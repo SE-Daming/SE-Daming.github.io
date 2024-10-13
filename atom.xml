@@ -6,7 +6,7 @@
   <link href="https://se-daming.github.io/atom.xml" rel="self"/>
   
   <link href="https://se-daming.github.io/"/>
-  <updated>2024-10-13T08:38:38.023Z</updated>
+  <updated>2024-10-13T14:09:07.593Z</updated>
   <id>https://se-daming.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test.md</title>
+    <link href="https://se-daming.github.io/2024/10/13/test-md/"/>
+    <id>https://se-daming.github.io/2024/10/13/test-md/</id>
+    <published>2024-10-13T14:08:46.000Z</published>
+    <updated>2024-10-13T14:09:07.593Z</updated>
+    
+    <content type="html"><![CDATA[<iframe src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" height=600 width=800> </iframe>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;iframe 
+src=&quot;https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm&quot; 
+scrolling=&quot;no&quot; 
+border=&quot;0&quot; 
+frameborder=&quot;no&quot; 
+fram</summary>
+      
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>面试题</title>
