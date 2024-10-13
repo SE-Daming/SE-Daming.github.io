@@ -11,15 +11,6 @@
   </url>
   
   <url>
-    <loc>https://se-daming.github.io/2024/11/13/test2-md/</loc>
-    
-    <lastmod>2024-10-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://se-daming.github.io/2024/10/13/%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
     
     <lastmod>2024-10-13</lastmod>
@@ -117,13 +108,6 @@
     <priority>1.0</priority>
   </url>
 
-  
-  <url>
-    <loc>https://se-daming.github.io/tags/MySQL/</loc>
-    <lastmod>2024-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
   
   <url>
     <loc>https://se-daming.github.io/tags/%E9%9D%A2%E8%AF%95/</loc>
