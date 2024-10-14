@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <title>about | 冬去春会来</title>
+  <title>http报文格式是怎样的 | 冬去春会来</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
     <meta name="description" content="后端开发博客日志">
@@ -84,39 +84,124 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-http报文格式是怎样的" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/about/index.html">about</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      http报文格式是怎样的
     </h1>
   
 
-,
+
       </header>
     
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-14T09:42:31.000Z" itemprop="datePublished">2024年10月14日</time>
+</span>
+      
+      
+        <span class="article-views">
+  <i class="fa fa-views"></i>
+  <i id="busuanzi_container_page_pv">
+      <i id="busuanzi_value_page_pv"></i>
+  </i>
+</span>
+
+      
+      
+<a href="/2024/10/14/http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/#comments" class="article-comment-link">
+  
+    
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/14/http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/" itemprop="commentCount"></span>
+    
+    
+    
+    
+    
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
     <div class="e-content article-entry" itemprop="articleBody">
-      <div class="author-page">
-        <div class="photo"><img src="/themeauthor.jpg"></div>
-        <div class="author">
-          <div><i class="fa fa-user">name：</i>Lianqing Zhu</div>
-          
-            <div>
-              <i class="fa fa-email">email：</i>
-              <a href="mailto:930673083@qq.com" target="_blank">930673083@qq.com</a>
+      
+        <h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><img src="/..%5Cimages%5Cimage-20241014174623505.png" alt="image-20241014174623505"></p>
+<h3 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h3><p>请求行、首部行、空行、请求实体</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /example.com/index.html HTTP1.1</span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>www.example.com</span><br><span class="line">Connection:close</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0</span><br><span class="line">Accept-language:CN</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h3><p>状态行、首部行、空行、相应实体</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP1.1 200 OK</span><br><span class="line">Connection:close</span><br><span class="line"><span class="attribute">Last-Modified</span><span class="punctuation">: </span>Tue,18 Aug 2020</span><br><span class="line">Cotent-Length:6123</span><br><span class="line">Cotent-Type:text/html</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="Connection字段是什么"><a href="#Connection字段是什么" class="headerlink" title="Connection字段是什么"></a>Connection字段是什么</h3><p>发送完该消息后关闭TCP连接</p>
+
+        
+            <div id="toc-article">
+                
+  <div class="widget-wrap" id="toc-wrap">
+    <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
+    <div class="widget">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="toc-text">请求报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-text">响应报文</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Connection%E5%AD%97%E6%AE%B5%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-text">Connection字段是什么</span></a></li></ol>
+    </div>
+  </div>
+
+
             </div>
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/2024/10/14/http报文格式是怎样的/">https://se-daming.github.io/2024/10/14/http报文格式是怎样的/</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
           
-            <div>
-              <i class="fa fa-github">github：</i>
-              <a href="https://github.com/SE-Daming" target="_blank">王大明</a>
-            </div>
+
           
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
         </div>
+      
+      
+        
+<nav id="article-nav">
+  
+    <a href="/2024/10/14/http2%E7%9B%B8%E5%AF%B9%E4%BA%8Ehttp1-1%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E4%BA%9B%E6%94%B9%E5%8F%98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">older</strong>
+      <div class="article-nav-title">
+        
+          http2相对于http1.1到底有哪些改变
+        
       </div>
+    </a>
+  
+  
+</nav>
+
+      
       
         
 
@@ -130,7 +215,7 @@
 
 
       
-    </div>
+    </footer>
   </div>
 </article>
 </section>
@@ -267,6 +352,16 @@
 
 
 
+
+  
+    
+<script src="/localshare/js/social-share.js"></script>
+
+    
+<script src="/localshare/js/qrcode.js"></script>
+
+  
+  
 
 
 
