@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <title>redis线程模型 | 冬去春会来</title>
+  <title>ConcurrentHashMap解析 | 冬去春会来</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
     <meta name="description" content="后端开发博客日志">
@@ -84,7 +84,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-redis线程模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-ConcurrentHashMap解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -92,7 +92,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      redis线程模型
+      ConcurrentHashMap解析
     </h1>
   
 
@@ -103,7 +103,7 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-15T02:20:11.000Z" itemprop="datePublished">2024年10月15日</time>
+  <time class="dt-published" datetime="2024-10-16T08:49:34.000Z" itemprop="datePublished">2024年10月16日</time>
 </span>
       
       
@@ -116,10 +116,10 @@
 
       
       
-<a href="/2024/10/15/redis%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/#comments" class="article-comment-link">
+<a href="/2024/10/16/ConcurrentHashMap%E8%A7%A3%E6%9E%90/#comments" class="article-comment-link">
   
     
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/15/redis%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/" itemprop="commentCount"></span>
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/16/ConcurrentHashMap%E8%A7%A3%E6%9E%90/" itemprop="commentCount"></span>
     
     
     
@@ -134,14 +134,27 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <p>1</p>
+<h2 id="ConcurrentHashMap的底层结构"><a href="#ConcurrentHashMap的底层结构" class="headerlink" title="ConcurrentHashMap的底层结构"></a>ConcurrentHashMap的底层结构</h2><p>jdk1.7是数组链表 ，类似于HashMap数组</p>
+<p>1.8是数组+链表+红黑树，和HashMap类似</p>
+<h2 id="ConcurrentHashMap如何保证线程安全"><a href="#ConcurrentHashMap如何保证线程安全" class="headerlink" title="ConcurrentHashMap如何保证线程安全"></a>ConcurrentHashMap如何保证线程安全</h2><h3 id="jdk1-8之前"><a href="#jdk1-8之前" class="headerlink" title="jdk1.8之前"></a>jdk1.8之前</h3><p>包含一个Segment数组（默认是16个，创建后不可更改，最大并发是16）、每一个segment元素都是一个HashEntry数组，类似于HashMap，每一个HashEntry元素是链表</p>
+<p>Segment继承了Reentrantlock，是一种可重入锁。每一个segment守护者一个HashEntry数组的元素，要更改元素首先要获取对应的segment锁。</p>
+<p>也就是说、同一segment的写会阻塞，不同segment可并发执行</p>
+<p>（get要加锁吗）</p>
+<h3 id="jdk1-8"><a href="#jdk1-8" class="headerlink" title="jdk1.8"></a>jdk1.8</h3><p>取消了segment分段锁，采用volatile（每个node的value和next）+CAS+sync保证并发安全。</p>
+<p>增加元素时先判断容器是否为空。为空则CAS来初始化。否则看元素位置处是否为空，为空则CAS赋值。不为空则sync后遍历赋值</p>
+<p>数据结构和hashmap类似，由数组链表红黑树组成。只锁定当前链表或红黑树的首节点来保证并发安全。锁的粒度更小</p>
+<p>总结：jdk1.8中通过对头节点加锁来确保线程安全。锁的粒度更小，并发量更大。</p>
+<h2 id="为什么要用CAS和Sync"><a href="#为什么要用CAS和Sync" class="headerlink" title="为什么要用CAS和Sync"></a>为什么要用CAS和Sync</h2><p>计算出该位置处为空则hash碰撞的几率低，用较少的自旋完成put；有元素说明发生了哈希碰撞，有大量线程访问或容量不够了则用悲观锁sync</p>
+<h2 id="get操作为什么不加锁"><a href="#get操作为什么不加锁" class="headerlink" title="get操作为什么不加锁"></a>get操作为什么不加锁</h2><p>node的value和next是用volatile修饰的，可以保证可加性</p>
+
         
             <div id="toc-article">
                 
   <div class="widget-wrap" id="toc-wrap">
     <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
     <div class="widget">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcurrentHashMap%E7%9A%84%E5%BA%95%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-text">ConcurrentHashMap的底层结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ConcurrentHashMap%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="toc-text">ConcurrentHashMap如何保证线程安全</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#jdk1-8%E4%B9%8B%E5%89%8D"><span class="toc-text">jdk1.8之前</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#jdk1-8"><span class="toc-text">jdk1.8</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8CAS%E5%92%8CSync"><span class="toc-text">为什么要用CAS和Sync</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#get%E6%93%8D%E4%BD%9C%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E5%8A%A0%E9%94%81"><span class="toc-text">get操作为什么不加锁</span></a></li></ol>
     </div>
   </div>
 
@@ -150,7 +163,7 @@
         
         
           <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/2024/10/15/redis线程模型/">https://se-daming.github.io/2024/10/15/redis线程模型/</a></p>
+              <p>原文链接: <a href="https://se-daming.github.io/2024/10/16/ConcurrentHashMap解析/">https://se-daming.github.io/2024/10/16/ConcurrentHashMap解析/</a></p>
               <p>版权声明: 转载请注明出处.</p>
           </blockquote>
         
@@ -162,6 +175,8 @@
           
 
           
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+
           
     <div class="social-share">
       <span>分享到:</span>
@@ -175,24 +190,15 @@
         
 <nav id="article-nav">
   
-    <a href="/2024/10/15/https%E8%BF%9E%E6%8E%A5%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E7%9A%84/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/10/16/HashMap%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">older</strong>
       <div class="article-nav-title">
         
-          https连接是如何创建的
+          HashMap解析
         
       </div>
     </a>
   
-  
-    <a href="/2024/10/15/redis%E5%8D%95%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%87%BA%E7%8E%B0%E9%98%BB%E5%A1%9E%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">newer</strong>
-      <div class="article-nav-title">
-        
-          redis单线程，出现阻塞了怎么办
-        
-      </div>
-    </a>
   
 </nav>
 
