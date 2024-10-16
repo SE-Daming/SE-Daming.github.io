@@ -110,7 +110,8 @@
       
         <hr>
 <p>title: 百度<br>date: 2024-10-16 22:41:40<br>tags: 百度实习</p>
-<ol>
+<ol start="14">
+<li><h2 id="创建新对象相关-类加载-内存分配：栈上分配，TLAB…"><a href="#创建新对象相关-类加载-内存分配：栈上分配，TLAB…" class="headerlink" title="创建新对象相关(类加载+内存分配：栈上分配，TLAB…)"></a>创建新对象相关(类加载+内存分配：栈上分配，TLAB…)</h2></li>
 <li><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2></li>
 </ol>
 <p>  byte1 short2 int4 long8 char2 float4 double8 boolean</p>
@@ -151,7 +152,6 @@
 </li>
 <li><h2 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h2><p>分为线程共享和线程私有<br>堆内存、运行时常量池；Java虚拟机栈、本地方法栈、程序计数器；字符串常量池</p>
 </li>
-<li><h2 id="创建新对象相关-类加载-内存分配：栈上分配，TLAB…"><a href="#创建新对象相关-类加载-内存分配：栈上分配，TLAB…" class="headerlink" title="创建新对象相关(类加载+内存分配：栈上分配，TLAB…)"></a>创建新对象相关(类加载+内存分配：栈上分配，TLAB…)</h2></li>
 <li><h2 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h2><p>标记清除、标记复制、标记整理<br>对需要清除的区域先标记再清除；会导致内存碎片问题</p>
 <p>将内存区域分为TO、from两部分、对需要清除的区域先标记再将未标记的部分整理到to区，将from指向to；内存利用率不高</p>
 <p>先标记需要清除的，然后将其复制到内存一侧；效率不高</p>
