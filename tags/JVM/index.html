@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <title>http2相对于http1.1到底有哪些改变 | 冬去春会来</title>
+  <title>tag: JVM | 冬去春会来</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
     <meta name="description" content="后端开发博客日志">
@@ -84,148 +84,35 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-http2相对于http1-1到底有哪些改变" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <section id="main">
+
   
-    <h1 class="p-name article-title" itemprop="headline name">
-      http2相对于http1.1到底有哪些改变
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-14T07:58:01.000Z" itemprop="datePublished">2024年10月14日</time>
-</span>
-      
-      
-        <span class="article-views">
-  <i class="fa fa-views"></i>
-  <i id="busuanzi_container_page_pv">
-      <i id="busuanzi_value_page_pv"></i>
-  </i>
-</span>
-
-      
-      
-<a href="/2024/10/14/http2%E7%9B%B8%E5%AF%B9%E4%BA%8Ehttp1-1%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E4%BA%9B%E6%94%B9%E5%8F%98/#comments" class="article-comment-link">
   
     
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/14/http2%E7%9B%B8%E5%AF%B9%E4%BA%8Ehttp1-1%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E4%BA%9B%E6%94%B9%E5%8F%98/" itemprop="commentCount"></span>
     
-    
-    
-    
-    
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="HTTP2的目的"><a href="#HTTP2的目的" class="headerlink" title="HTTP2的目的"></a>HTTP2的目的</h3><p>减少感知时延，提高响应速度</p>
-<h3 id="手段"><a href="#手段" class="headerlink" title="手段"></a>手段</h3><p>经单一TCP连接使请求和响应多路复用</p>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>提供报文优先次序、服务器主动推送（如果没发送任何请求，只是建立了TCP连接可以主动推送吗）、首部字段压缩</p>
-<h3 id="HTTP1-1存在的问题-HOL-队首阻塞"><a href="#HTTP1-1存在的问题-HOL-队首阻塞" class="headerlink" title="HTTP1.1存在的问题   HOL 队首阻塞"></a>HTTP1.1存在的问题   HOL 队首阻塞</h3><p>HTTP1使用持续TCP连接，允许经单一TCP连接请求相应一个web页面。这样每个web页面平等共享带宽，导致HOL</p>
-<p>假如一个web页面有一个大视频对象和视频下面很多小对象，使用同一TCP连接请求、该大视频会花费很长时间，小对象被延迟了。这就是HOL队首阻塞</p>
-<h3 id="HTTP1-1解决HOL"><a href="#HTTP1-1解决HOL" class="headerlink" title="HTTP1.1解决HOL"></a>HTTP1.1解决HOL</h3><p>打开多个并行TCP连接、web页面的多个对象并行发送给浏览器</p>
-<h3 id="HTTP2解决HOL"><a href="#HTTP2解决HOL" class="headerlink" title="HTTP2解决HOL"></a>HTTP2解决HOL</h3><p>将每个报文分成二进制小帧，并且在同个TCP连接上交错发请求和响应报文，之后在接收端将其组装，这也是HTTP2最为重要的改进</p>
-<h3 id="成帧过程"><a href="#成帧过程" class="headerlink" title="成帧过程"></a>成帧过程</h3><p>主要通过HTTP2的成帧子层完成.当服务器要发送HTTP响应时，该响应首先划分成帧，响应的首部字段成为一帧，报文体成为一帧。通过成帧子层该响应的帧与其他响应的帧交错经过单一TCP连接发送。当帧到达客户端时先在成帧子层组装成初始的响应报文，然后由浏览器处理。类似地、HTTP请求也划分成帧交错发送</p>
-<h3 id="服务器推送"><a href="#服务器推送" class="headerlink" title="服务器推送"></a>服务器推送</h3><p>HTTP1.1中，服务器只是被动响应，浏览器请求什么就响应什么。HTTP2中服务器可以主动推送，即为一个请求发送多个响应，从而消除额外等待时延</p>
-<h3 id="首部压缩"><a href="#首部压缩" class="headerlink" title="首部压缩"></a>首部压缩</h3><p>HTTP2会压缩请求头。如果发送的多个请求的请求头一样或类似。协议会消除重复的部分。这由HPACK算法实现：客户端和服务端同时维护一张头信息表，所有字段会存入这个表，生成一个索引号，以后就只发送索引号不发送字段，从而提高速度</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>HTTP2相对于HTTP1主要提高了响应性能，做了头部压缩、二进制成帧、请求响应多路复用、服务器主动推送</p>
-
+    <section class="archives-wrap">
+      <div class="archive-title">
         
-            <div id="toc-article">
-                
-  <div class="widget-wrap" id="toc-wrap">
-    <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
-    <div class="widget">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP2%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="toc-text">HTTP2的目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%89%8B%E6%AE%B5"><span class="toc-text">手段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%88%E6%9E%9C"><span class="toc-text">效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP1-1%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98-HOL-%E9%98%9F%E9%A6%96%E9%98%BB%E5%A1%9E"><span class="toc-text">HTTP1.1存在的问题   HOL 队首阻塞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP1-1%E8%A7%A3%E5%86%B3HOL"><span class="toc-text">HTTP1.1解决HOL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP2%E8%A7%A3%E5%86%B3HOL"><span class="toc-text">HTTP2解决HOL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%88%90%E5%B8%A7%E8%BF%87%E7%A8%8B"><span class="toc-text">成帧过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8E%A8%E9%80%81"><span class="toc-text">服务器推送</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A6%96%E9%83%A8%E5%8E%8B%E7%BC%A9"><span class="toc-text">首部压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
-    </div>
-  </div>
-
-
-            </div>
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/2024/10/14/http2相对于http1-1到底有哪些改变/">https://se-daming.github.io/2024/10/14/http2相对于http1-1到底有哪些改变/</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-        
-<nav id="article-nav">
-  
-    <a href="/2024/10/14/first/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">older</strong>
-      <div class="article-nav-title">
-        
-          first
+          <i class="fa fa-tag"></i>
+          JVM
         
       </div>
+      <div class="archives">
+  
+  <ul class="archive-article archive-type-post">
+  <li class="archive-article-inner">
+    <a href="/2024/10/17/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4/">
+      <time class="dt-published" datetime="2024-10-17T06:25:37.000Z" itemprop="datePublished">2024年10月17日</time>
+      | <span class="archive-article-title">双亲委派机制是什么，如何打破</span>
     </a>
-  
-  
-    <a href="/2024/10/14/http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">newer</strong>
-      <div class="article-nav-title">
-        
-          http报文格式是怎样的
-        
-      </div>
-    </a>
-  
-</nav>
-
-      
-      
-        
-
-
-  <section id="comments" class="vcomment"></section>
+  </li>
+</ul>
 
 
 
+  </div></section>
 
 
-
-
-      
-    </footer>
-  </div>
-</article>
 </section>
         
           <aside id="sidebar">
@@ -368,16 +255,6 @@
 
 
 
-
-  
-    
-<script src="/localshare/js/social-share.js"></script>
-
-    
-<script src="/localshare/js/qrcode.js"></script>
-
-  
-  
 
 
 
