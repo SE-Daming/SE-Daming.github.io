@@ -147,7 +147,7 @@
 <p>（在JVM中，只有相同类加载器+相同类名才视作同一个类）</p>
 <p>做法：tomcat为每一个应用都自定义了一个类加载器去加载对应的类，主要通过该重写ClassLoader中的loadClass方法实现。</p>
 <p>涉及到的tomcat类加载器的层次如下</p>
-<p><img src="/..%5Cimages%5Cimage-20241017150845802.png" alt="image-20241017150845802"></p>
+<p><img src="/../images/image-20241017150845802.png" alt="image-20241017150845802"></p>
 <p>每个Web应用会创建一个独立的WebApp类加载器来实现应用之间的隔离；Shared类加载器用于加载应用间共享的类比如Spring，mybatis；</p>
 <p>通用类加载器加载可悲web应用和tomcat内部组件共享的类；Catalina用于加载tomcat自身的类</p>
 <p>ClassLoader中四个核心方法</p>
