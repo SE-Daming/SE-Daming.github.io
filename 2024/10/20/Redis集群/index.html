@@ -149,14 +149,29 @@
 <h4 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a><strong>增量同步</strong></h4><p>slave只更新与master不同的部分</p>
 <h5 id="slave如何知道与master的差异呢"><a href="#slave如何知道与master的差异呢" class="headerlink" title="slave如何知道与master的差异呢"></a>slave如何知道与master<strong>的差异呢</strong></h5><p>依据offset、它记录了主从之间在replication-backlog的差异。</p>
 <p>缓冲区尽量大一些，防止频繁全量同步</p>
-<h2 id="哨兵集群"><a href="#哨兵集群" class="headerlink" title="哨兵集群"></a>哨兵集群</h2><h2 id="cluster集群"><a href="#cluster集群" class="headerlink" title="cluster集群"></a>cluster集群</h2>
+<h2 id="哨兵集群"><a href="#哨兵集群" class="headerlink" title="哨兵集群"></a>哨兵集群</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p><strong>监控、选主、通知</strong></p>
+<h3 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h3><h4 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h4><p>一个sentinel检测到某个节点未在及时响应ping，则认为主观下线</p>
+<h4 id="客观下线"><a href="#客观下线" class="headerlink" title="客观下线"></a>客观下线</h4><p>超过quonum数量的sentinel都认为某节点主观下线，则该节点客观下线</p>
+<h3 id="选主"><a href="#选主" class="headerlink" title="选主"></a>选主</h3><p>某redis节点经过主观下线、客观下线后要选举出新的master</p>
+<p>要先选举出sentinel中的leader。</p>
+<p>当一个sentinel节点确认redis节点主观下线后，请求其他sentinel节点将自己选举为leader，被请求的sentinel只能同意一个请求</p>
+<p>当选举票数达到最低票数后该sentinel为leader，由它来选择一个redis节点作为master，否则重新选举</p>
+<p>流程为：</p>
+<p>过滤故障节点、选择优先级slave-priority最高的节点，不存在则选择复制偏移量最大的节点，不存在则选择runid最小的节点作为新的master</p>
+<h3 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h3><p>sentinel给被选择的slave节点发送slaveof No one命令，让其成为master</p>
+<p>sentinel给其他slave发送slaveof命令，使他们成为新master的从节点</p>
+<p>sentinel把故障节点标记为slave，当其恢复后成为新的slave节点</p>
+<h2 id="cluster集群"><a href="#cluster集群" class="headerlink" title="cluster集群"></a>cluster集群</h2><p>一个切片集群中有16384个哈希槽，会经平均分配或手动分配映射到具体的节点</p>
+<p>当操作数据时先计算他的哈希槽的索引确定在哪台节点然后去操作</p>
+<h3 id="如何计算哈希槽的索引"><a href="#如何计算哈希槽的索引" class="headerlink" title="如何计算哈希槽的索引"></a>如何计算哈希槽的索引</h3><p>如果没有”{}“，则根据key来计算，如果有”{}“，根据里面的内容计算</p>
+
         
             <div id="toc-article">
                 
   <div class="widget-wrap" id="toc-wrap">
     <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
     <div class="widget">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E9%9B%86%E7%BE%A4"><span class="toc-text">主从集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5"><span class="toc-text">主从同步</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E9%87%8F%E5%90%8C%E6%AD%A5"><span class="toc-text">全量同步</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E8%BF%87%E7%A8%8B"><span class="toc-text">同步过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E6%98%AF%E5%90%A6%E6%98%AF%E7%AC%AC%E4%B8%80%E6%AC%A1"><span class="toc-text">如何知道是否是第一次</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5"><span class="toc-text">增量同步</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#slave%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E4%B8%8Emaster%E7%9A%84%E5%B7%AE%E5%BC%82%E5%91%A2"><span class="toc-text">slave如何知道与master的差异呢</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4"><span class="toc-text">哨兵集群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cluster%E9%9B%86%E7%BE%A4"><span class="toc-text">cluster集群</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E9%9B%86%E7%BE%A4"><span class="toc-text">主从集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E4%BB%8E%E5%90%8C%E6%AD%A5"><span class="toc-text">主从同步</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%A8%E9%87%8F%E5%90%8C%E6%AD%A5"><span class="toc-text">全量同步</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E8%BF%87%E7%A8%8B"><span class="toc-text">同步过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E6%98%AF%E5%90%A6%E6%98%AF%E7%AC%AC%E4%B8%80%E6%AC%A1"><span class="toc-text">如何知道是否是第一次</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E5%90%8C%E6%AD%A5"><span class="toc-text">增量同步</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#slave%E5%A6%82%E4%BD%95%E7%9F%A5%E9%81%93%E4%B8%8Emaster%E7%9A%84%E5%B7%AE%E5%BC%82%E5%91%A2"><span class="toc-text">slave如何知道与master的差异呢</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%A8%E5%85%B5%E9%9B%86%E7%BE%A4"><span class="toc-text">哨兵集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%91%E6%8E%A7"><span class="toc-text">监控</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A7%82%E4%B8%8B%E7%BA%BF"><span class="toc-text">主观下线</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%A2%E8%A7%82%E4%B8%8B%E7%BA%BF"><span class="toc-text">客观下线</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%89%E4%B8%BB"><span class="toc-text">选主</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E7%9F%A5"><span class="toc-text">通知</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cluster%E9%9B%86%E7%BE%A4"><span class="toc-text">cluster集群</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%AE%A1%E7%AE%97%E5%93%88%E5%B8%8C%E6%A7%BD%E7%9A%84%E7%B4%A2%E5%BC%95"><span class="toc-text">如何计算哈希槽的索引</span></a></li></ol></li></ol>
     </div>
   </div>
 

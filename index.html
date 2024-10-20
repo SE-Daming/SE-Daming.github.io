@@ -134,7 +134,22 @@
 <h4 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a><strong>增量同步</strong></h4><p>slave只更新与master不同的部分</p>
 <h5 id="slave如何知道与master的差异呢"><a href="#slave如何知道与master的差异呢" class="headerlink" title="slave如何知道与master的差异呢"></a>slave如何知道与master<strong>的差异呢</strong></h5><p>依据offset、它记录了主从之间在replication-backlog的差异。</p>
 <p>缓冲区尽量大一些，防止频繁全量同步</p>
-<h2 id="哨兵集群"><a href="#哨兵集群" class="headerlink" title="哨兵集群"></a>哨兵集群</h2><h2 id="cluster集群"><a href="#cluster集群" class="headerlink" title="cluster集群"></a>cluster集群</h2>
+<h2 id="哨兵集群"><a href="#哨兵集群" class="headerlink" title="哨兵集群"></a>哨兵集群</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p><strong>监控、选主、通知</strong></p>
+<h3 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h3><h4 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h4><p>一个sentinel检测到某个节点未在及时响应ping，则认为主观下线</p>
+<h4 id="客观下线"><a href="#客观下线" class="headerlink" title="客观下线"></a>客观下线</h4><p>超过quonum数量的sentinel都认为某节点主观下线，则该节点客观下线</p>
+<h3 id="选主"><a href="#选主" class="headerlink" title="选主"></a>选主</h3><p>某redis节点经过主观下线、客观下线后要选举出新的master</p>
+<p>要先选举出sentinel中的leader。</p>
+<p>当一个sentinel节点确认redis节点主观下线后，请求其他sentinel节点将自己选举为leader，被请求的sentinel只能同意一个请求</p>
+<p>当选举票数达到最低票数后该sentinel为leader，由它来选择一个redis节点作为master，否则重新选举</p>
+<p>流程为：</p>
+<p>过滤故障节点、选择优先级slave-priority最高的节点，不存在则选择复制偏移量最大的节点，不存在则选择runid最小的节点作为新的master</p>
+<h3 id="通知"><a href="#通知" class="headerlink" title="通知"></a>通知</h3><p>sentinel给被选择的slave节点发送slaveof No one命令，让其成为master</p>
+<p>sentinel给其他slave发送slaveof命令，使他们成为新master的从节点</p>
+<p>sentinel把故障节点标记为slave，当其恢复后成为新的slave节点</p>
+<h2 id="cluster集群"><a href="#cluster集群" class="headerlink" title="cluster集群"></a>cluster集群</h2><p>一个切片集群中有16384个哈希槽，会经平均分配或手动分配映射到具体的节点</p>
+<p>当操作数据时先计算他的哈希槽的索引确定在哪台节点然后去操作</p>
+<h3 id="如何计算哈希槽的索引"><a href="#如何计算哈希槽的索引" class="headerlink" title="如何计算哈希槽的索引"></a>如何计算哈希槽的索引</h3><p>如果没有”{}“，则根据key来计算，如果有”{}“，根据里面的内容计算</p>
+
         
         
           <blockquote id="copyright">
