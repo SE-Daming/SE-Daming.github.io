@@ -85,6 +85,246 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-索引浅析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/16/%E7%B4%A2%E5%BC%95%E6%B5%85%E6%9E%90/">索引浅析</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-16T07:01:21.000Z" itemprop="datePublished">2024年10月16日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/16/%E7%B4%A2%E5%BC%95%E6%B5%85%E6%9E%90/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1</p>
+<h3 id="索引树的高度如何计算"><a href="#索引树的高度如何计算" class="headerlink" title="索引树的高度如何计算"></a>索引树的高度如何计算</h3>
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-SQL优化的几种方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/16/SQL%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">SQL优化的几种方式</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-16T06:50:38.000Z" itemprop="datePublished">2024年10月16日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/16/SQL%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2><h3 id="插入优化"><a href="#插入优化" class="headerlink" title="插入优化"></a>插入优化</h3><p>1、使用批量插入</p>
+<p>2、手动提交事务</p>
+<p>3、主键顺序插入，减少页分裂和页合并的次数</p>
+<p>4、大批量数据使用load命令</p>
+<h4 id="主键设计"><a href="#主键设计" class="headerlink" title="主键设计"></a>主键设计</h4><p>尽量降低主键的长度、主键应当是有序自增的、避免使用UUID或其他业务主键，如身份证、业务操作时尽量不更改主键</p>
+<h4 id="为什么不用UUID"><a href="#为什么不用UUID" class="headerlink" title="为什么不用UUID"></a>为什么不用UUID</h4><p>非递增、太长（36字符）导致占用内存大，索引树的高度大，磁盘IO次数多，性能差</p>
+<h3 id="查询优化"><a href="#查询优化" class="headerlink" title="查询优化"></a>查询优化</h3><p>查询时尽量使用索引查询</p>
+<h4 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h4><p>尽量使用覆盖索引、多字段排序时要遵循最左前缀法则、</p>
+<h4 id="深度分页"><a href="#深度分页" class="headerlink" title="深度分页"></a>深度分页</h4><p>延迟关联或子查询优化</p>
+<h4 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h4><h4 id="order-by优化"><a href="#order-by优化" class="headerlink" title="order by优化"></a>order by优化</h4><p>MySQL排序有using index和using filesort两种实现方式，要尽量优化成效率高的using index，避免额外排序</p>
+<p>也就是说，要对排序字段创建索引并尽量使用覆盖索引；如果不可避免的出现filesort可以适当增加排序缓冲区的大小</p>
+<h3 id="更新优化"><a href="#更新优化" class="headerlink" title="更新优化"></a>更新优化</h3><p>分批更新、限制更新的行数，避免大事务；</p>
+<p>在更新的列上有索引，避免行锁升级为表锁</p>
+<h3 id="删除优化"><a href="#删除优化" class="headerlink" title="删除优化"></a>删除优化</h3><p>大批数据删除要分批次删除，避免大事务阻塞；用LIMIT控制行数</p>
+<h4 id="delete和truncate区别"><a href="#delete和truncate区别" class="headerlink" title="delete和truncate区别"></a>delete和truncate区别</h4><p>delete是DML、truncate是DDL</p>
+<p>delete删除后可回滚、truncate不能</p>
+<p>delete对每一行删除会记录日志，速度慢；truncate不记录，直接释放整个数据页，不支持where条件</p>
+<p>delete删除后表的结构属性不变；truncate删除后AUTO-INCREMENT重置</p>
+<h3 id="explain关键字"><a href="#explain关键字" class="headerlink" title="explain关键字"></a>explain关键字</h3><p><img src="/../images/image-20241016150948729.png" alt="image-20241016150948729"></p>
+<p>type:连接类型。性能：NULL（select 1） &gt; system （表只有一行、系统表）&gt; const（常量查找，主键或唯一索引） &gt; eq_ref（主键或唯一索引的等值匹配） &gt; ref （非唯一索引的查找）&gt; range（根据索引查找匹配行） &gt; index（扫描整个索引而不是全表扫描） &gt; ALL（全表扫描）</p>
+<p>除了ALL都表示用到了索引</p>
+<p>key：实际用到的索引</p>
+<p>possible_keys：可能用到的索引</p>
+<p>rows ：MySQL估计需要读取的行数</p>
+<p>extra 额外信息：using index（MySQL仅通过索引来满足查询而无需读取实际数据行）、using where、using filesort（对结果排序时如果索引不能满足则读取实际数据行然后在内存中排序）、using temporary</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-设计一个秒杀系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/15/%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/">设计一个秒杀系统</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-15T04:10:16.000Z" itemprop="datePublished">2024年10月15日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/15/%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><p>将库存信心保存到redis、利用其抗高并发的特性进行库存的查询和扣减</p>
+<h2 id="超卖"><a href="#超卖" class="headerlink" title="超卖"></a>超卖</h2><p>当买多卖少时，超卖最可能发生</p>
+<p>如果允许同一个用户购买多个，则使用redis的decr命令即可、但是会导致库存数为负数。需要在decr返回值小于0时再incr回来以确保超时订单库存回滚正常</p>
+<p>如果只允许一个用户购买一个，也就是超买问题</p>
+<h2 id="超买"><a href="#超买" class="headerlink" title="超买"></a>超买</h2><p>判断用户是否购买、判断库存是否充足、扣减库存</p>
+<p>其中第二三步redis可解决</p>
+<p>判断是否购买放到set集合里面。</p>
+<p>分布式环境下就不能放到set、考虑放到redis</p>
+<h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><p>MySQL存 ：库存扣了、没有订单</p>
+<p>Redis存：数据一致性。redis做了资格判断和扣减库存，没来得及发送到mq操作数据库就挂了</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-redis单线程，出现阻塞了怎么办" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -542,23 +782,23 @@
       <ul>
         
           <li>
+            <a href="/2024/10/20/Redis%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E5%92%8C%E7%BC%93%E5%AD%98%E6%B7%98%E6%B1%B0/">Redis过期删除和缓存淘汰</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/20/Redis%E6%8C%81%E4%B9%85%E5%8C%96%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0/">Redis持久化如何实现</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/20/%E5%A4%A7key%E3%80%81%E7%83%ADkey%E6%98%AF%E4%BB%80%E4%B9%88/">大key、热key是什么</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/19/CMS%E5%92%8CG1%E7%9A%84%E5%8C%BA%E5%88%AB/">CMS和G1的区别</a>
           </li>
         
           <li>
             <a href="/2024/10/19/RR%E7%BA%A7%E5%88%AB%E7%9C%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E5%B9%BB%E8%AF%BB%E4%BA%86%E5%90%97/">RR级别真的解决幻读了吗</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/19/Kafka%E4%B8%AD%E6%B6%88%E8%B4%B9%E8%80%85%E7%BB%84%E6%98%AF%E4%BB%80%E4%B9%88/">Kafka中消费者组是什么</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/19/Kafka%E5%A6%82%E4%BD%95%E8%B0%83%E4%BC%98%EF%BC%9F/">Kafka如何调优？</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/19/Kafka%E4%B8%AD%E6%B6%88%E8%B4%B9%E8%80%85%E4%BA%8B%E5%8A%A1%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F/">Kafka中消费者事务是什么？</a>
           </li>
         
       </ul>
@@ -571,7 +811,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 12.5px;">JUC</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Kafka/" style="font-size: 20px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 12.5px;">Redis</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 12.5px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 15px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">项目</a>
+      <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 12.5px;">JUC</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Kafka/" style="font-size: 20px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 17.5px;">Redis</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 12.5px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 15px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">项目</a>
     </div>
   </div>
 
@@ -583,7 +823,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">36</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">39</span></li></ul>
     </div>
   </div>
 
@@ -593,7 +833,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
