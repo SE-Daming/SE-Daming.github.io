@@ -85,6 +85,109 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-Redis的底层数据结构是怎样的" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/20/Redis%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/">Redis的底层数据结构是怎样的</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-20T07:26:25.000Z" itemprop="datePublished">2024年10月20日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/20/Redis%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>s</p>
+<h2 id="数据类型和底层结构关系"><a href="#数据类型和底层结构关系" class="headerlink" title="数据类型和底层结构关系"></a>数据类型和底层结构关系</h2><p><img src="C:\Users\123z'l'q\Desktop\daily\source\images\image-20241020160339021.png" alt="image-20241020160339021"></p>
+<h2 id="SDS"><a href="#SDS" class="headerlink" title="SDS"></a>SDS</h2><h3 id="为什么不直接使用c语言的"><a href="#为什么不直接使用c语言的" class="headerlink" title="为什么不直接使用c语言的"></a>为什么不直接使用c语言的</h3><p>获取字符串长度要运算；</p>
+<p>不可修改；</p>
+<p>非二进制安全（以空字符\0 结尾，若数据中包含可能导致中断）</p>
+<h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p><img src="/../images/image-20241020160902392.png" alt="image-20241020160902392"></p>
+<p>len:字符串长度</p>
+<p>alloc：分配字节数；</p>
+<p>flags：header类型</p>
+<p>buf：数据</p>
+<h3 id="内存预分配"><a href="#内存预分配" class="headerlink" title="内存预分配"></a>内存预分配</h3><p>假如我们要给SDS追加一段字符串“,Amy”，这里首先会申请新内存空间：</p>
+<p>如果新字符串小于1M，则新空间为扩展后字符串长度的两倍+1；</p>
+<p>如果新字符串大于1M，则新空间为扩展后字符串长度+1M+1。称为内存预分配。</p>
+<p><img src="/../images/image-20241020161035719.png" alt="image-20241020161035719"></p>
+<h3 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h3><p>支持动态扩容；</p>
+<p>获取字符串长度O1；</p>
+<p>减少内存分配次数；</p>
+<p>二进制安全</p>
+<h2 id="压缩列表"><a href="#压缩列表" class="headerlink" title="压缩列表"></a>压缩列表</h2><p>可看成是连续内存的双向链表，链表通过记录上一节点和本节点长度来寻址。内存占用较低</p>
+<h3 id="结构-1"><a href="#结构-1" class="headerlink" title="结构"></a>结构</h3><p><img src="/../images/image-20241020161424164.png" alt="image-20241020161424164"></p>
+<p>bytes:总字节数</p>
+<p>len:节点数</p>
+<p>tail:尾偏移量，表位节点到起始的距离</p>
+<p>entry:存储数据的节点</p>
+<p>end:结束标识</p>
+<h3 id="Entry结构"><a href="#Entry结构" class="headerlink" title="Entry结构"></a>Entry结构</h3><p><img src="/../images/image-20241020161442063.png" alt="image-20241020161442063"></p>
+<p><em>previous_entry_length</em>:前一个节点长度、占用1或5个字节。前一个长度小于254字节，则占用1字节</p>
+<p><em>encoding</em>：记录content的数据类型（字符串还是整数），1、2、5个字节（整数固定1字节，字符串则和字符串长度有关）</p>
+<p><em>content</em>：节点数据</p>
+<h3 id="连锁更新问题"><a href="#连锁更新问题" class="headerlink" title="连锁更新问题"></a>连锁更新问题</h3><p>一开始N个连续的250-253字节节点，插入了一个255字节节点。导致previous-entry-length变成5个节点，后面节点也跟着改变</p>
+<h2 id="跳表"><a href="#跳表" class="headerlink" title="跳表"></a>跳表</h2><p><strong>是多层的有序链表</strong>、每层都是一条有序双向链表、每个节点包含多层指针、底层包含了所有元素、平均Ologn、最坏On</p>
+<p><img src="/../images/image-20241020162224472.png" alt="image-20241020162224472"></p>
+<h3 id="如何设置层高"><a href="#如何设置层高" class="headerlink" title="如何设置层高"></a>如何设置层高</h3><h3 id="结构-2"><a href="#结构-2" class="headerlink" title="结构"></a>结构</h3><p>层级、长度、首尾节点</p>
+<p>节点：权重、数据、前一个元素的指针、多级索引数组</p>
+<p>多级索引：下一个节点、索引跨度</p>
+<h3 id="为什么不用B-树、红黑树"><a href="#为什么不用B-树、红黑树" class="headerlink" title="为什么不用B+树、红黑树"></a>为什么不用B+树、红黑树</h3>
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/index.html">https://se-daming.github.io/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-Redis过期删除和缓存淘汰" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -757,79 +860,6 @@
 </article>
 
 
-  <article id="post-Kafka消息挤压了，怎么办" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/19/Kafka%E6%B6%88%E6%81%AF%E6%8C%A4%E5%8E%8B%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E/">Kafka消息挤压了，怎么办</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-19T07:58:59.000Z" itemprop="datePublished">2024年10月19日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/19/Kafka%E6%B6%88%E6%81%AF%E6%8C%A4%E5%8E%8B%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="消息积压的原因"><a href="#消息积压的原因" class="headerlink" title="消息积压的原因"></a>消息积压的原因</h2><h3 id="生产快"><a href="#生产快" class="headerlink" title="生产快"></a>生产快</h3><h3 id="消费慢"><a href="#消费慢" class="headerlink" title="消费慢"></a>消费慢</h3><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>1、增加主题的分区数，同时增加消费者数，扩展消费者组</p>
-<p>2、提高消费者每次从服务端拉取的字节数<em>fetch.max.bytes</em>（默认是50M）、每次拉取的最大条数<em>max.poll.records</em>。（达到这俩参数的其中一个就会拉取停止）</p>
-<p>3、优化消费者处理逻辑</p>
-<p>4、生产者限流</p>
-<p>5、持续监控Kafka集群，比如用eagle</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/index.html">https://se-daming.github.io/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
@@ -848,6 +878,10 @@
       <ul>
         
           <li>
+            <a href="/2024/10/20/Redis%E7%9A%84%E5%BA%95%E5%B1%82%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/">Redis的底层数据结构是怎样的</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/20/Redis%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E5%92%8C%E7%BC%93%E5%AD%98%E6%B7%98%E6%B1%B0/">Redis过期删除和缓存淘汰</a>
           </li>
         
@@ -863,10 +897,6 @@
             <a href="/2024/10/19/CMS%E5%92%8CG1%E7%9A%84%E5%8C%BA%E5%88%AB/">CMS和G1的区别</a>
           </li>
         
-          <li>
-            <a href="/2024/10/19/RR%E7%BA%A7%E5%88%AB%E7%9C%9F%E7%9A%84%E8%A7%A3%E5%86%B3%E5%B9%BB%E8%AF%BB%E4%BA%86%E5%90%97/">RR级别真的解决幻读了吗</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -877,7 +907,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 12.5px;">JUC</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Kafka/" style="font-size: 20px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 17.5px;">Redis</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 12.5px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 15px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">项目</a>
+      <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 12.5px;">JUC</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Kafka/" style="font-size: 20px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 17.5px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 20px;">Redis</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 12.5px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 15px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 10px;">项目</a>
     </div>
   </div>
 
@@ -889,7 +919,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">39</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">40</span></li></ul>
     </div>
   </div>
 
@@ -899,7 +929,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
