@@ -134,14 +134,26 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h2 id="内存淘汰"><a href="#内存淘汰" class="headerlink" title="内存淘汰"></a>内存淘汰</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><p>八种两类</p>
+<p><strong>不进行内存淘汰</strong>，noeviction，有新的数据写入会禁止写入</p>
+<p><strong>进行内存淘汰</strong>，又可分为在设置了ttl中淘汰和在所有数据中淘汰</p>
+<p>设置了TTL：随机淘汰、淘汰ttl早的、lru（淘汰设置了过期时间中最久未使用的）、lfu（淘汰最少使用的）</p>
+<p>所有数据：随即淘汰、LRU、LFU</p>
+<h2 id="过期删除"><a href="#过期删除" class="headerlink" title="过期删除"></a>过期删除</h2><p>采用惰性删除和定期删除两种策略搭配使用，在CPU和内存浪费之间平衡</p>
+<h3 id="惰性删除"><a href="#惰性删除" class="headerlink" title="惰性删除"></a>惰性删除</h3><p>在访问key时看是否过期。过期则删除</p>
+<h3 id="定期删除"><a href="#定期删除" class="headerlink" title="定期删除"></a>定期删除</h3><p>每隔<strong>一段时间</strong>从redis取出<strong>一定数据</strong>检查，删除其中过期的</p>
+<h4 id="隔多久"><a href="#隔多久" class="headerlink" title="隔多久"></a>隔多久</h4><p>默认是hz10   每秒10次</p>
+<h4 id="取多少"><a href="#取多少" class="headerlink" title="取多少"></a>取多少</h4><p>默认是选择20个，</p>
+<p>检查这20个是否过期，删除过期的</p>
+<p>如果过期的大于25%，则再选20个重复，直到比例小于25%</p>
+
         
             <div id="toc-article">
                 
   <div class="widget-wrap" id="toc-wrap">
     <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
     <div class="widget">
-      
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E5%AD%98%E6%B7%98%E6%B1%B0"><span class="toc-text">内存淘汰</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E7%B1%BB"><span class="toc-text">分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4"><span class="toc-text">过期删除</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%83%B0%E6%80%A7%E5%88%A0%E9%99%A4"><span class="toc-text">惰性删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%9C%9F%E5%88%A0%E9%99%A4"><span class="toc-text">定期删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9A%94%E5%A4%9A%E4%B9%85"><span class="toc-text">隔多久</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%96%E5%A4%9A%E5%B0%91"><span class="toc-text">取多少</span></a></li></ol></li></ol></li></ol>
     </div>
   </div>
 
