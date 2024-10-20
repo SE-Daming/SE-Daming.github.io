@@ -147,7 +147,8 @@
 <p>offset：偏移量</p>
 <p>master判断从节点是否是第一次就是看replication id是否一致</p>
 <h4 id="增量同步"><a href="#增量同步" class="headerlink" title="增量同步"></a><strong>增量同步</strong></h4><p>slave只更新与master不同的部分</p>
-<h5 id="slave如何知道与master的差异呢"><a href="#slave如何知道与master的差异呢" class="headerlink" title="slave如何知道与master的差异呢"></a>slave如何知道与master<strong>的差异呢</strong></h5><p>依据offset、它记录了主从之间在replication-backlog的差异。</p>
+<h5 id="slave如何知道与master的差异呢"><a href="#slave如何知道与master的差异呢" class="headerlink" title="slave如何知道与master的差异呢"></a>slave如何知道与master<strong>的差异呢</strong></h5><p>与raplication-backlog有关、这个文件是固定大小的环形数组，会记录redis命令和offset、包括master当前的offset、slave同步到的offset</p>
+<p>依据offset、它记录了主从之间在replication-backlog的差异。</p>
 <p>缓冲区尽量大一些，防止频繁全量同步</p>
 <h2 id="哨兵集群"><a href="#哨兵集群" class="headerlink" title="哨兵集群"></a>哨兵集群</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p><strong>监控、选主、通知</strong></p>
 <h3 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h3><h4 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h4><p>一个sentinel检测到某个节点未在及时响应ping，则认为主观下线</p>
