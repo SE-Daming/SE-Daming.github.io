@@ -85,6 +85,166 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-Java优先队列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/18/Java%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">Java优先队列</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-18T04:44:59.000Z" itemprop="datePublished">2024年10月18日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/18/Java%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">pq.poll();</span><br><span class="line">pq.offer();<span class="comment">//队列满返回false</span></span><br><span class="line">pq.add();<span class="comment">//队列满抛异常</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PriorityQueue&lt;String&gt; pq = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(String s1, String s2)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.compare(s1.length(), s2.length()); <span class="comment">// 按长度升序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 添加元素</span></span><br><span class="line">pq.add(<span class="string">&quot;ale&quot;</span>);</span><br><span class="line">pq.add(<span class="string">&quot;banana&quot;</span>);</span><br><span class="line">pq.add(<span class="string">&quot;kiwi&quot;</span>);</span><br><span class="line">pq.add(<span class="string">&quot;grape&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印并移除元素，按长度优先级</span></span><br><span class="line"><span class="keyword">while</span> (!pq.isEmpty()) &#123;</span><br><span class="line">    System.out.println(pq.poll()); <span class="comment">// 输出 ale,kiwi, grape,banana</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-volatile浅析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/18/volatile%E6%B5%85%E6%9E%90/">volatile浅析</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-18T03:58:24.000Z" itemprop="datePublished">2024年10月18日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/18/volatile%E6%B5%85%E6%9E%90/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="volatile作用"><a href="#volatile作用" class="headerlink" title="volatile作用"></a>volatile作用</h2><p>保证可见性、禁止指令重排</p>
+<h2 id="可见性原理"><a href="#可见性原理" class="headerlink" title="可见性原理"></a>可见性原理</h2><p>指示JVM使用这个变量时去主存中获取</p>
+<p>具体些说：每一个线程都有自己的本地内存，线程间共享主内存。</p>
+<p>volatile内存可见性主要通过lock前缀指令实现，它会锁定当前内存区域的缓存，并且立即将当前缓存行写入到主内存，会写主内存的时候通过MESI协议使其他线程缓存的改变量失效，导致其他线程也要去主内存去重新读取</p>
+<h2 id="有序性原理"><a href="#有序性原理" class="headerlink" title="有序性原理"></a>有序性原理</h2><p>插入特定的内存屏障禁止指令重排序</p>
+<p>volatile 的有序性是通过插入内存屏障（Memory Barrier），在内存屏障前后禁止重排序优化，以此实现有序性的。</p>
+<h4 id="什么是内存屏障？"><a href="#什么是内存屏障？" class="headerlink" title="什么是内存屏障？"></a>什么是内存屏障？</h4><p>内存屏障（Memory Barrier 或 Memory Fence）是一种硬件级别的同步操作，它强制处理器按照特定顺序执行内存访问操作，确保内存操作的顺序性，阻止编译器和 CPU 对内存操作进行不必要的重排序。内存屏障可以确保跨越屏障的读写操作不会交叉进行，以此维持程序的内存一致性模型。</p>
+<p>在 Java 内存模型（JMM）中，volatile 关键字用于修饰变量时，能够保证该变量的可见性和有序性。关于有序性，volatile 通过内存屏障的插入来实现：</p>
+<ul>
+<li><strong>写内存屏障（Store Barrier &#x2F; Write Barrier）</strong>： 当线程写入 volatile 变量时，JMM 会在写操作前插入 StoreStore 屏障，确保在这次写操作之前的所有普通写操作都已完成。接着在写操作后插入 StoreLoad 屏障，强制所有后来的读写操作都在此次写操作完成之后执行，这就确保了其他线程能立即看到 volatile 变量的最新值。</li>
+<li><strong>读内存屏障（Load Barrier &#x2F; Read Barrier）</strong>： 当线程读取 volatile 变量时，JMM 会在读操作前插入 LoadLoad 屏障，确保在此次读操作之前的所有读操作都已完成。而在读操作后插入 LoadStore 屏障，防止在此次读操作之后的写操作被重排序到读操作之前，这样就确保了对 volatile 变量的读取总是能看到之前对同一变量或其他相关变量的写入结果。</li>
+</ul>
+<p>通过这种方式，volatile 关键字有效地实现了内存操作的顺序性，从而保证了多线程环境下对 volatile 变量的操作遵循 happens-before 原则，确保了并发编程的正确性。</p>
+<h2 id="MESI协议"><a href="#MESI协议" class="headerlink" title="MESI协议"></a>MESI协议</h2><p>全称为 Modified,Exclusive ，Shared,Invalid，是一种高速缓存一致性协议，为了解决CPU在并发环境下多个CPU缓存不一致而提出的</p>
+<p>它定义个高速缓存中数据的四种状态</p>
+<ol>
+<li><strong>Modified（M）</strong>：表示缓存行已经被修改，但还没有被写回主存储器。在这种状态下，只有一个 CPU 能独占这个修改状态。</li>
+<li><strong>Exclusive（E）</strong>：表示缓存行与主存储器相同，并且是主存储器的唯一拷贝。这种状态下，只有一个 CPU 能独占这个状态。</li>
+<li><strong>Shared（S）</strong>：表示此高速缓存行可能存储在计算机的其他高速缓存中，并且与主存储器匹配。在这种状态下，各个 CPU 可以并发的对这个数据进行读取，但都不能进行写操作。</li>
+<li><strong>Invalid（I）</strong>：表示此缓存行无效或已过期，不能使用。</li>
+</ol>
+<p>MESI 协议的主要用途是确保在多个 CPU 共享内存时，各个 CPU 的缓存数据能够保持一致性。当某个 CPU 对共享数据进行修改时，它会将这个数据的状态从 S（共享）或 E（独占）状态转变为 M（修改）状态，并等待适当的时机将这个修改写回主存储器。同时，它会向其他 CPU 广播一个“无效消息”，使得其他 CPU 将自己缓存中对应的数据状态转变为I（无效）状态，从而在下次访问这个数据时能够从主存储器或其他 CPU 的缓存中重新获取正确的数据。</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUC/" rel="tag">JUC</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-MySQL索引高度计算" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -758,168 +918,10 @@
 </article>
 
 
-  <article id="post-ConcurrentHashMap解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/ConcurrentHashMap%E8%A7%A3%E6%9E%90/">ConcurrentHashMap解析</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T08:49:34.000Z" itemprop="datePublished">2024年10月16日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/16/ConcurrentHashMap%E8%A7%A3%E6%9E%90/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>1</p>
-<h2 id="ConcurrentHashMap的底层结构"><a href="#ConcurrentHashMap的底层结构" class="headerlink" title="ConcurrentHashMap的底层结构"></a>ConcurrentHashMap的底层结构</h2><p>jdk1.7是数组链表 ，类似于HashMap数组</p>
-<p>1.8是数组+链表+红黑树，和HashMap类似</p>
-<h2 id="ConcurrentHashMap如何保证线程安全"><a href="#ConcurrentHashMap如何保证线程安全" class="headerlink" title="ConcurrentHashMap如何保证线程安全"></a>ConcurrentHashMap如何保证线程安全</h2><h3 id="jdk1-8之前"><a href="#jdk1-8之前" class="headerlink" title="jdk1.8之前"></a>jdk1.8之前</h3><p>包含一个Segment数组（默认是16个，创建后不可更改，最大并发是16）、每一个segment元素都是一个HashEntry数组，类似于HashMap，每一个HashEntry元素是链表</p>
-<p>Segment继承了Reentrantlock，是一种可重入锁。每一个segment守护者一个HashEntry数组的元素，要更改元素首先要获取对应的segment锁。</p>
-<p>也就是说、同一segment的写会阻塞，不同segment可并发执行</p>
-<p>（get要加锁吗）</p>
-<h3 id="jdk1-8"><a href="#jdk1-8" class="headerlink" title="jdk1.8"></a>jdk1.8</h3><p>取消了segment分段锁，采用volatile（每个node的value和next）+CAS+sync保证并发安全。</p>
-<p>增加元素时先判断容器是否为空。为空则CAS来初始化。否则看元素位置处是否为空，为空则CAS赋值。不为空则sync后遍历赋值</p>
-<p>数据结构和hashmap类似，由数组链表红黑树组成。只锁定当前链表或红黑树的首节点来保证并发安全。锁的粒度更小</p>
-<p>总结：jdk1.8中通过对头节点加锁来确保线程安全。锁的粒度更小，并发量更大。</p>
-<h2 id="为什么要用CAS和Sync"><a href="#为什么要用CAS和Sync" class="headerlink" title="为什么要用CAS和Sync"></a>为什么要用CAS和Sync</h2><p>计算出该位置处为空则hash碰撞的几率低，用较少的自旋完成put；有元素说明发生了哈希碰撞，有大量线程访问或容量不够了则用悲观锁sync</p>
-<h2 id="get操作为什么不加锁"><a href="#get操作为什么不加锁" class="headerlink" title="get操作为什么不加锁"></a>get操作为什么不加锁</h2><p>node的value和next是用volatile修饰的，可以保证可加性</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-HashMap解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/HashMap%E8%A7%A3%E6%9E%90/">HashMap解析</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T08:11:52.000Z" itemprop="datePublished">2024年10月16日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/16/HashMap%E8%A7%A3%E6%9E%90/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>h</p>
-<h2 id="HashMap的底层原理"><a href="#HashMap的底层原理" class="headerlink" title="HashMap的底层原理"></a>HashMap的底层原理</h2><p>底层结构是数组、链表、红黑树</p>
-<h2 id="HashMap的put流程"><a href="#HashMap的put流程" class="headerlink" title="HashMap的put流程"></a>HashMap的put流程</h2><p>先看table是否为空，为空则初始化，否则则计算元素下标，如果此处没元素则直接put。如果有则看当前元素是否等于插入元素，等于则覆盖。不等于则遍历链表或红黑树来查找相同的元素，找到则覆盖，找不到则插入到红黑树或链表头部。如果是链表则看是否达到阈值8，达到8且hashmap的数组长度大于64则转换成红黑树；至此插入元素完成，然后检查负载因子是否超过阈值0.75，超过则扩容，否则执行结束</p>
-<h3 id="扩容过程"><a href="#扩容过程" class="headerlink" title="扩容过程"></a>扩容过程</h3><p>先创建一个原数组两倍大小的新数组，将原来的引用指向新数组并更新扩容阈值，将旧数组的元素重新计算哈希码并分配到新数组中，</p>
-<h2 id="HashMap的get流程"><a href="#HashMap的get流程" class="headerlink" title="HashMap的get流程"></a>HashMap的get流程</h2><p>计算出元素的索引位置，如果当前位置为null则直接返回，否则看当前元素是否等于k，等于直接返回。否则遍历链表或红黑树直到找到相同的元素；如果不存在则返回null；</p>
-<h2 id="为什么线程不安全"><a href="#为什么线程不安全" class="headerlink" title="为什么线程不安全"></a>为什么线程不安全</h2><p>1、两个线程同时put导致数据丢失。两个元素计算得到的索引一样，并且得到的新插入的位置一样，会导致覆盖其他线程的数据</p>
-<p>2、jdk1.8前多线程下扩容会导致死循环</p>
-<h2 id="为什么容量是2的n次方"><a href="#为什么容量是2的n次方" class="headerlink" title="为什么容量是2的n次方"></a>为什么容量是2的n次方</h2><p>1、方便计算索引位置。利用与运算计算代替除运算，更快速的计算出位置。但前提是容量是2的n次方</p>
-<p>2、扩容后新数组的位置容易确定，分布比较均匀。扩容中只需判断原hash和左移一位，也就是扩大两倍的hash的与运算是0还是1，0则位置不变，1则原位置加上原容量</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
-<a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+<a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
 </nav>
 
 
@@ -934,6 +936,14 @@
       <ul>
         
           <li>
+            <a href="/2024/10/24/%E7%BC%93%E5%AD%98%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/">缓存双写一致性</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/24/Java%E4%BB%A3%E7%90%86/">Java代理</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/24/MySQL%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">MySQL隔离级别</a>
           </li>
         
@@ -943,14 +953,6 @@
         
           <li>
             <a href="/2024/10/24/binlog%E7%9A%84%E5%86%99%E5%85%A5%E6%97%B6%E6%9C%BA/">binlog的写入时机</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/24/%E4%B8%80%E6%9D%A1SQL%E8%AF%AD%E5%8F%A5%E5%A6%82%E4%BD%95%E6%89%A7%E8%A1%8C%E7%9A%84/">一条SQL语句如何执行的</a>
-          </li>
-        
-          <li>
-            <a href="/2024/10/24/redo%E5%92%8Cbinlog%E7%9A%84%E5%AF%B9%E6%AF%94/">redo和binlog的对比</a>
           </li>
         
       </ul>
@@ -963,7 +965,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/HTTP/" style="font-size: 14px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 12px;">JUC</a> <a href="/tags/JVM/" style="font-size: 12px;">JVM</a> <a href="/tags/Kafka/" style="font-size: 16px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18px;">Redis</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 12px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 14px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 12px;">项目</a>
+      <a href="/tags/HTTP/" style="font-size: 15px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 12.5px;">JUC</a> <a href="/tags/JVM/" style="font-size: 12.5px;">JVM</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.5px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 20px;">Redis</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 12.5px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 15px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 12.5px;">项目</a>
     </div>
   </div>
 
@@ -975,7 +977,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">49</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">51</span></li></ul>
     </div>
   </div>
 
@@ -985,7 +987,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
