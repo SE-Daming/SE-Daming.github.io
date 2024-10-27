@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <title>归档: 2024 | 冬去春会来</title>
+  <title>gateway的作用 | 冬去春会来</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
     <meta name="description" content="后端开发博客日志">
@@ -84,149 +84,135 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-
-  
-  
+        <section id="main"><article id="post-gateway的作用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
     
     
-    <section class="archives-wrap">
-      <div class="archive-title">
+      <header class="article-header">
         
-          <i class="fa fa-date"></i>
-          2024
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      gateway的作用
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-27T02:18:24.000Z" itemprop="datePublished">2024年10月27日</time>
+</span>
+      
+      
+        <span class="article-views">
+  <i class="fa fa-views"></i>
+  <i id="busuanzi_container_page_pv">
+      <i id="busuanzi_value_page_pv"></i>
+  </i>
+</span>
+
+      
+      
+<a href="/2024/10/27/gateway%E7%9A%84%E4%BD%9C%E7%94%A8/#comments" class="article-comment-link">
+  
+    
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/27/gateway%E7%9A%84%E4%BD%9C%E7%94%A8/" itemprop="commentCount"></span>
+    
+    
+    
+    
+    
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>身份校验、请求转发</p>
+<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><h3 id="请求转发"><a href="#请求转发" class="headerlink" title="请求转发"></a>请求转发</h3><p>引入依赖、配置路由</p>
+<h3 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h3><p>自定义GlobalFilter，实现filter接口</p>
+<h2 id="网关如何传递信息给微服务"><a href="#网关如何传递信息给微服务" class="headerlink" title="网关如何传递信息给微服务"></a>网关如何传递信息给微服务</h2><p>网关将请求转发给微服务是以http方式、可以把信息放到请求头，每个服务使用ThreadLocal保存</p>
+<h2 id="微服务之间不经过网关，如何传递信息"><a href="#微服务之间不经过网关，如何传递信息" class="headerlink" title="微服务之间不经过网关，如何传递信息"></a>微服务之间不经过网关，如何传递信息</h2><p>使用feign做rpc：实现RequestInterceptor接口重写apply方法将信息放到请求头，把它注册为bean</p>
+<p>使用dubbo做rpc：实现filter接口自定义拦截器在请求中增加信息，@WebFilter注解</p>
+<p>@WebFilter(filterName &#x3D; “accessFilter”, urlPatterns &#x3D; {“&#x2F;api&#x2F;*”})</p>
+
+        
+            <div id="toc-article">
+                
+  <div class="widget-wrap" id="toc-wrap">
+    <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
+    <div class="widget">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-text">使用流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E8%BD%AC%E5%8F%91"><span class="toc-text">请求转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E9%AA%8C%E8%AF%81"><span class="toc-text">身份验证</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BD%91%E5%85%B3%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E4%BF%A1%E6%81%AF%E7%BB%99%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-text">网关如何传递信息给微服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B9%8B%E9%97%B4%E4%B8%8D%E7%BB%8F%E8%BF%87%E7%BD%91%E5%85%B3%EF%BC%8C%E5%A6%82%E4%BD%95%E4%BC%A0%E9%80%92%E4%BF%A1%E6%81%AF"><span class="toc-text">微服务之间不经过网关，如何传递信息</span></a></li></ol>
+    </div>
+  </div>
+
+
+            </div>
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/2024/10/27/gateway的作用/">https://se-daming.github.io/2024/10/27/gateway的作用/</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+        
+<nav id="article-nav">
+  
+    <a href="/2024/10/27/Nacos%E5%8E%9F%E7%90%86/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">older</strong>
+      <div class="article-nav-title">
+        
+          Nacos原理
         
       </div>
-      <div class="archives">
-  
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/18/%E5%BF%AB%E6%89%8B-1/">
-      <time class="dt-published" datetime="2024-10-18T10:58:35.000Z" itemprop="datePublished">2024年10月18日</time>
-      | <span class="archive-article-title">快手</span>
     </a>
-  </li>
-</ul>
-
-
   
   
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/18/JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/">
-      <time class="dt-published" datetime="2024-10-18T09:43:19.000Z" itemprop="datePublished">2024年10月18日</time>
-      | <span class="archive-article-title">JVM内存区域</span>
-    </a>
-  </li>
-</ul>
-
-
-  
-  
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/18/JMM%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/">
-      <time class="dt-published" datetime="2024-10-18T08:02:35.000Z" itemprop="datePublished">2024年10月18日</time>
-      | <span class="archive-article-title">JMM到底是什么</span>
-    </a>
-  </li>
-</ul>
-
-
-  
-  
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/18/Java%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">
-      <time class="dt-published" datetime="2024-10-18T04:44:59.000Z" itemprop="datePublished">2024年10月18日</time>
-      | <span class="archive-article-title">Java优先队列</span>
-    </a>
-  </li>
-</ul>
-
-
-  
-  
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/18/volatile%E6%B5%85%E6%9E%90/">
-      <time class="dt-published" datetime="2024-10-18T03:58:24.000Z" itemprop="datePublished">2024年10月18日</time>
-      | <span class="archive-article-title">volatile浅析</span>
-    </a>
-  </li>
-</ul>
-
-
-  
-  
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/18/MySQL%E7%B4%A2%E5%BC%95%E9%AB%98%E5%BA%A6%E8%AE%A1%E7%AE%97/">
-      <time class="dt-published" datetime="2024-10-18T02:53:45.000Z" itemprop="datePublished">2024年10月18日</time>
-      | <span class="archive-article-title">MySQL索引高度计算</span>
-    </a>
-  </li>
-</ul>
-
-
-  
-  
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/17/%E5%BF%AB%E6%89%8B/">
-      <time class="dt-published" datetime="2024-10-17T15:39:22.000Z" itemprop="datePublished">2024年10月17日</time>
-      | <span class="archive-article-title">快手</span>
-    </a>
-  </li>
-</ul>
-
-
-  
-  
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/17/hot100/">
-      <time class="dt-published" datetime="2024-10-17T15:33:07.000Z" itemprop="datePublished">2024年10月17日</time>
-      | <span class="archive-article-title">hot100</span>
-    </a>
-  </li>
-</ul>
-
-
-  
-  
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/17/%E5%9F%BA%E4%BA%8ESPI%E4%BF%AE%E6%94%B9Sharding-JDBC%E5%AE%9E%E7%8E%B0Nacos%E5%85%AC%E5%85%B1%E9%85%8D%E7%BD%AE/">
-      <time class="dt-published" datetime="2024-10-17T07:28:53.000Z" itemprop="datePublished">2024年10月17日</time>
-      | <span class="archive-article-title">基于SPI修改Sharding-JDBC实现Nacos公共配置</span>
-    </a>
-  </li>
-</ul>
-
-
-  
-  
-  <ul class="archive-article archive-type-post">
-  <li class="archive-article-inner">
-    <a href="/2024/10/17/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4/">
-      <time class="dt-published" datetime="2024-10-17T06:25:37.000Z" itemprop="datePublished">2024年10月17日</time>
-      | <span class="archive-article-title">双亲委派机制是什么，如何打破</span>
-    </a>
-  </li>
-</ul>
-
-
-
-  </div></section>
-
-
-    <nav id="page-nav">
-
-<a class="extend prev" rel="prev" href="/archives/2024/page/4/">上一页</a><a class="page-number" href="/archives/2024/">1</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2024/page/3/">3</a><a class="page-number" href="/archives/2024/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/archives/2024/page/6/">6</a><a class="page-number" href="/archives/2024/page/7/">7</a><a class="extend next" rel="next" href="/archives/2024/page/6/">下一页</a>
 </nav>
 
+      
+      
+        
 
+
+  <section id="comments" class="vcomment"></section>
+
+
+
+
+
+
+
+      
+    </footer>
+  </div>
+</article>
 </section>
         
           <aside id="sidebar">
@@ -369,6 +355,16 @@
 
 
 
+
+  
+    
+<script src="/localshare/js/social-share.js"></script>
+
+    
+<script src="/localshare/js/qrcode.js"></script>
+
+  
+  
 
 
 
