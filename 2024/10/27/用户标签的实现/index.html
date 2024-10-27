@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <title>AQS是什么 | 冬去春会来</title>
+  <title>用户标签的实现 | 冬去春会来</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
     <meta name="description" content="后端开发博客日志">
@@ -84,7 +84,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-AQS是什么" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-用户标签的实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -92,7 +92,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      AQS是什么
+      用户标签的实现
     </h1>
   
 
@@ -103,7 +103,7 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-27T11:36:09.000Z" itemprop="datePublished">2024年10月27日</time>
+  <time class="dt-published" datetime="2024-10-27T13:46:30.000Z" itemprop="datePublished">2024年10月27日</time>
 </span>
       
       
@@ -116,10 +116,10 @@
 
       
       
-<a href="/2024/10/27/AQS%E6%98%AF%E4%BB%80%E4%B9%88/#comments" class="article-comment-link">
+<a href="/2024/10/27/%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/#comments" class="article-comment-link">
   
     
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/27/AQS%E6%98%AF%E4%BB%80%E4%B9%88/" itemprop="commentCount"></span>
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/27/%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/" itemprop="commentCount"></span>
     
     
     
@@ -134,7 +134,12 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>AQS是Java中用户构建锁和同步器的一个抽象工具类，它的核心思想是如果被请求的资源空闲则将请求线程设为有效的工作线程，将资源设为锁定状态。如果资源被占用则需要一定的阻塞等待机制来保证锁分配。它的核心有三部分：状态state、控制线程获得锁的队列、实现类要实现的方法（tryAcquire\tryRelease）.比如常见的锁和同步器ReentrantLock、Semaphore、countdownLatch等都是基于AQS构建的</p>
+        <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>用MySQL存储、有多少标签就有多少字段、如果新增标签的话会新增字段</p>
+<p>用MySQL配合二进制实现。预设1个bigint类型字段、有8*8个位、可表示64个标签</p>
+<p>取消标签：取反~后&amp;</p>
+<p>新增标签：该表字符值 | tag</p>
+<h2 id="其他方式"><a href="#其他方式" class="headerlink" title="其他方式"></a>其他方式</h2><p>一个标签表、用户标签关联表</p>
+<p>但是需要联查、</p>
 
         
             <div id="toc-article">
@@ -142,7 +147,7 @@
   <div class="widget-wrap" id="toc-wrap">
     <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
     <div class="widget">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0"><span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E6%96%B9%E5%BC%8F"><span class="toc-text">其他方式</span></a></li></ol>
     </div>
   </div>
 
@@ -151,7 +156,7 @@
         
         
           <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/2024/10/27/AQS是什么/">https://se-daming.github.io/2024/10/27/AQS是什么/</a></p>
+              <p>原文链接: <a href="https://se-daming.github.io/2024/10/27/用户标签的实现/">https://se-daming.github.io/2024/10/27/用户标签的实现/</a></p>
               <p>版权声明: 转载请注明出处.</p>
           </blockquote>
         
@@ -163,7 +168,7 @@
           
 
           
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUC/" rel="tag">JUC</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a></li></ul>
 
           
     <div class="social-share">
@@ -178,24 +183,15 @@
         
 <nav id="article-nav">
   
-    <a href="/2024/10/27/MVCC%E5%92%8C%E6%9C%80%E5%B7%A6%E5%89%8D%E7%BC%80%E6%B3%95%E5%88%99/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/10/27/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">older</strong>
       <div class="article-nav-title">
         
-          MVCC和最左前缀法则
+          策略模式
         
       </div>
     </a>
   
-  
-    <a href="/2024/10/27/bean%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">newer</strong>
-      <div class="article-nav-title">
-        
-          bean的生命周期
-        
-      </div>
-    </a>
   
 </nav>
 
