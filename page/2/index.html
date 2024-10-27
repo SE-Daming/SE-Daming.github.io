@@ -85,6 +85,75 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-AQS是什么" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/27/AQS%E6%98%AF%E4%BB%80%E4%B9%88/">AQS是什么</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-27T11:36:09.000Z" itemprop="datePublished">2024年10月27日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/27/AQS%E6%98%AF%E4%BB%80%E4%B9%88/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>AQS是Java中用户构建锁和同步器的一个抽象工具类，它的核心思想是如果被请求的资源空闲则将请求线程设为有效的工作线程，将资源设为锁定状态。如果资源被占用则需要一定的阻塞等待机制来保证锁分配。它的核心有三部分：状态state、控制线程获得锁的队列、实现类要实现的方法（tryAcquire\tryRelease）.比如常见的锁和同步器ReentrantLock、Semaphore、countdownLatch等都是基于AQS构建的</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/2/index.html">https://se-daming.github.io/page/2/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUC/" rel="tag">JUC</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-MVCC和最左前缀法则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -761,78 +830,6 @@
 </article>
 
 
-  <article id="post-ReentrantLock浅析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/25/ReentrantLock%E6%B5%85%E6%9E%90/">ReentrantLock浅析</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-25T00:37:08.000Z" itemprop="datePublished">2024年10月25日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/25/ReentrantLock%E6%B5%85%E6%9E%90/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>1</p>
-<h1 id="如何实现公平锁"><a href="#如何实现公平锁" class="headerlink" title="如何实现公平锁"></a>如何实现公平锁</h1><p>获取锁时先判断state是否为0，如果为0则看其否有前驱节点CAS去获取，不为0则看当前占用线程是否是自己，如果是则state+1,实现可重入</p>
-<h1 id="如何实现非公平锁"><a href="#如何实现非公平锁" class="headerlink" title="如何实现非公平锁"></a>如何实现非公平锁</h1><p>获取锁时先判断state是否为0，如果为0则去CAS获取，没有看是否有前驱节点，不为0则看是否是自己的</p>
-<p>也就是说、是否公平体现在获取锁时看是否有其他前驱节点</p>
-<h1 id="如何实现可重入"><a href="#如何实现可重入" class="headerlink" title="如何实现可重入"></a>如何实现可重入</h1>
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/2/index.html">https://se-daming.github.io/page/2/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUC/" rel="tag">JUC</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
@@ -851,6 +848,10 @@
       <ul>
         
           <li>
+            <a href="/2024/10/27/%E5%8E%8B%E6%B5%8B/">压测</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/27/%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/">用户标签的实现</a>
           </li>
         
@@ -866,10 +867,6 @@
             <a href="/2024/10/27/TCP%E5%92%8CUDP/">TCP和UDP</a>
           </li>
         
-          <li>
-            <a href="/2024/10/27/TCP%E5%8F%AF%E9%9D%A0%E6%80%A7%E5%AE%9E%E7%8E%B0/">TCP可靠性实现</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -880,7 +877,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/HTTP/" style="font-size: 12.86px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 14.29px;">JUC</a> <a href="/tags/JVM/" style="font-size: 14.29px;">JVM</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.14px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.57px;">Redis</a> <a href="/tags/Spring/" style="font-size: 12.86px;">Spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 15.71px;">分布式</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 11.43px;">小红书</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.43px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.86px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.86px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 12.86px;">项目</a>
+      <a href="/tags/HTTP/" style="font-size: 12.86px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 14.29px;">JUC</a> <a href="/tags/JVM/" style="font-size: 14.29px;">JVM</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.14px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.57px;">Redis</a> <a href="/tags/Spring/" style="font-size: 12.86px;">Spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 15.71px;">分布式</a> <a href="/tags/%E5%8E%8B%E6%B5%8B/" style="font-size: 10px;">压测</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 11.43px;">小红书</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.43px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.86px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.86px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 12.86px;">项目</a>
     </div>
   </div>
 
@@ -892,7 +889,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">75</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">76</span></li></ul>
     </div>
   </div>
 
@@ -902,7 +899,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E6%B5%8B/" rel="tag">压测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 

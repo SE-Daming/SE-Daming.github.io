@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   
   
-  <title>TCP和UDP | 冬去春会来</title>
+  <title>压测 | 冬去春会来</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
     <meta name="description" content="后端开发博客日志">
@@ -84,7 +84,7 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-TCP和UDP" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-压测" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -92,7 +92,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      TCP和UDP
+      压测
     </h1>
   
 
@@ -103,7 +103,7 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-27T12:41:39.000Z" itemprop="datePublished">2024年10月27日</time>
+  <time class="dt-published" datetime="2024-10-27T15:14:08.000Z" itemprop="datePublished">2024年10月27日</time>
 </span>
       
       
@@ -116,10 +116,10 @@
 
       
       
-<a href="/2024/10/27/TCP%E5%92%8CUDP/#comments" class="article-comment-link">
+<a href="/2024/10/27/%E5%8E%8B%E6%B5%8B/#comments" class="article-comment-link">
   
     
-      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/27/TCP%E5%92%8CUDP/" itemprop="commentCount"></span>
+      <span class="post-comments-count valine-comment-count" data-xid="/2024/10/27/%E5%8E%8B%E6%B5%8B/" itemprop="commentCount"></span>
     
     
     
@@ -134,7 +134,20 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>1</p>
+        <h3 id="1000QPS压测"><a href="#1000QPS压测" class="headerlink" title="1000QPS压测"></a>1000QPS压测</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>每秒1000QPS10w个对象需要存到ck数据库</p>
+<p>先把请求数据放到Kafka的不同分区和主题中（2个主题、100个分区），然后消费者（10个）监听到消息后放到redis读队列中，有两个衡量指标衡量是否转存到写队列。一个是数量阈值、一个是时间计时器。如果写队列到了一定阈值（1w）后、将读队列开关关闭、转存到读队列（while循环不断检测）。如果没到阈值但到时间了也转存到读队列。之后从读队列中拿出数据序列化并基于jdbc存到ck，开关打开。都没有的话则休眠10ms后再自旋</p>
+<p>阈值：8000 时间阈值：0.15s</p>
+<p>阈值的设定：while中判断是否达到阈值、然后拿出所有的转到读队列。阈值一方面和ck的批量写入量有关，另一个是和判断后的时间间隙有关</p>
+<p>经实验、ck批量写入是1w、判断后又有大约2000的数据进来。</p>
+<p>时间阈值：100ms大约1w个对象、可能没到8000阈值（需要80ms）、经实验150ms内堆积也差不多8000个对象</p>
+<h4 id="为什么原生jdbc"><a href="#为什么原生jdbc" class="headerlink" title="为什么原生jdbc"></a>为什么原生jdbc</h4><p>避免将Java对象转成数据库中的行，减少ORM时的开销；另外，mysql的批量写入一次最多4M数据（可设置），估算每一次请求的数据大概是5kb、5000字节、也就是说，mp的批量写入一次最多写入800条数据、再多就会一条一条写入。</p>
+<p>而ck官方建议：如果是1kb，则写入速度是5w到20w每秒；（当时测试写入1kb的5w数据大概是900多毫秒、2kb大概是1700多ms）所以批量写入的阈值设为了1w</p>
+<h4 id="双buffer缓冲队列"><a href="#双buffer缓冲队列" class="headerlink" title="双buffer缓冲队列"></a>双buffer缓冲队列</h4><p>原因：</p>
+<p>隔离数据处理和数据写入。提高系统吞吐量和处理效率；</p>
+<p>避免并发冲突，当写队列接收时读队列转存到数据库，不会相互干扰</p>
+<p>为了保证批量写入，如果只有一个队列的话</p>
+<p>介绍：两个set、一个用作读、一个用作写。</p>
+<h4 id="如何保证批量插入"><a href="#如何保证批量插入" class="headerlink" title="如何保证批量插入"></a>如何保证批量插入</h4><p>用了双buffer缓存队列，引入了redis作为缓存。</p>
 
         
             <div id="toc-article">
@@ -142,7 +155,7 @@
   <div class="widget-wrap" id="toc-wrap">
     <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
     <div class="widget">
-      
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1000QPS%E5%8E%8B%E6%B5%8B"><span class="toc-text">1000QPS压测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8E%9F%E7%94%9Fjdbc"><span class="toc-text">为什么原生jdbc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8Cbuffer%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97"><span class="toc-text">双buffer缓冲队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5"><span class="toc-text">如何保证批量插入</span></a></li></ol></li></ol>
     </div>
   </div>
 
@@ -151,7 +164,7 @@
         
         
           <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/2024/10/27/TCP和UDP/">https://se-daming.github.io/2024/10/27/TCP和UDP/</a></p>
+              <p>原文链接: <a href="https://se-daming.github.io/2024/10/27/压测/">https://se-daming.github.io/2024/10/27/压测/</a></p>
               <p>版权声明: 转载请注明出处.</p>
           </blockquote>
         
@@ -163,7 +176,7 @@
           
 
           
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8E%8B%E6%B5%8B/" rel="tag">压测</a></li></ul>
 
           
     <div class="social-share">
@@ -178,24 +191,15 @@
         
 <nav id="article-nav">
   
-    <a href="/2024/10/27/TCP%E5%8F%AF%E9%9D%A0%E6%80%A7%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2024/10/27/%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">older</strong>
       <div class="article-nav-title">
         
-          TCP可靠性实现
+          用户标签的实现
         
       </div>
     </a>
   
-  
-    <a href="/2024/10/27/Java%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%80%81/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">newer</strong>
-      <div class="article-nav-title">
-        
-          Java如何实现多态
-        
-      </div>
-    </a>
   
 </nav>
 
