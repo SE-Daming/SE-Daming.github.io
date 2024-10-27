@@ -85,7 +85,7 @@
 
       <div class="outer">
         <section id="main">
-  <article id="post-百度" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-快手-1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -93,7 +93,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/%E7%99%BE%E5%BA%A6/">百度</a>
+      <a class="p-name article-title" href="/2024/10/18/%E5%BF%AB%E6%89%8B-1/">快手</a>
     </h1>
   
 
@@ -104,12 +104,12 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T15:42:46.000Z" itemprop="datePublished">2024年10月16日</time>
+  <time class="dt-published" datetime="2024-10-18T10:58:35.000Z" itemprop="datePublished">2024年10月18日</time>
 </span>
       
       
       
-<a href="/2024/10/16/%E7%99%BE%E5%BA%A6/#comments" class="article-comment-link">
+<a href="/2024/10/18/%E5%BF%AB%E6%89%8B-1/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -119,71 +119,10 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <ol>
-<li><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2></li>
-</ol>
-<p>  byte1 short2 int4 long8 char2 float4 double8 boolean</p>
-<ol start="2">
-<li><h2 id="面向对象三大特性"><a href="#面向对象三大特性" class="headerlink" title="面向对象三大特性"></a>面向对象三大特性</h2></li>
-</ol>
-<p>  封装：通过 public private default protected来实现，主要为了限制其他类和包使用<br>  继承：一个对象可继承自另一个对象<br>  多态：一个变量可有多种表现形态。主要由继承来实现，比如teacher和stu都继承自person，则person既可以表现成stu也可以。。。</p>
-<ol start="3">
-<li><h2 id="重载重写-多态-虚方法表"><a href="#重载重写-多态-虚方法表" class="headerlink" title="重载重写+多态+虚方法表"></a>重载重写+多态+虚方法表</h2></li>
-</ol>
-<p>  重载是一个类中有多个方法方法名相同，但是参数或参数类型、返回值不同<br>  重写是当继承自另一个类是，子类重写父类的方法<br>  多态如何实现？<br>  虚方法表是多态实现的一个必要条件，它记录了方法的实现类的地址，用来确定引用变量调用子类方法时具体调用的哪个方法</p>
-<ol start="4">
-<li><h2 id="集合的几个接口介绍一下，并说区别"><a href="#集合的几个接口介绍一下，并说区别" class="headerlink" title="集合的几个接口介绍一下，并说区别"></a>集合的几个接口介绍一下，并说区别</h2></li>
-</ol>
-<p>  集合包含list、set、queue三个主要接口、除此之外还有map<br>  list是可重复的一些数据、set是不可重复的数据、map是键值对类型数据的集合<br>  list下包含arraylist、linkedlist、vector的子类实现<br>  set包含hashset、treeset的实现<br>  map包含hashmap、linkedhashmap、hashtable、treemap的实现</p>
-<ol start="5">
-<li><h2 id="ArrayList和LinkedList的区别"><a href="#ArrayList和LinkedList的区别" class="headerlink" title="ArrayList和LinkedList的区别"></a>ArrayList和LinkedList的区别</h2></li>
-</ol>
-<p>  底层实现不同：a是动态数组、l是链表<br>  插入和删除效率不同：a的插入需要移动后面元素，时间复杂度是On，删除时也需要移动元素，On<br>                   l的插入要先找到对应元素然后o1插入，总的来说也是on，删除同理<br>  l更适合在头部插入元素，O1、而a是On<br>  a支持索引查找，O1、l是On<br>  大多数情况下使用啊</p>
-<ol start="6">
-<li><h2 id="HashMap一整套（数据结构，扩容）"><a href="#HashMap一整套（数据结构，扩容）" class="headerlink" title="HashMap一整套（数据结构，扩容）"></a>HashMap一整套（数据结构，扩容）</h2></li>
-</ol>
-<p>  8之前是数组+链表；8之后是数组+链表+红黑树；<br>  扩容过程:先创建原来2倍容量的数组，然后将旧数组元素拷贝到新的数组，然后改变引用指向新的数组</p>
-<ol start="7">
-<li><h2 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h2></li>
-<li><h2 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h2></li>
-</ol>
-<p>  是Java中的一个关键字，用来解决可见性和防止指令重排<br>  当一个变量如果没被volatile标记、则他被修改时可能会先放到缓冲区，其他变量读到的仍然是修改前的数值。<br>  指令重排：JVM会对class文件的命令在不影响结果的前提下进行重排序</p>
-<ol start="9">
-<li><h2 id="Java的锁类型"><a href="#Java的锁类型" class="headerlink" title="Java的锁类型"></a>Java的锁类型</h2></li>
-</ol>
-<p>  包含公平锁、分公平锁；可重入锁，不可重入锁<br>  主要包含sync实现的和R锁<br>  sync对比R：非公平、可公可非；不可重入，可重入；修饰代码块、方法， 修饰代码块；自动释放，手动释放；重量、轻量；基于监视器monitor实现，基于AQS实现；R可带超时的获取尝试</p>
-<ol start="10">
-<li><h2 id="AQS的非公平实现（顺便把AQS一整套说了）"><a href="#AQS的非公平实现（顺便把AQS一整套说了）" class="headerlink" title="AQS的非公平实现（顺便把AQS一整套说了）"></a>AQS的非公平实现（顺便把AQS一整套说了）</h2></li>
-<li><h2 id="线程创建方式（线程和线程体）"><a href="#线程创建方式（线程和线程体）" class="headerlink" title="线程创建方式（线程和线程体）"></a>线程创建方式（线程和线程体）</h2><p>继承thread类重写run方法；实现runnable接口的run方法；实现callable接口的call方法；线程池创建；</p>
-</li>
-<li><h2 id="为什么会有线程安全"><a href="#为什么会有线程安全" class="headerlink" title="为什么会有线程安全"></a>为什么会有线程安全</h2><p>多线程下对同一资源进行操作，比如对同一变量自增，需要先读取然后修改。这个过程不是原子性的，可能出现读到的相同，修改后出现问题</p>
-</li>
-<li><h2 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h2><p>分为线程共享和线程私有<br>堆内存、运行时常量池；Java虚拟机栈、本地方法栈、程序计数器；字符串常量池</p>
-</li>
-<li><h2 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h2><p>标记清除、标记复制、标记整理<br>对需要清除的区域先标记再清除；会导致内存碎片问题</p>
-<p>将内存区域分为TO、from两部分、对需要清除的区域先标记再将未标记的部分整理到to区，将from指向to；内存利用率不高</p>
-<p>先标记需要清除的，然后将其复制到内存一侧；效率不高</p>
-</li>
-<li><h2 id="垃圾回收器搭配"><a href="#垃圾回收器搭配" class="headerlink" title="垃圾回收器搭配"></a>垃圾回收器搭配</h2><p>serial，serial old<br>paraneel、paraneel new<br>serial CMS<br>g1 </p>
-</li>
-<li><h2 id="三色标记算法"><a href="#三色标记算法" class="headerlink" title="三色标记算法"></a>三色标记算法</h2></li>
-<li><h2 id="CMS-G1"><a href="#CMS-G1" class="headerlink" title="CMS,G1"></a>CMS,G1</h2><p>CMS是老年代的回收，G1是新生代和老年代；<br>CMS用标记清除算法，G1用标记整理算法<br>CMS：初始标记、并发标记、最终标记、并发清除<br>G1：初始标记、并发标记、并发标记、并发清除<br>CMS会产生内存碎片和浮动垃圾，严重时退化成serial</p>
-</li>
-<li><h2 id="Springboot启动流程"><a href="#Springboot启动流程" class="headerlink" title="Springboot启动流程"></a>Springboot启动流程</h2></li>
-<li><h2 id="MySQL索引（ACID，事务隔离，MVCC）"><a href="#MySQL索引（ACID，事务隔离，MVCC）" class="headerlink" title="MySQL索引（ACID，事务隔离，MVCC）"></a>MySQL索引（ACID，事务隔离，MVCC）</h2></li>
-<li><h2 id="MySQL锁"><a href="#MySQL锁" class="headerlink" title="MySQL锁"></a>MySQL锁</h2><p>用来解决并发下的问题<br>全局锁、表级锁、行级锁<br>表锁、元数据锁、意向锁；<br>行锁、间隙锁、临建锁，建立在索引上的，没索引则升级为表锁</p>
-</li>
-<li><h2 id="MySQL三大日志"><a href="#MySQL三大日志" class="headerlink" title="MySQL三大日志"></a>MySQL三大日志</h2><p>redolog、undolog、binlog<br>重做日志，用来做崩溃后的恢复；用来事务回滚和MVCC；数据备份用的</p>
-</li>
-<li><h2 id="MySQL慢SQL排查"><a href="#MySQL慢SQL排查" class="headerlink" title="MySQL慢SQL排查"></a>MySQL慢SQL排查</h2></li>
-<li><h2 id="假设慢SQL不是索引的问题，可能是哪些原因"><a href="#假设慢SQL不是索引的问题，可能是哪些原因" class="headerlink" title="假设慢SQL不是索引的问题，可能是哪些原因"></a>假设慢SQL不是索引的问题，可能是哪些原因</h2><p>表数据量过大、考虑分表；<br>表或查询记录被上锁；<br>MySQL抖了一下，刷新脏页到磁盘时</p>
-</li>
-<li><h2 id="InnoDB的各种特性"><a href="#InnoDB的各种特性" class="headerlink" title="InnoDB的各种特性"></a>InnoDB的各种特性</h2><p>事务、外键、行级锁、崩溃后数据恢复、mvcc</p>
-</li>
-<li><h2 id="说一下项目难点，并说说怎么解决"><a href="#说一下项目难点，并说说怎么解决" class="headerlink" title="说一下项目难点，并说说怎么解决"></a>说一下项目难点，并说说怎么解决</h2></li>
-<li><h2 id="手撕快排"><a href="#手撕快排" class="headerlink" title="手撕快排"></a>手撕快排</h2></li>
-</ol>
-
+        <h2 id="mysql-三大日志"><a href="#mysql-三大日志" class="headerlink" title="mysql 三大日志"></a>mysql 三大日志</h2><p>redolog：保证数据持久性</p>
+<p>undolog：事务异常的回退、MVCC的版本链</p>
+<p>binlog:做数据备份和主从同步</p>
+<h2 id="其中binlog的底层数据结构说一下"><a href="#其中binlog的底层数据结构说一下" class="headerlink" title="其中binlog的底层数据结构说一下"></a>其中binlog的底层数据结构说一下</h2><h2 id="分别细说三大日志的作用"><a href="#分别细说三大日志的作用" class="headerlink" title="分别细说三大日志的作用"></a>分别细说三大日志的作用</h2><h2 id="幻读概念"><a href="#幻读概念" class="headerlink" title="幻读概念"></a>幻读概念</h2><h2 id="mysql的隔离级别"><a href="#mysql的隔离级别" class="headerlink" title="mysql的隔离级别"></a>mysql的隔离级别</h2><h2 id="mysql-inodb的数据结构"><a href="#mysql-inodb的数据结构" class="headerlink" title="mysql inodb的数据结构"></a>mysql inodb的数据结构</h2><h2 id="B-树和B树有啥区别（为啥比B树快）"><a href="#B-树和B树有啥区别（为啥比B树快）" class="headerlink" title="B+树和B树有啥区别（为啥比B树快）"></a>B+树和B树有啥区别（为啥比B树快）</h2><h2 id="索引下推知道吗"><a href="#索引下推知道吗" class="headerlink" title="索引下推知道吗"></a>索引下推知道吗</h2><h2 id="voliate关键字有什么作用"><a href="#voliate关键字有什么作用" class="headerlink" title="voliate关键字有什么作用"></a>voliate关键字有什么作用</h2><h2 id="详细说一下JMM内存模型"><a href="#详细说一下JMM内存模型" class="headerlink" title="详细说一下JMM内存模型"></a>详细说一下JMM内存模型</h2><h2 id="voliate关键字为啥不能保证原子性"><a href="#voliate关键字为啥不能保证原子性" class="headerlink" title="voliate关键字为啥不能保证原子性"></a>voliate关键字为啥不能保证原子性</h2>
         
         
           <blockquote id="copyright">
@@ -199,7 +138,7 @@
           
 
           
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a></li></ul>
 
           
     <div class="social-share">
@@ -217,7 +156,7 @@
 </article>
 
 
-  <article id="post-分片上传和断点续传如何实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-JVM内存区域" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -225,7 +164,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0%E5%92%8C%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0/">分片上传和断点续传如何实现</a>
+      <a class="p-name article-title" href="/2024/10/18/JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/">JVM内存区域</a>
     </h1>
   
 
@@ -236,12 +175,12 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T14:25:07.000Z" itemprop="datePublished">2024年10月16日</time>
+  <time class="dt-published" datetime="2024-10-18T09:43:19.000Z" itemprop="datePublished">2024年10月18日</time>
 </span>
       
       
       
-<a href="/2024/10/16/%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0%E5%92%8C%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0/#comments" class="article-comment-link">
+<a href="/2024/10/18/JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -251,11 +190,12 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>j用到的技术：Redis、MD5</p>
-<h3 id="分片上传"><a href="#分片上传" class="headerlink" title="分片上传"></a>分片上传</h3><p>前端将文件分片后携带文件id、各个分片的索引，总分片数。文件MD5</p>
-<p>后端将总分片数、已经上传的分片保存到redis。当所有分片上传完成后，后端组装这些分片并计算出MD5值验证是否组装成功。</p>
-<h3 id="断点续传"><a href="#断点续传" class="headerlink" title="断点续传"></a>断点续传</h3><p>继续上传时先查询已经上传的分片、从该分片索引处继续上传</p>
-
+        <h1 id="线程共享"><a href="#线程共享" class="headerlink" title="线程共享"></a>线程共享</h1><h2 id="堆"><a href="#堆" class="headerlink" title="堆"></a>堆</h2><p>存放对象实例、（包含字符串常量池）</p>
+<h2 id="方法区"><a href="#方法区" class="headerlink" title="方法区"></a>方法区</h2><p>类加载的类型信息、常量、静态变量、JIT编译后的代码缓存、运行时常量池</p>
+<p>元空间和永生代是方法区的实现、方法区是规范</p>
+<h1 id="线程隔离"><a href="#线程隔离" class="headerlink" title="线程隔离"></a>线程隔离</h1><h2 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h2><p>当前线程执行字节码的行号指示器</p>
+<h2 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h2><p>局部变量表、操作数栈、动态链接（将符号引用换成内存地址）、方法出口、异常表</p>
+<h2 id="本地方法栈"><a href="#本地方法栈" class="headerlink" title="本地方法栈"></a>本地方法栈</h2>
         
         
           <blockquote id="copyright">
@@ -271,7 +211,7 @@
           
 
           
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li></ul>
 
           
     <div class="social-share">
@@ -289,7 +229,7 @@
 </article>
 
 
-  <article id="post-Kafka的架构是怎样的" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-JMM到底是什么" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -297,7 +237,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/Kafka%E7%9A%84%E6%9E%B6%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/">Kafka的架构是怎样的</a>
+      <a class="p-name article-title" href="/2024/10/18/JMM%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/">JMM到底是什么</a>
     </h1>
   
 
@@ -308,12 +248,12 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T10:15:04.000Z" itemprop="datePublished">2024年10月16日</time>
+  <time class="dt-published" datetime="2024-10-18T08:02:35.000Z" itemprop="datePublished">2024年10月18日</time>
 </span>
       
       
       
-<a href="/2024/10/16/Kafka%E7%9A%84%E6%9E%B6%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/#comments" class="article-comment-link">
+<a href="/2024/10/18/JMM%E5%88%B0%E5%BA%95%E6%98%AF%E4%BB%80%E4%B9%88/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -323,14 +263,20 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><p>生产者、broker、消费者、topic、partition、leader、follower、ISR、zookeeper</p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>生产者将消息发送到broker的某个topic的某个partition中，消费者从topic中获取数据，使用zk来管理集群状态和配置。这就是基础架构</p>
-<h2 id="生产者发送消息"><a href="#生产者发送消息" class="headerlink" title="生产者发送消息"></a>生产者发送消息</h2><p>主要涉及到两个线程sender和main</p>
-<p>main线程中生产者调用send方法携带消息经拦截器-分区器-序列化器到达发送缓冲区双端队列RecordAccumulator，当队列中消息量达到batch-size或linger-ms的阈值则sender线程从中拉取消息到broker。过程是拉取消息构建相应的请求到NetworkClient，最多有五个请求，selector负责从中拉取消息发送到broker的分区，等待ack应答，如果acks参数设为0则不等待应答直接返回成功，如果设为1则partition的leader需要应答，如果设为-1则leader和ISR都要应答；当selector收到成功应答后则返回成功，并且清理掉缓冲队列中的信息，否则retries重试发送给分区。</p>
-<p><img src="/../images/image-20241017164008592.png" alt="image-20241017164008592"></p>
-<h2 id="消费者消费消息"><a href="#消费者消费消息" class="headerlink" title="消费者消费消息"></a>消费者消费消息</h2><p>采用pull拉的方式主动拉取消息，但这样可能导致没数据时陷入循环，一直返回空数据</p>
-<h3 id="消费者工作流程"><a href="#消费者工作流程" class="headerlink" title="消费者工作流程"></a>消费者工作流程</h3><p><img src="/../images/image-20241019162921787.png" alt="image-20241019162921787"></p>
-<h3 id="消费过程"><a href="#消费过程" class="headerlink" title="消费过程"></a>消费过程</h3><p>消费者发送消费请求<em>sendFetches</em>后创建网络请求<em>ConsumerNetworkClient</em>，携带着每批次最小抓取大小<em>Fetch-min-bytes</em>、最大抓取大小<em>Fetch-max-bytes</em>、超时时间<em>Fetch-max-wait-ms</em>调用send方法发送请求给broker，通过回调方法<em>onSuccess</em>返回数据到队列<em>completedFetches</em>中，消费者每一批次最大拉取<em>Max-poll-records</em>条数据后经过反序列化、拦截器后处理数据</p>
+        <h2 id="JMM是什么"><a href="#JMM是什么" class="headerlink" title="JMM是什么"></a>JMM是什么</h2><p>JMM是Java定义的内存模型，定义了Java程序中线程如何与内存进行交互的规则，简化多线程编程，确保多线程环境下数据一致性和可见性</p>
+<p>从开发人员：JMM是一组规范、保证了指令重排时的字段可见性</p>
+<p>从JVM角度：因为不同的os内存访问有一定差异，所以可能造成相同代码运行在不同的系统上可能有问题，JMM屏蔽掉了这种差异，使得Java程序在不同os下运行达到同样的并发效果</p>
+<p><strong>JMM规定</strong>：所有变量存储在主内存中，包括实例变量，静态变量，不包括局部变量和方法参数。每个线程有自己的工作内存，工作内存保存了线程用到的变量和主内存的拷贝副本，线程对变量的操作在工作内存中进行，不能直接读写主内存的变量</p>
+<h2 id="并发编程三个特点"><a href="#并发编程三个特点" class="headerlink" title="并发编程三个特点"></a>并发编程三个特点</h2><h3 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h3><p>通过sync关键字或加锁来实现</p>
+<h3 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h3><p>通过volatile、synchronized、lock以及原子类来实现</p>
+<h3 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h3><p>通过sync、volatile或其他同步工具</p>
+<h2 id="happens-before"><a href="#happens-before" class="headerlink" title="happens-before"></a>happens-before</h2><h3 id="什么是hb"><a href="#什么是hb" class="headerlink" title="什么是hb"></a>什么是hb</h3><p>hb是用来描述和可见性相关的问题的，如果第一个操作hb第二个操作，那么第一个操作的结果对第二个操作是可见的。</p>
+<p>也就是说、hb是用来表达操作可见性的</p>
+<h3 id="hb的规则"><a href="#hb的规则" class="headerlink" title="hb的规则"></a>hb的规则</h3><p> 1、在同一线程内，前面的hp后面的操作</p>
+<p>2、<strong>解锁操作hb加锁操作</strong></p>
+<p>3、<strong>对volatile的写hb对它的读</strong>，<strong>也就是说，volatile修饰的变量修改后其他线程一定能读到最新值</strong></p>
+<p>4、线程的start操作hb run方法的每一个操作</p>
+<p>5、中断规则、传递规则、并发工具类的规则</p>
 
         
         
@@ -347,7 +293,7 @@
           
 
           
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUC/" rel="tag">JUC</a></li></ul>
 
           
     <div class="social-share">
@@ -365,7 +311,7 @@
 </article>
 
 
-  <article id="post-ConcurrentHashMap解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-Java优先队列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -373,7 +319,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/ConcurrentHashMap%E8%A7%A3%E6%9E%90/">ConcurrentHashMap解析</a>
+      <a class="p-name article-title" href="/2024/10/18/Java%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">Java优先队列</a>
     </h1>
   
 
@@ -384,12 +330,12 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T08:49:34.000Z" itemprop="datePublished">2024年10月16日</time>
+  <time class="dt-published" datetime="2024-10-18T04:44:59.000Z" itemprop="datePublished">2024年10月18日</time>
 </span>
       
       
       
-<a href="/2024/10/16/ConcurrentHashMap%E8%A7%A3%E6%9E%90/#comments" class="article-comment-link">
+<a href="/2024/10/18/Java%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -399,19 +345,8 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>1</p>
-<h2 id="ConcurrentHashMap的底层结构"><a href="#ConcurrentHashMap的底层结构" class="headerlink" title="ConcurrentHashMap的底层结构"></a>ConcurrentHashMap的底层结构</h2><p>jdk1.7是数组链表 ，类似于HashMap数组</p>
-<p>1.8是数组+链表+红黑树，和HashMap类似</p>
-<h2 id="ConcurrentHashMap如何保证线程安全"><a href="#ConcurrentHashMap如何保证线程安全" class="headerlink" title="ConcurrentHashMap如何保证线程安全"></a>ConcurrentHashMap如何保证线程安全</h2><h3 id="jdk1-8之前"><a href="#jdk1-8之前" class="headerlink" title="jdk1.8之前"></a>jdk1.8之前</h3><p>包含一个Segment数组（默认是16个，创建后不可更改，最大并发是16）、每一个segment元素都是一个HashEntry数组，类似于HashMap，每一个HashEntry元素是链表</p>
-<p>Segment继承了Reentrantlock，是一种可重入锁。每一个segment守护者一个HashEntry数组的元素，要更改元素首先要获取对应的segment锁。</p>
-<p>也就是说、同一segment的写会阻塞，不同segment可并发执行</p>
-<p>（get要加锁吗）</p>
-<h3 id="jdk1-8"><a href="#jdk1-8" class="headerlink" title="jdk1.8"></a>jdk1.8</h3><p>取消了segment分段锁，采用volatile（每个node的value和next）+CAS+sync保证并发安全。</p>
-<p>增加元素时先判断容器是否为空。为空则CAS来初始化。否则看元素位置处是否为空，为空则CAS赋值。不为空则sync后遍历赋值</p>
-<p>数据结构和hashmap类似，由数组链表红黑树组成。只锁定当前链表或红黑树的首节点来保证并发安全。锁的粒度更小</p>
-<p>总结：jdk1.8中通过对头节点加锁来确保线程安全。锁的粒度更小，并发量更大。</p>
-<h2 id="为什么要用CAS和Sync"><a href="#为什么要用CAS和Sync" class="headerlink" title="为什么要用CAS和Sync"></a>为什么要用CAS和Sync</h2><p>计算出该位置处为空则hash碰撞的几率低，用较少的自旋完成put；有元素说明发生了哈希碰撞，有大量线程访问或容量不够了则用悲观锁sync</p>
-<h2 id="get操作为什么不加锁"><a href="#get操作为什么不加锁" class="headerlink" title="get操作为什么不加锁"></a>get操作为什么不加锁</h2><p>node的value和next是用volatile修饰的，可以保证可加性</p>
+        <h2 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">pq.poll();</span><br><span class="line">pq.offer();<span class="comment">//队列满返回false</span></span><br><span class="line">pq.add();<span class="comment">//队列满抛异常</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PriorityQueue&lt;String&gt; pq = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(String s1, String s2)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.compare(s1.length(), s2.length()); <span class="comment">// 按长度升序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 添加元素</span></span><br><span class="line">pq.add(<span class="string">&quot;ale&quot;</span>);</span><br><span class="line">pq.add(<span class="string">&quot;banana&quot;</span>);</span><br><span class="line">pq.add(<span class="string">&quot;kiwi&quot;</span>);</span><br><span class="line">pq.add(<span class="string">&quot;grape&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印并移除元素，按长度优先级</span></span><br><span class="line"><span class="keyword">while</span> (!pq.isEmpty()) &#123;</span><br><span class="line">    System.out.println(pq.poll()); <span class="comment">// 输出 ale,kiwi, grape,banana</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         
         
@@ -446,7 +381,7 @@
 </article>
 
 
-  <article id="post-HashMap解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-volatile浅析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -454,7 +389,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/HashMap%E8%A7%A3%E6%9E%90/">HashMap解析</a>
+      <a class="p-name article-title" href="/2024/10/18/volatile%E6%B5%85%E6%9E%90/">volatile浅析</a>
     </h1>
   
 
@@ -465,12 +400,12 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T08:11:52.000Z" itemprop="datePublished">2024年10月16日</time>
+  <time class="dt-published" datetime="2024-10-18T03:58:24.000Z" itemprop="datePublished">2024年10月18日</time>
 </span>
       
       
       
-<a href="/2024/10/16/HashMap%E8%A7%A3%E6%9E%90/#comments" class="article-comment-link">
+<a href="/2024/10/18/volatile%E6%B5%85%E6%9E%90/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -480,15 +415,28 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>h</p>
-<h2 id="HashMap的底层原理"><a href="#HashMap的底层原理" class="headerlink" title="HashMap的底层原理"></a>HashMap的底层原理</h2><p>底层结构是数组、链表、红黑树</p>
-<h2 id="HashMap的put流程"><a href="#HashMap的put流程" class="headerlink" title="HashMap的put流程"></a>HashMap的put流程</h2><p>先看table是否为空，为空则初始化，否则则计算元素下标，如果此处没元素则直接put。如果有则看当前元素是否等于插入元素，等于则覆盖。不等于则遍历链表或红黑树来查找相同的元素，找到则覆盖，找不到则插入到红黑树或链表头部。如果是链表则看是否达到阈值8，达到8且hashmap的数组长度大于64则转换成红黑树；至此插入元素完成，然后检查负载因子是否超过阈值0.75，超过则扩容，否则执行结束</p>
-<h3 id="扩容过程"><a href="#扩容过程" class="headerlink" title="扩容过程"></a>扩容过程</h3><p>先创建一个原数组两倍大小的新数组，将原来的引用指向新数组并更新扩容阈值，将旧数组的元素重新计算哈希码并分配到新数组中，</p>
-<h2 id="HashMap的get流程"><a href="#HashMap的get流程" class="headerlink" title="HashMap的get流程"></a>HashMap的get流程</h2><p>计算出元素的索引位置，如果当前位置为null则直接返回，否则看当前元素是否等于k，等于直接返回。否则遍历链表或红黑树直到找到相同的元素；如果不存在则返回null；</p>
-<h2 id="为什么线程不安全"><a href="#为什么线程不安全" class="headerlink" title="为什么线程不安全"></a>为什么线程不安全</h2><p>1、两个线程同时put导致数据丢失。两个元素计算得到的索引一样，并且得到的新插入的位置一样，会导致覆盖其他线程的数据</p>
-<p>2、jdk1.8前多线程下扩容会导致死循环</p>
-<h2 id="为什么容量是2的n次方"><a href="#为什么容量是2的n次方" class="headerlink" title="为什么容量是2的n次方"></a>为什么容量是2的n次方</h2><p>1、方便计算索引位置。利用与运算计算代替除运算，更快速的计算出位置。但前提是容量是2的n次方</p>
-<p>2、扩容后新数组的位置容易确定，分布比较均匀。扩容中只需判断原hash和左移一位，也就是扩大两倍的hash的与运算是0还是1，0则位置不变，1则原位置加上原容量</p>
+        <h2 id="volatile作用"><a href="#volatile作用" class="headerlink" title="volatile作用"></a>volatile作用</h2><p>保证可见性、禁止指令重排</p>
+<h2 id="可见性原理"><a href="#可见性原理" class="headerlink" title="可见性原理"></a>可见性原理</h2><p>指示JVM使用这个变量时去主存中获取</p>
+<p>具体些说：每一个线程都有自己的本地内存，线程间共享主内存。</p>
+<p>volatile内存可见性主要通过lock前缀指令实现，它会锁定当前内存区域的缓存，并且立即将当前缓存行写入到主内存，会写主内存的时候通过MESI协议使其他线程缓存的改变量失效，导致其他线程也要去主内存去重新读取</p>
+<h2 id="有序性原理"><a href="#有序性原理" class="headerlink" title="有序性原理"></a>有序性原理</h2><p>插入特定的内存屏障禁止指令重排序</p>
+<p>volatile 的有序性是通过插入内存屏障（Memory Barrier），在内存屏障前后禁止重排序优化，以此实现有序性的。</p>
+<h4 id="什么是内存屏障？"><a href="#什么是内存屏障？" class="headerlink" title="什么是内存屏障？"></a>什么是内存屏障？</h4><p>内存屏障（Memory Barrier 或 Memory Fence）是一种硬件级别的同步操作，它强制处理器按照特定顺序执行内存访问操作，确保内存操作的顺序性，阻止编译器和 CPU 对内存操作进行不必要的重排序。内存屏障可以确保跨越屏障的读写操作不会交叉进行，以此维持程序的内存一致性模型。</p>
+<p>在 Java 内存模型（JMM）中，volatile 关键字用于修饰变量时，能够保证该变量的可见性和有序性。关于有序性，volatile 通过内存屏障的插入来实现：</p>
+<ul>
+<li><strong>写内存屏障（Store Barrier &#x2F; Write Barrier）</strong>： 当线程写入 volatile 变量时，JMM 会在写操作前插入 StoreStore 屏障，确保在这次写操作之前的所有普通写操作都已完成。接着在写操作后插入 StoreLoad 屏障，强制所有后来的读写操作都在此次写操作完成之后执行，这就确保了其他线程能立即看到 volatile 变量的最新值。</li>
+<li><strong>读内存屏障（Load Barrier &#x2F; Read Barrier）</strong>： 当线程读取 volatile 变量时，JMM 会在读操作前插入 LoadLoad 屏障，确保在此次读操作之前的所有读操作都已完成。而在读操作后插入 LoadStore 屏障，防止在此次读操作之后的写操作被重排序到读操作之前，这样就确保了对 volatile 变量的读取总是能看到之前对同一变量或其他相关变量的写入结果。</li>
+</ul>
+<p>通过这种方式，volatile 关键字有效地实现了内存操作的顺序性，从而保证了多线程环境下对 volatile 变量的操作遵循 happens-before 原则，确保了并发编程的正确性。</p>
+<h2 id="MESI协议"><a href="#MESI协议" class="headerlink" title="MESI协议"></a>MESI协议</h2><p>全称为 Modified,Exclusive ，Shared,Invalid，是一种高速缓存一致性协议，为了解决CPU在并发环境下多个CPU缓存不一致而提出的</p>
+<p>它定义个高速缓存中数据的四种状态</p>
+<ol>
+<li><strong>Modified（M）</strong>：表示缓存行已经被修改，但还没有被写回主存储器。在这种状态下，只有一个 CPU 能独占这个修改状态。</li>
+<li><strong>Exclusive（E）</strong>：表示缓存行与主存储器相同，并且是主存储器的唯一拷贝。这种状态下，只有一个 CPU 能独占这个状态。</li>
+<li><strong>Shared（S）</strong>：表示此高速缓存行可能存储在计算机的其他高速缓存中，并且与主存储器匹配。在这种状态下，各个 CPU 可以并发的对这个数据进行读取，但都不能进行写操作。</li>
+<li><strong>Invalid（I）</strong>：表示此缓存行无效或已过期，不能使用。</li>
+</ol>
+<p>MESI 协议的主要用途是确保在多个 CPU 共享内存时，各个 CPU 的缓存数据能够保持一致性。当某个 CPU 对共享数据进行修改时，它会将这个数据的状态从 S（共享）或 E（独占）状态转变为 M（修改）状态，并等待适当的时机将这个修改写回主存储器。同时，它会向其他 CPU 广播一个“无效消息”，使得其他 CPU 将自己缓存中对应的数据状态转变为I（无效）状态，从而在下次访问这个数据时能够从主存储器或其他 CPU 的缓存中重新获取正确的数据。</p>
 
         
         
@@ -505,7 +453,7 @@
           
 
           
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUC/" rel="tag">JUC</a></li></ul>
 
           
     <div class="social-share">
@@ -523,7 +471,7 @@
 </article>
 
 
-  <article id="post-索引浅析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-MySQL索引高度计算" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -531,7 +479,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/%E7%B4%A2%E5%BC%95%E6%B5%85%E6%9E%90/">索引浅析</a>
+      <a class="p-name article-title" href="/2024/10/18/MySQL%E7%B4%A2%E5%BC%95%E9%AB%98%E5%BA%A6%E8%AE%A1%E7%AE%97/">MySQL索引高度计算</a>
     </h1>
   
 
@@ -542,12 +490,12 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T07:01:21.000Z" itemprop="datePublished">2024年10月16日</time>
+  <time class="dt-published" datetime="2024-10-18T02:53:45.000Z" itemprop="datePublished">2024年10月18日</time>
 </span>
       
       
       
-<a href="/2024/10/16/%E7%B4%A2%E5%BC%95%E6%B5%85%E6%9E%90/#comments" class="article-comment-link">
+<a href="/2024/10/18/MySQL%E7%B4%A2%E5%BC%95%E9%AB%98%E5%BA%A6%E8%AE%A1%E7%AE%97/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -557,100 +505,17 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>1</p>
-<h3 id="索引树的高度如何计算"><a href="#索引树的高度如何计算" class="headerlink" title="索引树的高度如何计算"></a>索引树的高度如何计算</h3>
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/6/index.html">https://se-daming.github.io/page/6/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-SQL优化的几种方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/SQL%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">SQL优化的几种方式</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T06:50:38.000Z" itemprop="datePublished">2024年10月16日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/16/SQL%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2><h3 id="插入优化"><a href="#插入优化" class="headerlink" title="插入优化"></a>插入优化</h3><p>1、使用批量插入</p>
-<p>2、手动提交事务</p>
-<p>3、主键顺序插入，减少页分裂和页合并的次数</p>
-<p>4、大批量数据使用load命令</p>
-<h4 id="主键设计"><a href="#主键设计" class="headerlink" title="主键设计"></a>主键设计</h4><p>尽量降低主键的长度、主键应当是有序自增的、避免使用UUID或其他业务主键，如身份证、业务操作时尽量不更改主键</p>
-<h4 id="为什么不用UUID"><a href="#为什么不用UUID" class="headerlink" title="为什么不用UUID"></a>为什么不用UUID</h4><p>非递增、太长（36字符）导致占用内存大，索引树的高度大，磁盘IO次数多，性能差</p>
-<h3 id="查询优化"><a href="#查询优化" class="headerlink" title="查询优化"></a>查询优化</h3><p>查询时尽量使用索引查询</p>
-<h4 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h4><p>尽量使用覆盖索引、多字段排序时要遵循最左前缀法则、</p>
-<h4 id="深度分页"><a href="#深度分页" class="headerlink" title="深度分页"></a>深度分页</h4><p>延迟关联或子查询优化</p>
-<h4 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h4><h4 id="order-by优化"><a href="#order-by优化" class="headerlink" title="order by优化"></a>order by优化</h4><p>MySQL排序有using index和using filesort两种实现方式，要尽量优化成效率高的using index，避免额外排序</p>
-<p>也就是说，要对排序字段创建索引并尽量使用覆盖索引；如果不可避免的出现filesort可以适当增加排序缓冲区的大小</p>
-<h3 id="更新优化"><a href="#更新优化" class="headerlink" title="更新优化"></a>更新优化</h3><p>分批更新、限制更新的行数，避免大事务；</p>
-<p>在更新的列上有索引，避免行锁升级为表锁</p>
-<h3 id="删除优化"><a href="#删除优化" class="headerlink" title="删除优化"></a>删除优化</h3><p>大批数据删除要分批次删除，避免大事务阻塞；用LIMIT控制行数</p>
-<h4 id="delete和truncate区别"><a href="#delete和truncate区别" class="headerlink" title="delete和truncate区别"></a>delete和truncate区别</h4><p>delete是DML、truncate是DDL</p>
-<p>delete删除后可回滚、truncate不能</p>
-<p>delete对每一行删除会记录日志，速度慢；truncate不记录，直接释放整个数据页，不支持where条件</p>
-<p>delete删除后表的结构属性不变；truncate删除后AUTO-INCREMENT重置</p>
-<h3 id="explain关键字"><a href="#explain关键字" class="headerlink" title="explain关键字"></a>explain关键字</h3><p><img src="/../images/image-20241016150948729.png" alt="image-20241016150948729"></p>
-<p>type:连接类型。性能：NULL（select 1） &gt; system （表只有一行、系统表）&gt; const（常量查找，主键或唯一索引） &gt; eq_ref（主键或唯一索引的等值匹配） &gt; ref （非唯一索引的查找）&gt; range（根据索引查找匹配行） &gt; index（扫描整个索引而不是全表扫描） &gt; ALL（全表扫描）</p>
-<p>除了ALL都表示用到了索引</p>
-<p>key：实际用到的索引</p>
-<p>possible_keys：可能用到的索引</p>
-<p>rows ：MySQL估计需要读取的行数</p>
-<p>extra 额外信息：using index（MySQL仅通过索引来满足查询而无需读取实际数据行）、using where、using filesort（对结果排序时如果索引不能满足则读取实际数据行然后在内存中排序）、using temporary</p>
+        <h2 id="B-树三层就可存储千万级别数据"><a href="#B-树三层就可存储千万级别数据" class="headerlink" title="B+树三层就可存储千万级别数据"></a>B+树三层就可存储千万级别数据</h2><p><img src="/../images/image-20241018105856519.png" alt="image-20241018105856519"></p>
+<p><img src="/../images/image-20241018111115021.png" alt="image-20241018111115021"></p>
+<h3 id="以聚集索引为例"><a href="#以聚集索引为例" class="headerlink" title="以聚集索引为例"></a>以聚集索引为例</h3><p>MySQL 是以页的形式组织数据的</p>
+<h3 id="若有为2层"><a href="#若有为2层" class="headerlink" title="若有为2层"></a>若有为2层</h3><p>根节点存放主键和指针</p>
+<p>设主键为bigint，8字节、指针固定6字节</p>
+<p>一页是16k&#x2F;（8+6）&#x3D;1000，说明根节点可储存1000个指针</p>
+<p>假设一行数据是300字节，则一个数据页16k&#x2F;300&#x3D;50条数据</p>
+<p>1000*50&#x3D;5w数据</p>
+<h3 id="若为3层"><a href="#若为3层" class="headerlink" title="若为3层"></a>若为3层</h3><p>同样根节点存储1000个指针指向1000个数据页，每个数据页同样有1000个指针指向第三层的数据页</p>
+<p>第三层每一个数据页50条记录</p>
+<p>则总数据1000x1000x50&#x3D;5000w</p>
 
         
         
@@ -685,7 +550,7 @@
 </article>
 
 
-  <article id="post-设计一个秒杀系统" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-快手" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -693,7 +558,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/15/%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/">设计一个秒杀系统</a>
+      <a class="p-name article-title" href="/2024/10/17/%E5%BF%AB%E6%89%8B/">快手</a>
     </h1>
   
 
@@ -704,12 +569,12 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-15T04:10:16.000Z" itemprop="datePublished">2024年10月15日</time>
+  <time class="dt-published" datetime="2024-10-17T15:39:22.000Z" itemprop="datePublished">2024年10月17日</time>
 </span>
       
       
       
-<a href="/2024/10/15/%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F/#comments" class="article-comment-link">
+<a href="/2024/10/17/%E5%BF%AB%E6%89%8B/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -719,17 +584,16 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><p>将库存信心保存到redis、利用其抗高并发的特性进行库存的查询和扣减</p>
-<h2 id="超卖"><a href="#超卖" class="headerlink" title="超卖"></a>超卖</h2><p>当买多卖少时，超卖最可能发生</p>
-<p>如果允许同一个用户购买多个，则使用redis的decr命令即可、但是会导致库存数为负数。需要在decr返回值小于0时再incr回来以确保超时订单库存回滚正常</p>
-<p>如果只允许一个用户购买一个，也就是超买问题</p>
-<h2 id="超买"><a href="#超买" class="headerlink" title="超买"></a>超买</h2><p>判断用户是否购买、判断库存是否充足、扣减库存</p>
-<p>其中第二三步redis可解决</p>
-<p>判断是否购买放到set集合里面。</p>
-<p>分布式环境下就不能放到set、考虑放到redis</p>
-<h2 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h2><p>MySQL存 ：库存扣了、没有订单</p>
-<p>Redis存：数据一致性。redis做了资格判断和扣减库存，没来得及发送到mq操作数据库就挂了</p>
-
+        <h2 id="1-mysql索引为什么要使用b-树，而不使用b树、AVL"><a href="#1-mysql索引为什么要使用b-树，而不使用b树、AVL" class="headerlink" title="1.mysql索引为什么要使用b+树，而不使用b树、AVL"></a>1.mysql索引为什么要使用b+树，而不使用b树、AVL</h2><h3 id="为什么不用B树"><a href="#为什么不用B树" class="headerlink" title="为什么不用B树"></a>为什么不用B树</h3><p>B树的所有节点既存放k也有value，B+树只有叶子节点，非只有k</p>
+<p>B树的叶子节点是独立的，B+树叶子节点间通过链表连接</p>
+<p>B树检索时可能没到叶子节点就结束了，B+树的效率很稳定</p>
+<p>范围查找时B树找到下限后进行中序遍历然后找上线，B+树只需遍历链表</p>
+<p>B+树层高一般3-4层就可存储千万数据，磁盘io最多也3，4次。</p>
+<p>综合：B+树更少的io次数，更高效的查询效率，更适合范围查询</p>
+<h3 id="为什么不用AVL"><a href="#为什么不用AVL" class="headerlink" title="为什么不用AVL"></a>为什么不用AVL</h3><p>AVL每个节点只保存一个数据，磁盘io次数更多</p>
+<p>AVL需要旋转来保持平衡，效率低下</p>
+<h2 id="2-为什么千万级别的数据b-树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）"><a href="#2-为什么千万级别的数据b-树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）" class="headerlink" title="2.为什么千万级别的数据b+树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）"></a>2.为什么千万级别的数据b+树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）</h2><h2 id="3-最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况："><a href="#3-最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况：" class="headerlink" title="3.最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况："></a>3.最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况：</h2><p>a&#x3D;1 and b &#x3D; 2 and d &#x3D; 3 and c &#x3D;4<br>a&#x3D;1 and b &#x3D; 2 and c &gt; 1（这里说太快了，想都没想就说了，说成c不会走索引，实际应该是c会走，但d不走，这里都会犯错不该）</p>
+<h2 id="4-mysql事务特性以及怎么实现的？"><a href="#4-mysql事务特性以及怎么实现的？" class="headerlink" title="4.mysql事务特性以及怎么实现的？"></a>4.mysql事务特性以及怎么实现的？</h2><h2 id="5-MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read-view生成时机的不同，好！）"><a href="#5-MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read-view生成时机的不同，好！）" class="headerlink" title="5.MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read view生成时机的不同，好！）"></a>5.MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read view生成时机的不同，好！）</h2><h2 id="6-MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）"><a href="#6-MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）" class="headerlink" title="6.MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）"></a>6.MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）</h2><h2 id="7-java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）"><a href="#7-java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）" class="headerlink" title="7.java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）"></a>7.java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）</h2><h2 id="8-int占几个字节（4个字节，算是猜对了）"><a href="#8-int占几个字节（4个字节，算是猜对了）" class="headerlink" title="8.int占几个字节（4个字节，算是猜对了）"></a>8.int占几个字节（4个字节，算是猜对了）</h2><h2 id="9-讲讲ConcurrentHashMap（jdk1-7和jdk1-8的都说了，对比不同和提升）"><a href="#9-讲讲ConcurrentHashMap（jdk1-7和jdk1-8的都说了，对比不同和提升）" class="headerlink" title="9.讲讲ConcurrentHashMap（jdk1.7和jdk1.8的都说了，对比不同和提升）"></a>9.讲讲ConcurrentHashMap（jdk1.7和jdk1.8的都说了，对比不同和提升）</h2><h2 id="10-什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）"><a href="#10-什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）" class="headerlink" title="10.什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）"></a>10.什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）</h2><h2 id="11-concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）"><a href="#11-concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）" class="headerlink" title="11.concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）"></a>11.concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）</h2><h2 id="12-那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）"><a href="#12-那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）" class="headerlink" title="12.那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）"></a>12.那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）</h2><h2 id="13-那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1-5倍，HashMap讲的比较详细）"><a href="#13-那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1-5倍，HashMap讲的比较详细）" class="headerlink" title="13.那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1.5倍，HashMap讲的比较详细）"></a>13.那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1.5倍，HashMap讲的比较详细）</h2><h2 id="14-redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）"><a href="#14-redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）" class="headerlink" title="14.redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）"></a>14.redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）</h2><h2 id="15-redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）"><a href="#15-redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）" class="headerlink" title="15.redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）"></a>15.redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）</h2>
         
         
           <blockquote id="copyright">
@@ -745,7 +609,7 @@
           
 
           
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a></li></ul>
 
           
     <div class="social-share">
@@ -763,7 +627,7 @@
 </article>
 
 
-  <article id="post-redis单线程，出现阻塞了怎么办" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-hot100" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -771,7 +635,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/15/redis%E5%8D%95%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%87%BA%E7%8E%B0%E9%98%BB%E5%A1%9E%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E/">redis单线程，出现阻塞了怎么办</a>
+      <a class="p-name article-title" href="/2024/10/17/hot100/">hot100</a>
     </h1>
   
 
@@ -782,12 +646,12 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-15T02:57:26.000Z" itemprop="datePublished">2024年10月15日</time>
+  <time class="dt-published" datetime="2024-10-17T15:33:07.000Z" itemprop="datePublished">2024年10月17日</time>
 </span>
       
       
       
-<a href="/2024/10/15/redis%E5%8D%95%E7%BA%BF%E7%A8%8B%EF%BC%8C%E5%87%BA%E7%8E%B0%E9%98%BB%E5%A1%9E%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E/#comments" class="article-comment-link">
+<a href="/2024/10/17/hot100/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -797,7 +661,30 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h2 id="31-下一个排列"><a href="#31-下一个排列" class="headerlink" title="31 下一个排列"></a>31 下一个排列</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将nums = [1,2,7,4,3,1]变成nums = [1,3,1,2,4,7]</span><br></pre></td></tr></table></figure>
+
+<p>steps：</p>
+<p>先找出最大的索引 k 满足 nums[k] &lt; nums[k+1]，如果不存在，就翻转整个数组；<br>再找出另一个最大索引 l 满足 nums[l] &gt; nums[k]；<br>交换 nums[l] 和 nums[k]；<br>最后翻转 nums[k+1:]。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">nextPermutation</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> i=nums.length-<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;nums[i+<span class="number">1</span>])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            reverse(nums,<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> j=nums.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(j&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j]&gt;nums[i])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(nums,i,j);</span><br><span class="line">        reverse(nums,i+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[]nums,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">        <span class="type">int</span> tmp=nums[i];</span><br><span class="line">        nums[i]=nums[j];</span><br><span class="line">        nums[j]=tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">reverse</span><span class="params">(<span class="type">int</span>[]nums,<span class="type">int</span> begin)</span>&#123;</span><br><span class="line">        <span class="type">int</span> end=nums.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(begin&lt;end)&#123;</span><br><span class="line">            swap(nums,begin,end);</span><br><span class="line">            begin++;</span><br><span class="line">            end--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="142-环形链表II"><a href="#142-环形链表II" class="headerlink" title="142 环形链表II"></a>142 环形链表II</h2><p>找出环形链表的起始位置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//快指针和慢指针相遇时，维护一个ptr、它和慢指针同时走，相遇时即为ruo</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        <span class="keyword">while</span>(fast!=<span class="literal">null</span>)&#123;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            <span class="keyword">if</span>(fast.next!=<span class="literal">null</span>)</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(slow==fast)&#123;</span><br><span class="line">                ListNode ptr=head;</span><br><span class="line">                <span class="keyword">while</span>(ptr!=slow)&#123;</span><br><span class="line">                    ptr=ptr.next;</span><br><span class="line">                    slow=slow.next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> slow;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="接雨水"><a href="#接雨水" class="headerlink" title="接雨水"></a>接雨水</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//维护一个单调递减栈、当遇到比栈顶元素大的时，以栈顶元素左边一个为左边界，以该元素为右边界，计算雨水面积，重复直到该元素小于栈顶。</span></span><br><span class="line"><span class="comment">//递减则入栈否则计算</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">trap</span><span class="params">(<span class="type">int</span>[] height)</span> &#123;</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    Deque&lt;Integer&gt;stack=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;height.length;i++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty()&amp;&amp;height[stack.peek()]&lt;height[i])&#123;</span><br><span class="line">            <span class="type">int</span> cur=stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(stack.isEmpty())&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> l=stack.peek();</span><br><span class="line">            <span class="type">int</span> r=i;</span><br><span class="line">            <span class="type">int</span> h=Math.min(height[l],height[r])-height[cur];</span><br><span class="line">            ans+=(r-l-<span class="number">1</span>)*h;</span><br><span class="line">        &#125;</span><br><span class="line">        stack.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、定义双向链表；2、移到头部、头部增加、删除尾部、删除节点</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LRUCache</span> &#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">DLinkedNode</span>&#123;</span><br><span class="line">        <span class="type">int</span> k;</span><br><span class="line">        <span class="type">int</span> v;</span><br><span class="line">        DLinkedNode pre;</span><br><span class="line">        DLinkedNode next;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">DLinkedNode</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">DLinkedNode</span><span class="params">(<span class="type">int</span> _key, <span class="type">int</span> _value)</span> &#123;k = _key; v = _value;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    HashMap&lt;Integer,DLinkedNode&gt;map;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line">    <span class="type">int</span> capacity;</span><br><span class="line">    DLinkedNode head,tail;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LRUCache</span><span class="params">(<span class="type">int</span> capacity)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.capacity=capacity;</span><br><span class="line">        size=<span class="number">0</span>;</span><br><span class="line">        head=<span class="keyword">new</span> <span class="title class_">DLinkedNode</span>();</span><br><span class="line">        tail=<span class="keyword">new</span> <span class="title class_">DLinkedNode</span>();</span><br><span class="line">        head.next=tail;</span><br><span class="line">        tail.pre=head;</span><br><span class="line">        map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        DLinkedNode node=map.get(key);</span><br><span class="line">        <span class="keyword">if</span>(node!=<span class="literal">null</span>)&#123;</span><br><span class="line">            moveToHead(node);</span><br><span class="line">            <span class="keyword">return</span> node.v;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(<span class="type">int</span> key, <span class="type">int</span> value)</span> &#123;</span><br><span class="line">        DLinkedNode node=map.get(key);</span><br><span class="line">        <span class="keyword">if</span>(node==<span class="literal">null</span>)&#123;</span><br><span class="line">           <span class="type">DLinkedNode</span> <span class="variable">newNode</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">DLinkedNode</span>(key,value);</span><br><span class="line">            map.put(key,newNode);</span><br><span class="line">            addToHead(newNode);</span><br><span class="line">            <span class="keyword">if</span>(++size&gt;capacity)&#123;</span><br><span class="line">                DLinkedNode tail=removeTail();</span><br><span class="line">                map.remove(tail.k);</span><br><span class="line">                --size;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            node.v=value;</span><br><span class="line">            moveToHead(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">moveToHead</span><span class="params">(DLinkedNode node)</span>&#123;</span><br><span class="line">       removeNode(node);</span><br><span class="line">       addToHead(node);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">addToHead</span><span class="params">(DLinkedNode node)</span>&#123;</span><br><span class="line">        node.pre = head;</span><br><span class="line">        node.next = head.next;</span><br><span class="line">        head.next.pre = node;</span><br><span class="line">        head.next = node;</span><br><span class="line">    &#125;</span><br><span class="line">    DLinkedNode <span class="title function_">removeTail</span><span class="params">()</span>&#123;</span><br><span class="line">        DLinkedNode res=tail.pre;</span><br><span class="line">        removeNode(res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">removeNode</span><span class="params">(DLinkedNode node)</span>&#123;</span><br><span class="line">        node.pre.next=node.next;</span><br><span class="line">        node.next.pre=node.pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your LRUCache object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * LRUCache obj = new LRUCache(capacity);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj.get(key);</span></span><br><span class="line"><span class="comment"> * obj.put(key,value);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="非递归中序遍历"><a href="#非递归中序遍历" class="headerlink" title="非递归中序遍历"></a>非递归中序遍历</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">inorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line">    Deque&lt;TreeNode&gt; stk = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;TreeNode&gt;();</span><br><span class="line">    <span class="keyword">while</span>(root!=<span class="literal">null</span>||!stk.isEmpty())&#123;</span><br><span class="line">        <span class="keyword">while</span>(root!=<span class="literal">null</span>)&#123;</span><br><span class="line">            stk.push(root);</span><br><span class="line">            root=root.left;</span><br><span class="line">        &#125;</span><br><span class="line">        root=stk.pop();</span><br><span class="line">        res.add(root.val);</span><br><span class="line">        root=root.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
         
         
           <blockquote id="copyright">
@@ -813,6 +700,8 @@
           
 
           
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+
           
     <div class="social-share">
       <span>分享到:</span>
@@ -829,7 +718,7 @@
 </article>
 
 
-  <article id="post-redis线程模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-基于SPI修改Sharding-JDBC实现Nacos公共配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -837,7 +726,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/15/redis%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/">redis线程模型</a>
+      <a class="p-name article-title" href="/2024/10/17/%E5%9F%BA%E4%BA%8ESPI%E4%BF%AE%E6%94%B9Sharding-JDBC%E5%AE%9E%E7%8E%B0Nacos%E5%85%AC%E5%85%B1%E9%85%8D%E7%BD%AE/">基于SPI修改Sharding-JDBC实现Nacos公共配置</a>
     </h1>
   
 
@@ -848,12 +737,12 @@
       
       <span class="article-date">
   <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-15T02:20:11.000Z" itemprop="datePublished">2024年10月15日</time>
+  <time class="dt-published" datetime="2024-10-17T07:28:53.000Z" itemprop="datePublished">2024年10月17日</time>
 </span>
       
       
       
-<a href="/2024/10/15/redis%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B/#comments" class="article-comment-link">
+<a href="/2024/10/17/%E5%9F%BA%E4%BA%8ESPI%E4%BF%AE%E6%94%B9Sharding-JDBC%E5%AE%9E%E7%8E%B0Nacos%E5%85%AC%E5%85%B1%E9%85%8D%E7%BD%AE/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -863,8 +752,10 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>i</p>
-<h2 id="BIO、NIO、IO多路复用、信号驱动IO、异步IO"><a href="#BIO、NIO、IO多路复用、信号驱动IO、异步IO" class="headerlink" title="BIO、NIO、IO多路复用、信号驱动IO、异步IO"></a>BIO、NIO、IO多路复用、信号驱动IO、异步IO</h2><h3 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h3><h3 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h3><h3 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h3><h4 id="select"><a href="#select" class="headerlink" title="select"></a>select</h4><h4 id="poll"><a href="#poll" class="headerlink" title="poll"></a>poll</h4><h4 id="epoll"><a href="#epoll" class="headerlink" title="epoll"></a>epoll</h4>
+        <p>shardingsphereJDBC在5.3.0之后不支持nacos的动态配置和统一管理，我联想到数据库连接驱动是以SPI的方式使用的、然后我去看了shardingjdbc的包，发现他也是以SPI的形式表现的，我读了源码发现有个<em>ShardingSphereDriverURLManager</em>类，它负责读取shardingjdbc的配置，具体做法是静态方法<em>getContent</em>调用接口的<em>accept</em>方法将所有实现了<em>ShardingSphereDriverURLProvider</em>接口的类加载，这个实现类的路径是以SPI机制在META-INF&#x2F;services下ShardingSphereDriverURLProvider文件中存取。</p>
+<p>所以我实现了<em>ShardingSphereDriverURLProvider</em>接口，这个接口中有两个核心方法、一个是<em>accept</em>、一个是<em>getContent</em>、accept是检测配置文件中url是否匹配jdbc：开头的格式、、getContent是读取配置并加载。我实现了<em>ShardingSphereDriverURLProvider</em>接口并重写了这两个方法、把url匹配规则设为含有nacos的、getContent里设定了nacos的配置（账号、密码、命名空间、配置文件名等等）</p>
+<p>Nacos配置监听器</p>
+
         
         
           <blockquote id="copyright">
@@ -880,7 +771,95 @@
           
 
           
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-双亲委派机制是什么，如何打破" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/17/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4/">双亲委派机制是什么，如何打破</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-17T06:25:37.000Z" itemprop="datePublished">2024年10月17日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/17/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E5%A6%82%E4%BD%95%E6%89%93%E7%A0%B4/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>双亲委派是类加载时的一种机制，主要涉及到三个加载器：启动类加载器。扩展类加载器，应用程序加载器</p>
+<p>按顺序采取自下而上的顺序委派加载，一个类加载时首先去看应用程序加载器是否加载过、加载过则返回，没有则看扩展类是否加载过、没有则看启动类是否加载过，加载过则返回，没有则从上而下加载。启动类看是否是自己加载的范畴，是则加载并返回，不是则扩展类看是否，直到加载成功</p>
+<p>当一个类加载器去加载某个类的时候，会自底向上查找是否加载过，如果加载过就直接返回，如果一直到最顶层的类加载器都没有加载，再由顶向下进行加载。</p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>1、避免类重复加载</p>
+<p>2、保证类加载的安全性，防止核心类库被改变</p>
+<h2 id="如何指定特定的加载器"><a href="#如何指定特定的加载器" class="headerlink" title="如何指定特定的加载器"></a>如何指定特定的加载器</h2><p>获取到类加载器，调用loadClass方法</p>
+<h2 id="如何打破双亲委派"><a href="#如何打破双亲委派" class="headerlink" title="如何打破双亲委派"></a>如何打破双亲委派</h2><p>1、自定义类加载器重写loadClass方法。Tomcat是这样做的</p>
+<p>2、线程上下文类加载器，利用上下文类加载器来加载，JDBC、JNDI</p>
+<p>3、Osgi框架的类加载器，Osgi是一套新的类加载器机制</p>
+<h2 id="Tomcat是如何做的"><a href="#Tomcat是如何做的" class="headerlink" title="Tomcat是如何做的"></a>Tomcat是如何做的</h2><p>问题：一个tomcat可运行多个web应用，如果两个应用出现了相同的限定类名，如果不打破的话则不能正确加载</p>
+<p>（在JVM中，只有相同类加载器+相同类名才视作同一个类）</p>
+<p>做法：tomcat为每一个应用都自定义了一个类加载器去加载对应的类，主要通过该重写ClassLoader中的loadClass方法实现。</p>
+<p>涉及到的tomcat类加载器的层次如下</p>
+<p><img src="/../images/image-20241017150845802.png" alt="image-20241017150845802"></p>
+<p>每个Web应用会创建一个独立的WebApp类加载器来实现应用之间的隔离；Shared类加载器用于加载应用间共享的类比如Spring，mybatis；</p>
+<p>通用类加载器加载可悲web应用和tomcat内部组件共享的类；Catalina用于加载tomcat自身的类</p>
+<p>ClassLoader中四个核心方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Class&lt;?&gt; loadClass(String name)</span><br><span class="line">类加载的入口，提供了双亲委派机制。内部会调用findClass   重要</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> Class&lt;?&gt; findClass(String name)</span><br><span class="line">由类加载器子类实现,获取二进制数据调用defineClass ，比如URLClassLoader会根据文件路径去获取类文件中的二进制数据。重要</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> Class&lt;?&gt; defineClass(String name, <span class="type">byte</span>[] b, <span class="type">int</span> off, <span class="type">int</span> len)</span><br><span class="line">做一些类名的校验，然后调用虚拟机底层的方法将字节码信息加载到虚拟机内存中</span><br><span class="line"></span><br><span class="line"><span class="keyword">protected</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title function_">resolveClass</span><span class="params">(Class&lt;?&gt; c)</span></span><br><span class="line">执行类生命周期中的连接阶段，默认是<span class="literal">false</span>、也就是不连接，不加载静态方法</span><br></pre></td></tr></table></figure>
+
+<p>loadClass：提供双亲委派机制，调用findClass去根据类路径获取二进制数据，</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/6/index.html">https://se-daming.github.io/page/6/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li></ul>
 
           
     <div class="social-share">
@@ -901,7 +880,7 @@
 
     <nav id="page-nav">
 
-<a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
+<a class="extend prev" rel="prev" href="/page/5/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/7/">下一页</a>
 </nav>
 
 
@@ -916,23 +895,23 @@
       <ul>
         
           <li>
-            <a href="/2024/10/27/gateway%E7%9A%84%E4%BD%9C%E7%94%A8/">gateway的作用</a>
+            <a href="/2024/10/27/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/">策略模式</a>
           </li>
         
           <li>
-            <a href="/2024/10/27/Nacos%E5%8E%9F%E7%90%86/">Nacos原理</a>
+            <a href="/2024/10/27/Java%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%A4%9A%E6%80%81/">Java如何实现多态</a>
           </li>
         
           <li>
-            <a href="/2024/10/27/%E6%9C%8D%E5%8A%A1%E9%9B%AA%E5%B4%A9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%A1%88/">服务雪崩是什么，服务保护有哪些方案</a>
+            <a href="/2024/10/27/TCP%E5%92%8CUDP/">TCP和UDP</a>
           </li>
         
           <li>
-            <a href="/2024/10/26/RBAC%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B/">RBAC模型介绍一下</a>
+            <a href="/2024/10/27/TCP%E5%8F%AF%E9%9D%A0%E6%80%A7%E5%AE%9E%E7%8E%B0/">TCP可靠性实现</a>
           </li>
         
           <li>
-            <a href="/2024/10/26/JVM%E7%BB%84%E6%88%90/">JVM组成</a>
+            <a href="/2024/10/27/IOC%E5%92%8CAOP/">IOC和AOP</a>
           </li>
         
       </ul>
@@ -945,7 +924,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/HTTP/" style="font-size: 13.33px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 13.33px;">JUC</a> <a href="/tags/JVM/" style="font-size: 15px;">JVM</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kafka/" style="font-size: 18.33px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 20px;">Redis</a> <a href="/tags/Spring/" style="font-size: 10px;">Spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 10px;">小红书</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.67px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">计算机网络</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 13.33px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.33px;">项目</a>
+      <a href="/tags/HTTP/" style="font-size: 12.86px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 14.29px;">JUC</a> <a href="/tags/JVM/" style="font-size: 14.29px;">JVM</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.14px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.57px;">Redis</a> <a href="/tags/Spring/" style="font-size: 12.86px;">Spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 15.71px;">分布式</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 10px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 10px;">小红书</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.43px;">快手日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.86px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.86px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 12.86px;">项目</a>
     </div>
   </div>
 
@@ -957,7 +936,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">64</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">74</span></li></ul>
     </div>
   </div>
 
@@ -967,7 +946,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
