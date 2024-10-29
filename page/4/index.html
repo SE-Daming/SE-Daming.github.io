@@ -85,6 +85,82 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-常见限流算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/24/%E5%B8%B8%E8%A7%81%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/">常见限流算法</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-24T09:57:00.000Z" itemprop="datePublished">2024年10月24日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/24/%E5%B8%B8%E8%A7%81%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1</p>
+<h1 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h1><p>把请求放到桶里、处理请求是出桶；</p>
+<p>可用队列实现</p>
+<p>优点：实现简单、可控制限流</p>
+<p>缺点：不能应对激增的流量；当桶持续慢时不能处理新的请求</p>
+<h1 id="令牌-桶算法"><a href="#令牌-桶算法" class="headerlink" title="令牌 桶算法"></a>令牌 桶算法</h1><p>边往桶里放令牌请求边拿令牌、拿到令牌的请求被处理、桶满了就不能放了</p>
+<p>优点：可以控制处理速率；可以应对激增的流量</p>
+<p>缺点：令牌产生速率和桶容量设置不合理的话可能导致请求被丢弃、系统过载；实现较复杂</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-缓存双写一致性" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -748,141 +824,6 @@
 </article>
 
 
-  <article id="post-小红书" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6/">小红书</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-22T07:51:42.000Z" itemprop="datePublished">2024年10月22日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/22/%E5%B0%8F%E7%BA%A2%E4%B9%A6/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h1><p>项目是一个仿照小红书的UGC平台，用户可以发布文章（推送），管理发文草稿、查询历史发文、查询浏览记录、搜索记录、评论、点赞（通州用户）、收藏、滚动查询、私聊、用户标签、关注、粉丝、AI问答</p>
-<p>文章如何让其他用户看到</p>
-<p>发文模块</p>
-<p>订单模块</p>
-<p>私聊模块</p>
-<p>购物模块</p>
-<p>登录模块</p>
-<p>用户模块</p>
-<h1 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h1><p>MySQL 一主一从、读写分离</p>
-<p>Redis  单机</p>
-<p>MQ   单机</p>
-<p>ES 单机</p>
-<p>微服务模块</p>
-<p>RPC</p>
-<p>Nacos为配置和注册中心、Dubbo作为远程调用、Sentinel服务保护、Seata分布式事务、Gateway作为网关</p>
-<p><strong>总结</strong></p>
-<p>采用微服务架构，模块化设计，各个服务之间通过RPC进行高效通信。我们使用MySQL的主从架构实现读写分离，提升性能，Redis作为缓存，MQ处理异步消息，Elasticsearch提供搜索功能。</p>
-<p>在服务治理方面，我们使用Nacos作为配置和注册中心，Dubbo作为远程调用框架，Sentinel负责服务保护，Seata确保分布式事务的完整性，Gateway作为统一的API网关，处理外部请求。</p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><h3 id="微服务的优势"><a href="#微服务的优势" class="headerlink" title="微服务的优势"></a>微服务的优势</h3><p>优点、缺点</p>
-<h3 id="说几个微服务用到的注解"><a href="#说几个微服务用到的注解" class="headerlink" title="说几个微服务用到的注解"></a>说几个微服务用到的注解</h3><h3 id="有哪些模块"><a href="#有哪些模块" class="headerlink" title="有哪些模块"></a>有哪些模块</h3><p>用户、登录、网关、搜索、评论、私聊、笔记、购物、支付、订单、商品</p>
-<h3 id="MySQL主从做什么，主从延迟怎么办"><a href="#MySQL主从做什么，主从延迟怎么办" class="headerlink" title="MySQL主从做什么，主从延迟怎么办"></a>MySQL主从做什么，主从延迟怎么办</h3><p>小红书大多数情况是读多写少的，读写分离能消除锁竞争，提高效率；</p>
-<p>提高可用性、安全性、主库故障时可以切换为从库</p>
-<p>为提高读性能</p>
-<h3 id="主从延迟的原因"><a href="#主从延迟的原因" class="headerlink" title="主从延迟的原因"></a>主从延迟的原因</h3><p>从库硬件资源不足、网络延迟、大量写请求同步、大事务</p>
-<h3 id="如何解决主从延迟"><a href="#如何解决主从延迟" class="headerlink" title="如何解决主从延迟"></a>如何解决主从延迟</h3><p>忽略；强制读主库；使用半同步复制；</p>
-<p>使用缓存key标记需要强一致性的数据、给他设计个主从延迟倍数的时间，如果有这个key则强制读主库。没有则说明主从同步了去从库;</p>
-<p>使用缓存</p>
-<p>具体到项目，小红书写操作比较少，而且每个人点赞、评论一秒也就一条，并发量不大。延迟可以忽略</p>
-<h3 id="为什么用dubbo不用feign"><a href="#为什么用dubbo不用feign" class="headerlink" title="为什么用dubbo不用feign"></a>为什么用dubbo不用feign</h3><p>性能更高、有负载均衡策略和容错机制（重试、失败转移）；</p>
-<p>feign也有重试机制但要和Ribbon配合</p>
-<p>dubbo支持多种rpc协议、feign支持http</p>
-<h3 id="dubbo性能高的原因"><a href="#dubbo性能高的原因" class="headerlink" title="dubbo性能高的原因"></a>dubbo性能高的原因</h3><p>序列化协议高效、减少网络传输开销；</p>
-<p>自定义RPC协议，减少创建连接的开销；</p>
-<p>提供负载均衡和容错机制</p>
-<h3 id="为什么不用dubbo的服务注册而是用nacos"><a href="#为什么不用dubbo的服务注册而是用nacos" class="headerlink" title="为什么不用dubbo的服务注册而是用nacos"></a>为什么不用dubbo的服务注册而是用nacos</h3><h3 id="分布式事务解决什么业务问题"><a href="#分布式事务解决什么业务问题" class="headerlink" title="分布式事务解决什么业务问题"></a>分布式事务解决什么业务问题</h3><h3 id="Nacos和Sentinel的具体配置和使用方式是怎样的？你们是如何监控服务的健康状况的？"><a href="#Nacos和Sentinel的具体配置和使用方式是怎样的？你们是如何监控服务的健康状况的？" class="headerlink" title="Nacos和Sentinel的具体配置和使用方式是怎样的？你们是如何监控服务的健康状况的？"></a>Nacos和Sentinel的具体配置和使用方式是怎样的？你们是如何监控服务的健康状况的？</h3><h3 id="在Gateway中，你们是如何设计路由和安全控制的？有没有使用其他的策略来优化API调用？”"><a href="#在Gateway中，你们是如何设计路由和安全控制的？有没有使用其他的策略来优化API调用？”" class="headerlink" title="在Gateway中，你们是如何设计路由和安全控制的？有没有使用其他的策略来优化API调用？”"></a>在Gateway中，你们是如何设计路由和安全控制的？有没有使用其他的策略来优化API调用？”</h3><h3 id="做分库分表了吗"><a href="#做分库分表了吗" class="headerlink" title="做分库分表了吗"></a>做分库分表了吗</h3><h3 id="发文流程"><a href="#发文流程" class="headerlink" title="发文流程"></a>发文流程</h3><h3 id="读笔记从哪读、发到哪"><a href="#读笔记从哪读、发到哪" class="headerlink" title="读笔记从哪读、发到哪"></a>读笔记从哪读、发到哪</h3><h3 id="如何推送给用户、feed流的哪种方式"><a href="#如何推送给用户、feed流的哪种方式" class="headerlink" title="如何推送给用户、feed流的哪种方式"></a>如何推送给用户、feed流的哪种方式</h3><p>feed的timeline</p>
-<h3 id="为什么用AT模式、哪里涉及到了分布式事务"><a href="#为什么用AT模式、哪里涉及到了分布式事务" class="headerlink" title="为什么用AT模式、哪里涉及到了分布式事务"></a>为什么用AT模式、哪里涉及到了分布式事务</h3><p>用户评论时设定用户标签、跨越笔记模块和用户模块、AT是用起来简单，无侵入性， 一阶段直接提交不锁定资源，依赖undolog回滚，实现最终一致性。符合当前</p>
-<p>场景，</p>
-<h3 id="如何保证mq的可靠性、"><a href="#如何保证mq的可靠性、" class="headerlink" title="如何保证mq的可靠性、"></a>如何保证mq的可靠性、</h3><h3 id="了解AI吗"><a href="#了解AI吗" class="headerlink" title="了解AI吗"></a>了解AI吗</h3><h3 id="哪里用到mq"><a href="#哪里用到mq" class="headerlink" title="哪里用到mq"></a>哪里用到mq</h3><p>发文异步到es、推送给粉丝；点赞、收藏异步</p>
-<p>订单生成和数据库扣减、同时保证分布式事务</p>
-<h1 id="数据库表的设计"><a href="#数据库表的设计" class="headerlink" title="数据库表的设计"></a>数据库表的设计</h1><h1 id="微服务模块"><a href="#微服务模块" class="headerlink" title="微服务模块"></a>微服务模块</h1><h2 id="用户模块"><a href="#用户模块" class="headerlink" title="用户模块"></a>用户模块</h2><h2 id="登录模块"><a href="#登录模块" class="headerlink" title="登录模块"></a>登录模块</h2><h2 id="搜索模块"><a href="#搜索模块" class="headerlink" title="搜索模块"></a>搜索模块</h2><p>笔记、用户</p>
-<h2 id="评论模块"><a href="#评论模块" class="headerlink" title="评论模块"></a>评论模块</h2><p>给评论点赞、先操作redis、再xxl-job定时更新到数据库</p>
-<h2 id="私聊模块"><a href="#私聊模块" class="headerlink" title="私聊模块"></a>私聊模块</h2><h2 id="订单模块"><a href="#订单模块" class="headerlink" title="订单模块"></a>订单模块</h2><p>该方案的核心思想是，先创建死信交换机、队列和消费者，来监听死信消息。</p>
-<p>然后创建定时过期的消息，比如订单支付的时间为 30min，则将消息的 <code>TTL</code>（最大存活时间）设置为 30min，<strong>将消息放到一个没有消费者消费的队列中，当消息过期后就会成为死信。</strong></p>
-<p>死信消息被重新发送到死信交换机，然后我们在死信队列中消费该消息，根据商品 ID 判断该商品是否被支付。</p>
-<p><img src="/../images/image-20241028102924313.png" alt="image-20241028102924313"></p>
-<h2 id="笔记模块（模拟1000人同时在线）"><a href="#笔记模块（模拟1000人同时在线）" class="headerlink" title="笔记模块（模拟1000人同时在线）"></a>笔记模块（模拟1000人同时在线）</h2><p>增删改查、设为未公开、收藏点赞</p>
-<h3 id="发文章"><a href="#发文章" class="headerlink" title="发文章"></a>发文章</h3><h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><p>保存笔记到数据库、保存到redis的zset（nid、属性、time、最多1000条，设置1天的TTL）。mq异步保存到es。mq的feed的timeline推送给粉丝到redis的zset（粉丝的uid、nid、time）</p>
-<p>保存到布隆过滤器（只+不-）</p>
-<h4 id="发文幂等性"><a href="#发文幂等性" class="headerlink" title="发文幂等性"></a>发文幂等性</h4><p>Redis+AOP实现自定义注解Idempotent</p>
-<h4 id="用户刷小红薯"><a href="#用户刷小红薯" class="headerlink" title="用户刷小红薯"></a>用户刷小红薯</h4><p>从哪查？</p>
-<h5 id="从“发现”"><a href="#从“发现”" class="headerlink" title="从“发现”"></a>从“发现”</h5><p>从redis的zset查、滚动查询、查不到（说明太久1天内没人发文章、活跃度低）则从数据库查</p>
-<h5 id="点进去"><a href="#点进去" class="headerlink" title="点进去"></a>点进去</h5><p>从数据库查、查note表、comment表（10条）</p>
-<p>防止缓存穿透</p>
-<h5 id="从关注的人"><a href="#从关注的人" class="headerlink" title="从关注的人"></a>从关注的人</h5><p>从redis的zset查，k为自己的uid。点进去查数据库</p>
-<h5 id="从我的历史发文"><a href="#从我的历史发文" class="headerlink" title="从我的历史发文"></a>从我的历史发文</h5><p>从数据库查、</p>
-<h4 id="为什么一个从数据库查、一个从缓存查"><a href="#为什么一个从数据库查、一个从缓存查" class="headerlink" title="为什么一个从数据库查、一个从缓存查"></a>为什么一个从数据库查、一个从缓存查</h4><p>假如一秒1000人刷、则一秒查询4000条记录，缓存更快；</p>
-<p>刷的人多、点进去的人少，数据库可以承受。另外要查询评论</p>
-<p>都从redis查意味着redis要保存所有发文、数据量大</p>
-<h3 id="点赞、收藏"><a href="#点赞、收藏" class="headerlink" title="点赞、收藏"></a>点赞、收藏</h3><p>写入redis  mq写入数据库、从redis读</p>
-<p>评论直接写到数据库</p>
-<h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><p>Springboot、springcloudAlibaba、mybatisplus、redis、mysql、sharding-jdbc、docker、mq、es</p>
-<h1 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h1><p>用户发文、评论、点赞、收藏、搜索文章、查看30天内的历史文章、查看自己发送过的文章</p>
-<p>关注用户、查看用户发文；与用户私聊</p>
-<p>文章带货、电商购物</p>
-<p>AI智能问答</p>
-<p>搭建后台管理系统</p>
-<h1 id="亮点"><a href="#亮点" class="headerlink" title="亮点"></a>亮点</h1><p>发文、高可用系统要搭建主从同步、但是又有延迟、所以考虑解决方案、参考了小红书实际的</p>
-<h1 id="有关API"><a href="#有关API" class="headerlink" title="有关API"></a>有关API</h1><h1 id="与小红书的不同，有哪些实现想法"><a href="#与小红书的不同，有哪些实现想法" class="headerlink" title="与小红书的不同，有哪些实现想法"></a>与小红书的不同，有哪些实现想法</h1><h1 id="数据量很大、并发很高"><a href="#数据量很大、并发很高" class="headerlink" title="数据量很大、并发很高"></a>数据量很大、并发很高</h1>
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
@@ -901,6 +842,10 @@
       <ul>
         
           <li>
+            <a href="/2024/10/29/%E5%88%86%E5%B8%83%E5%BC%8Fid/">分布式id</a>
+          </li>
+        
+          <li>
             <a href="/2024/10/29/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E5%8D%95/">自定义表单</a>
           </li>
         
@@ -916,10 +861,6 @@
             <a href="/2024/10/28/steps/">steps</a>
           </li>
         
-          <li>
-            <a href="/2024/10/28/%E6%B7%B1%E5%BA%A6%E5%88%86%E9%A1%B5%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3/">深度分页如何解决</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -930,7 +871,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/HTTP/" style="font-size: 12.86px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 14.29px;">JUC</a> <a href="/tags/JVM/" style="font-size: 14.29px;">JVM</a> <a href="/tags/Java/" style="font-size: 14.29px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.14px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.57px;">Redis</a> <a href="/tags/Spring/" style="font-size: 12.86px;">Spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 15.71px;">分布式</a> <a href="/tags/%E5%8E%8B%E6%B5%8B/" style="font-size: 10px;">压测</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 11.43px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 12.86px;">小红书</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.43px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.86px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.86px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 12.86px;">项目</a>
+      <a href="/tags/HTTP/" style="font-size: 13.33px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 15px;">JUC</a> <a href="/tags/JVM/" style="font-size: 15px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Kafka/" style="font-size: 16.67px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.33px;">Redis</a> <a href="/tags/Spring/" style="font-size: 13.33px;">Spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%8E%8B%E6%B5%8B/" style="font-size: 10px;">压测</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 11.67px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 13.33px;">小红书</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.67px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 13.33px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 13.33px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.33px;">项目</a>
     </div>
   </div>
 
@@ -942,7 +883,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">81</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">82</span></li></ul>
     </div>
   </div>
 
@@ -952,7 +893,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E6%B5%8B/" rel="tag">压测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E6%B5%8B/" rel="tag">压测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">3</span></li></ul>
     </div>
   </div>
 
