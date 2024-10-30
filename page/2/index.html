@@ -85,77 +85,6 @@
 
       <div class="outer">
         <section id="main">
-  <article id="post-TODOS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/29/TODOS/">TODOS</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-29T15:30:44.000Z" itemprop="datePublished">2024年10月29日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/29/TODOS/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>1</p>
-<p>自定义线程池</p>
-<p>ReentrantLock源码、特性</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/2/index.html">https://se-daming.github.io/page/2/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
   <article id="post-JIT是什么" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -486,17 +415,53 @@
         <p>1</p>
 <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>A用户发的笔记B用户如何快速看到、他的粉丝如何快速看到</p>
 <p>热点事件怎么办</p>
-<h1 id="推"><a href="#推" class="headerlink" title="推"></a>推</h1><p>发文时推送到粉丝列表、数据量会很大；</p>
+<p>复杂的账号关系</p>
+<h1 id="涉及到的存储数据"><a href="#涉及到的存储数据" class="headerlink" title="涉及到的存储数据"></a>涉及到的存储数据</h1><p>账号关系、feed数据</p>
+<h1 id="feed流系统特征"><a href="#feed流系统特征" class="headerlink" title="feed流系统特征"></a>feed流系统特征</h1><p>多账号内容流；</p>
+<p>非稳定的账号关系；</p>
+<p>读写严重不平衡；</p>
+<p>消息必达要求高</p>
+<p>主键自增功能（能够根据上次的id读到最新值）</p>
+<h1 id="什么时候涉及账号关系"><a href="#什么时候涉及账号关系" class="headerlink" title="什么时候涉及账号关系"></a>什么时候涉及账号关系</h1><p>关注、取关、</p>
+<h1 id="从哪可以读"><a href="#从哪可以读" class="headerlink" title="从哪可以读"></a>从哪可以读</h1><p>广场  &#x3D;》用户发文时推送到公共的发件箱、zset （时间戳相同怎么办）、限制1000条</p>
+<p>关注列表&#x3D;》用户发文时推 给粉丝的收件箱、zset、限制100条、每天定时截取</p>
+<p>个人主页&#x3D;》如果从redis查则每个人需要有发件箱、从MySQL则无需。考虑读写分离。</p>
+<p>暂无下拉功能、考虑用set实现、或相当于下滑</p>
+<h1 id="个人发件箱的功能"><a href="#个人发件箱的功能" class="headerlink" title="个人发件箱的功能"></a>个人发件箱的功能</h1><p>从个人主页进去查询、完整记录。所以如果要这个的话必须保持完成性</p>
+<p>新关注用户去查询、由于每个用户的收件箱限100条、查100条后截取前100条</p>
+<p>取关用户去查询、需要查询用户收件箱里存在的记录、、查最新的100条就行</p>
+<p>如何区分收件箱和发件箱、如何设计结构、为什么是zset</p>
+<h1 id="数据库读写分离是为什么"><a href="#数据库读写分离是为什么" class="headerlink" title="数据库读写分离是为什么"></a>数据库读写分离是为什么</h1><h1 id="两个核心问题"><a href="#两个核心问题" class="headerlink" title="两个核心问题"></a>两个核心问题</h1><p>数据存储、内容推送</p>
+<h3 id="存储什么"><a href="#存储什么" class="headerlink" title="存储什么"></a>存储什么</h3><p>账号关系（可变、数据量大、但关系简单、性能敏感）（hbase）、feed消息（数据量大、格式简单、不能丢失成本）</p>
+<p>评论、点赞、收藏数</p>
+<p>我的读写分离主要是针对账号关系、（点进用户首页）、</p>
+<h3 id="如何推送"><a href="#如何推送" class="headerlink" title="如何推送"></a>如何推送</h3><p><img src="/../images/image-20241030170659961.png" alt="image-20241030170659961"></p>
+<h4 id="推"><a href="#推" class="headerlink" title="推"></a>推</h4><p>偏推荐类</p>
+<p>发文时推送到粉丝列表、数据量会很大；采用阿里的TableScore、高效NoSQL</p>
 <p>新关注的粉丝看不到历史发文；</p>
 <p>取关后还能看见；</p>
 <p>有人一直发送垃圾消息、（屏蔽）</p>
+<p>数据量大：采取对应措施、限制发件箱、收件箱条数</p>
+<p>发送时间长、但是可以接受、1亿粉丝的话，100w每秒，100秒</p>
 <p><em><strong>TODOS</strong></em></p>
 <p>取关后：查询博主id、根据id查发件箱、删除该用户zset里的该博主的记录</p>
 <p>关注后：拉取博主的发件箱到用户</p>
+<p>统计每日在线时间—活跃度</p>
+<p>关注和取关是相对不太频繁的操作、解决关系变化时的feed流问题、可以关注时去查询博主的MySQL的发文保存到自己的收件箱、取关时就删除自己收件箱的记录</p>
 <p>数据量大、搭建redis集群</p>
-<h1 id="拉"><a href="#拉" class="headerlink" title="拉"></a>拉</h1><p>会有延迟、</p>
+<h4 id="拉"><a href="#拉" class="headerlink" title="拉"></a>拉</h4><p>会有延迟、</p>
 <p>关注了好多人</p>
-<h1 id="推拉结合"><a href="#推拉结合" class="headerlink" title="推拉结合"></a>推拉结合</h1>
+<p><strong>热点问题</strong></p>
+<p>有个人的发布话题太火爆迅速传播、粉丝去拉、未关注的人去拉、导致压力很大、流量上升了好几倍、资源被打满</p>
+<h4 id="推拉结合"><a href="#推拉结合" class="headerlink" title="推拉结合"></a>推拉结合</h4><p>对大V的活跃粉丝推、对不活跃粉丝拉（需要保留每个人的发件箱）</p>
+<h1 id="TableScore特征"><a href="#TableScore特征" class="headerlink" title="TableScore特征"></a>TableScore特征</h1><p>单表支持10万亿行、10pb、10000tb、</p>
+<p>数据按主键排序（滚动查询）</p>
+<p>单个key读写延迟在毫秒级别</p>
+<p>全托管的NoSQL、无需运维</p>
+<h1 id="扩展点、还有其他方法吗"><a href="#扩展点、还有其他方法吗" class="headerlink" title="扩展点、还有其他方法吗"></a>扩展点、还有其他方法吗</h1><p>redis的数据要过期吗？</p>
+<p>由于收件箱越来愈大、并且无法针对zset的单条记录设置过期时间；所以限制每个用户收件箱为100条、通过定时任务每天截取最新的100条记录；</p>
+<p>缺点：如果关注的博主长时间没人发文、数据一直不变。不过也符合逻辑</p>
+
         
         
           <blockquote id="copyright">
@@ -827,6 +792,94 @@
 </article>
 
 
+  <article id="post-用户标签的实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/27/%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/">用户标签的实现</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-27T13:46:30.000Z" itemprop="datePublished">2024年10月27日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/27/%E7%94%A8%E6%88%B7%E6%A0%87%E7%AD%BE%E7%9A%84%E5%AE%9E%E7%8E%B0/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h3 id="只允许有一个"><a href="#只允许有一个" class="headerlink" title="只允许有一个"></a>只允许有一个</h3><p>用MySQL存储、有多少标签就有多少字段、如果新增标签的话会新增字段</p>
+<p>用MySQL配合二进制实现。预设1个bigint类型字段、有8*8个位、可表示64个标签</p>
+<p>取消标签：取反~后&amp;</p>
+<p>新增标签：该表字符值 | tag</p>
+<h3 id="可以有多个"><a href="#可以有多个" class="headerlink" title="可以有多个"></a>可以有多个</h3><h2 id="其他方式"><a href="#其他方式" class="headerlink" title="其他方式"></a>其他方式</h2><p>一个标签表、用户标签关联表</p>
+<p>但是需要联查、</p>
+<h2 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h2><h3 id="用户标签表"><a href="#用户标签表" class="headerlink" title="用户标签表"></a>用户标签表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> user_tag(</span><br><span class="line">    uid <span class="type">int</span>,</span><br><span class="line">    冲浪王子 tinyint,</span><br><span class="line">    冲浪大人 tinyint</span><br><span class="line">) comment <span class="string">&#x27;用户标签表&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>需要扩展字段</p>
+<h3 id="关联表"><a href="#关联表" class="headerlink" title="关联表"></a>关联表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> user_tag(</span><br><span class="line">    uid <span class="type">int</span>,</span><br><span class="line">    did tinyint</span><br><span class="line">) comment <span class="string">&#x27;用户标签表&#x27;</span>;</span><br><span class="line"><span class="keyword">create</span>  <span class="keyword">table</span> dic(</span><br><span class="line">    id tinyint,</span><br><span class="line">    tag <span class="type">varchar</span>(<span class="number">10</span>)</span><br><span class="line">)comment <span class="string">&#x27;标签id映射表&#x27;</span>; #修改时直接修改字典表，比如要把冲浪大王改成冲浪达人、只需要改这个表</span><br></pre></td></tr></table></figure>
+
+<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><p>直观、灵活、可以随便新增标签</p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><p>需要跨表查询、用户和标签很多时效率会越来越低</p>
+<h3 id="二进制位运算"><a href="#二进制位运算" class="headerlink" title="二进制位运算"></a>二进制位运算</h3><p>新增：或|  运算</p>
+<p>取消 与运算&amp; 非~运算</p>
+<p>比如现在是0011、要取消1。则 0011&amp;~1  ，即0011&amp; 1101</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `t_user_tag` (</span><br><span class="line">  `user_id` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="number">-1</span> COMMENT <span class="string">&#x27;用户id&#x27;</span>,</span><br><span class="line">  `tag_info_01` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span> COMMENT <span class="string">&#x27;标签记录字段&#x27;</span>,</span><br><span class="line">  `tag_info_02` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span> COMMENT <span class="string">&#x27;标签记录字段&#x27;</span>,</span><br><span class="line">  `tag_info_03` <span class="type">bigint</span> <span class="keyword">NOT</span> <span class="keyword">NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;0&#x27;</span> COMMENT <span class="string">&#x27;标签记录字段&#x27;</span>,</span><br><span class="line">  `create_time` datetime <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  `update_time` datetime <span class="keyword">DEFAULT</span> <span class="built_in">CURRENT_TIMESTAMP</span> <span class="keyword">ON</span> <span class="keyword">UPDATE</span> <span class="built_in">CURRENT_TIMESTAMP</span> COMMENT <span class="string">&#x27;更新时间&#x27;</span>,</span><br><span class="line">  <span class="keyword">PRIMARY</span> KEY (`user_id`)</span><br><span class="line">) ENGINE<span class="operator">=</span>InnoDB  <span class="keyword">DEFAULT</span> CHARSET<span class="operator">=</span>utf8mb3 <span class="keyword">COLLATE</span><span class="operator">=</span>utf8mb3_bin COMMENT<span class="operator">=</span><span class="string">&#x27;用户标签记录&#x27;</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tag_dictionary (</span><br><span class="line">    id TINYINT <span class="keyword">NOT</span> <span class="keyword">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    tag_name <span class="type">VARCHAR</span>(<span class="number">50</span>) <span class="keyword">NOT</span> <span class="keyword">NULL</span>,</span><br><span class="line">    bit_position TINYINT <span class="keyword">NOT</span> <span class="keyword">NULL</span></span><br><span class="line">);#字典表</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h4><p>效率高、不需要跨表查询；节约空间</p>
+<h4 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h4><p>不直观、需要更多时也需要扩展、但是概率小。192个很够了</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/2/index.html">https://se-daming.github.io/page/2/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
 
     <nav id="page-nav">
 
@@ -849,10 +902,6 @@
           </li>
         
           <li>
-            <a href="/2024/10/30/ku/">ku;;;</a>
-          </li>
-        
-          <li>
             <a href="/2024/10/30/GC%E8%BF%87%E7%A8%8B/">GC过程</a>
           </li>
         
@@ -862,6 +911,10 @@
         
           <li>
             <a href="/2024/10/30/%E5%9C%BA%E6%99%AF%E9%A2%98/">场景题</a>
+          </li>
+        
+          <li>
+            <a href="/2024/10/30/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84/">全局异常处理怎么做的</a>
           </li>
         
       </ul>
@@ -886,7 +939,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">95</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">94</span></li></ul>
     </div>
   </div>
 
