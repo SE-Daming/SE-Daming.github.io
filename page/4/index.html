@@ -85,6 +85,682 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-MVCC和最左前缀法则" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/27/MVCC%E5%92%8C%E6%9C%80%E5%B7%A6%E5%89%8D%E7%BC%80%E6%B3%95%E5%88%99/">MVCC和最左前缀法则</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-27T11:11:57.000Z" itemprop="datePublished">2024年10月27日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/27/MVCC%E5%92%8C%E6%9C%80%E5%B7%A6%E5%89%8D%E7%BC%80%E6%B3%95%E5%88%99/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1</p>
+<h1 id="MVCC"><a href="#MVCC" class="headerlink" title="MVCC"></a>MVCC</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>MVCC是数据库中的多版本并发控制机制、通过维护数据的多个历史版本实现并发事务同时读写数据库时保持数据的一致性和隔离性。它允许多个事务同时读取同一行数据而不会相互阻塞，每个事务看到的数据版本是事务刚开始时的数据版本</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>undolog、readview、隐藏字段（最后一次插入或更新该数据事务id、回滚指针）</p>
+<h2 id="能解决的问题"><a href="#能解决的问题" class="headerlink" title="能解决的问题"></a>能解决的问题</h2><p>能解决RR级别下的不可重复读和部分幻读</p>
+<p>RC下事务中每次查询都生成readview、RR下只在事务开始前生成一次，因此可重复读</p>
+<h1 id="最左前缀法则"><a href="#最左前缀法则" class="headerlink" title="最左前缀法则"></a>最左前缀法则</h1><p>在查询数据时根据联合索引的创建顺序从左到右依次匹配查询条件的字段。遇到范围查询时（&gt;  &lt;）该字段索引及其后面的索引就会失效</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-gateway的作用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/27/gateway%E7%9A%84%E4%BD%9C%E7%94%A8/">gateway的作用</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-27T02:18:24.000Z" itemprop="datePublished">2024年10月27日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/27/gateway%E7%9A%84%E4%BD%9C%E7%94%A8/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>身份校验、请求转发</p>
+<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><h3 id="请求转发"><a href="#请求转发" class="headerlink" title="请求转发"></a>请求转发</h3><p>引入依赖、配置路由</p>
+<h3 id="身份验证"><a href="#身份验证" class="headerlink" title="身份验证"></a>身份验证</h3><p>自定义GlobalFilter，实现filter接口</p>
+<h2 id="网关如何传递信息给微服务"><a href="#网关如何传递信息给微服务" class="headerlink" title="网关如何传递信息给微服务"></a>网关如何传递信息给微服务</h2><p>网关将请求转发给微服务是以http方式、可以把信息放到请求头，每个服务使用ThreadLocal保存</p>
+<h2 id="微服务之间不经过网关，如何传递信息"><a href="#微服务之间不经过网关，如何传递信息" class="headerlink" title="微服务之间不经过网关，如何传递信息"></a>微服务之间不经过网关，如何传递信息</h2><p>使用feign做rpc：实现RequestInterceptor接口重写apply方法将信息放到请求头，把它注册为bean</p>
+<p>使用dubbo做rpc：实现filter接口自定义拦截器在请求中增加信息，@WebFilter注解</p>
+<p>@WebFilter(filterName &#x3D; “accessFilter”, urlPatterns &#x3D; {“&#x2F;api&#x2F;*”})</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-Nacos原理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/27/Nacos%E5%8E%9F%E7%90%86/">Nacos原理</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-27T02:13:24.000Z" itemprop="datePublished">2024年10月27日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/27/Nacos%E5%8E%9F%E7%90%86/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>服务启动时向注册中心注册自己的信息–IP、port、服务名</p>
+<p>调用者可以从注册中心订阅服务，获取服务列表</p>
+<p>调用者可对服务列表负载均衡，挑选一个服务</p>
+<p>调用者发起调用；</p>
+<h2 id="当服务提供者宕机时，调用者如何感知"><a href="#当服务提供者宕机时，调用者如何感知" class="headerlink" title="当服务提供者宕机时，调用者如何感知"></a>当服务提供者宕机时，调用者如何感知</h2><p>服务提供者会定期向注册中心发送心跳请求；</p>
+<p>当注册中心长期收不到心跳时会认为实例宕机，将其移除</p>
+<p>当新服务启动时会发送注册请求；</p>
+<p>当服务列表更新时会通知微服务更新本地列表</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-服务雪崩是什么，服务保护有哪些方案" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/27/%E6%9C%8D%E5%8A%A1%E9%9B%AA%E5%B4%A9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%A1%88/">服务雪崩是什么，服务保护有哪些方案</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-27T01:52:05.000Z" itemprop="datePublished">2024年10月27日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/27/%E6%9C%8D%E5%8A%A1%E9%9B%AA%E5%B4%A9%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%8C%E6%9C%8D%E5%8A%A1%E4%BF%9D%E6%8A%A4%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%A1%88/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1</p>
+<h1 id="服务雪崩"><a href="#服务雪崩" class="headerlink" title="服务雪崩"></a>服务雪崩</h1><p>在微服务架构下、一个服务崩溃可能会影响到其他服务。造成服务的连锁崩溃</p>
+<h1 id="服务保护"><a href="#服务保护" class="headerlink" title="服务保护"></a>服务保护</h1><h2 id="请求限流"><a href="#请求限流" class="headerlink" title="请求限流"></a>请求限流</h2><p>对接口限流</p>
+<h2 id="线程隔离"><a href="#线程隔离" class="headerlink" title="线程隔离"></a>线程隔离</h2><p>限制每个服务的并发访问数、服务之间不会互相影响</p>
+<h2 id="服务熔断"><a href="#服务熔断" class="headerlink" title="服务熔断"></a>服务熔断</h2>
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-RBAC模型介绍一下" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/RBAC%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B/">RBAC模型介绍一下</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-26T15:19:59.000Z" itemprop="datePublished">2024年10月26日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/26/RBAC%E6%A8%A1%E5%9E%8B%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%8B/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>它是通过给角色分配权限、给用户分配角色来实现权限分配的、在数据库涉及到5张表—用户表、权限表、角色表、用户角色表、角色权限表</p>
+<p>CMS平台有不同的角色、管理员、编辑、审核等等；权限有创建内容、编辑、审核、发布、IP控制、黑名单等等</p>
+<h2 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h2><p>便于角色的划分、授权管理、赋予最小权限、职责分离</p>
+<h2 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h2><p>没有提供按顺序操作的控制机制、很难适应对操作顺序要求严格的系统</p>
+<h2 id="如何解决缺点"><a href="#如何解决缺点" class="headerlink" title="如何解决缺点"></a>如何解决缺点</h2><p>基于<strong>ABAC模型</strong></p>
+<p>ABAC是一种基于属性的权限控制模型，它通过用户（用户组织、姓名）、资源（资源所有者、文件名）和环境（访问时间、数据的位置）的属性来决定访问权限。与RBAC不同，ABAC不依赖于预定义的角色，而是动态评估属性，以做出访问决策。</p>
+<p>ABAC可根据用户特征、操作类型等属性来进行授权、RBAC是根据角色授权</p>
+<p>假设有一个文件系统，用户A是财务部门的员工，文件X是敏感文件。你可以设置以下策略：</p>
+<ul>
+<li><p>只有财务部门的员工（用户属性）才能访问（文件属性）。</p>
+</li>
+<li><p>只有在工作时间（环境属性）内才能访问。</p>
+</li>
+</ul>
+<p>P5（职级）的研发（职位）同学有公司Gitlab的权限</p>
+<h2 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h2><p>更加灵活、可扩展</p>
+<h2 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h2><p>构建比较复杂</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-JVM组成" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/26/JVM%E7%BB%84%E6%88%90/">JVM组成</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-26T02:32:27.000Z" itemprop="datePublished">2024年10月26日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/26/JVM%E7%BB%84%E6%88%90/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><p>把字节码文件加载到内存</p>
+<h2 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h2><p>JVM管理的内存</p>
+<h2 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h2><p>包含了<strong>即时编译器、解释器、垃圾回收器</strong>，执行引擎使用解释器将字节码指令解释成机器码，使用即时编译器优化性能，使用垃圾回收器回收不再使用的对象。</p>
+<h2 id="本地接口"><a href="#本地接口" class="headerlink" title="本地接口"></a>本地接口</h2><p>调用本地使用C&#x2F;C++编译好的方法</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JVM/" rel="tag">JVM</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-SpringBoot自动装配原理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E5%8E%9F%E7%90%86/">SpringBoot自动装配原理</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-25T13:38:29.000Z" itemprop="datePublished">2024年10月25日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/25/SpringBoot%E8%87%AA%E5%8A%A8%E8%A3%85%E9%85%8D%E5%8E%9F%E7%90%86/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="自动装配原理"><a href="#自动装配原理" class="headerlink" title="自动装配原理"></a>自动装配原理</h1><p>springboot通过SPI机制定义了一套接口规范、规定在启动时会扫描META-INF&#x2F;spring.factories文件、将文件中的配置信息加载到spring容器</p>
+<p>具体实现与@<em>SpringBootApplication</em>注解有关、该注解下有个@<em>EnableAutoConfiguration</em>注解、该注解内加载了AutoConfigurationImportSeletor类，这个类中的<em>selectImports</em>方法加载自动装配类到IOC容器。该方法中有三个主要步骤、</p>
+<p>先看自动装配是否打开，然后获取<em>EnableAutoConfiguration</em>注解内的exclude和excludeName有哪些、然后根据condition注解获取需要自动装配的配置类、读取META&#x2F;spring factories里的实现类</p>
+<h1 id="如何自定义starter"><a href="#如何自定义starter" class="headerlink" title="如何自定义starter"></a>如何自定义starter</h1><p>创建springboot工程、导入springboot依赖、创建一个配置类，在META&#x2F;spring factories下写入该类的全类名、导入该工程、完成</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring/" rel="tag">Spring</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-SPI机制是什么" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/SPI%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88/">SPI机制是什么</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-25T13:30:34.000Z" itemprop="datePublished">2024年10月25日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/25/SPI%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>SPI是Java提供的用来被第三方实现或加载的api、</p>
+<h1 id="约定"><a href="#约定" class="headerlink" title="约定"></a>约定</h1><p>服务提供者提供接口的实现、在META-INF&#x2F;services下创建以接口命名的文件、文件内容为实现类的全路径名；</p>
+<p>项目要引入服务提供者的jar</p>
+<p>使用<em>ServiceLoader</em>类来动态加载接口实现类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServiceLoader&lt;PayService&gt; serviceLoader = ServiceLoader.load(PayService.class);</span><br></pre></td></tr></table></figure>
+
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-SPI和API的区别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/25/SPI%E5%92%8CAPI%E7%9A%84%E5%8C%BA%E5%88%AB/">SPI和API的区别</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-25T01:02:15.000Z" itemprop="datePublished">2024年10月25日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/25/SPI%E5%92%8CAPI%E7%9A%84%E5%8C%BA%E5%88%AB/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>S</p>
+<h1 id="SPI"><a href="#SPI" class="headerlink" title="SPI"></a>SPI</h1><p>SPI是服务调用者提供的接口规范，由服务提供者实现、服务调用者调用。</p>
+<p>调用方提供接口、实现方提供实现类</p>
+<p><a href="https://se-daming.github.io/2024/10/25/SPI%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88/">https://se-daming.github.io/2024/10/25/SPI%E6%9C%BA%E5%88%B6%E6%98%AF%E4%BB%80%E4%B9%88/</a></p>
+<h1 id="API"><a href="#API" class="headerlink" title="API"></a>API</h1><p>API是服务提供者提供、服务调用者调用。实现方提供接口和实现类</p>
+<p><img src="/../images/image-20241025231224930.png" alt="image-20241025231224930"></p>
+<h1 id="SDK"><a href="#SDK" class="headerlink" title="SDK"></a>SDK</h1><p>是相较于API说的、API是接口、比如调用支付宝接口</p>
+<p>SDK是工具包，比如项目引入数据采集工具</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-ReentrantLock浅析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -157,705 +833,10 @@
 </article>
 
 
-  <article id="post-TCP三次握手、四次挥手" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/25/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E3%80%81%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">TCP三次握手、四次挥手</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-25T00:22:08.000Z" itemprop="datePublished">2024年10月25日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/25/TCP%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E3%80%81%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>1</p>
-<h1 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h1><p>客户端携带syn标志的请求报文发送给服务端，客户端进入syn-send</p>
-<p>服务端响应带有ack标志的报文，并携带syn标志的请求报文，服务端进入syn-receive</p>
-<p>客户端响应ack报文、客户端和服务端进入esblish</p>
-<h1 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h1><p>客户端发送fin标志的请求报文、进入fin-wait1、</p>
-<p>服务端收到后发送ack</p>
-<p>FIN-WAIT 1   CLOSE-WAIT</p>
-<p>FIN-WAIT 2  LAST-ACK</p>
-<p>TIME-WAIT  CLOSE</p>
-<h1 id="半连接队列"><a href="#半连接队列" class="headerlink" title="半连接队列"></a>半连接队列</h1><p>三次握手时、服务端恢复ack+syn后把连接放到半连接队列</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-自我介绍" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/24/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">自我介绍</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-24T14:26:00.000Z" itemprop="datePublished">2024年10月24日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/24/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>面试官好，我是xxx。是天津工业大学软件工程专业2026届本科生，很荣幸参加百度的面试。</p>
-<p>我比较喜欢技术、对互联网产品和技术比较感兴趣，经常在业余时间自学后端开发相关技术栈、对Java后端开发的一些主流技术栈都有了解和使用，比如springboot、cloud、mybatis、redis、mysql、Kafka、等等，也能使用AI高效辅助工作、除此之外，我有一定的实际项目经验、在今年的上半年，我在天津本地的一家软件公司做Java后端开发，在此期间我也了解到了软件开发的流程和真实的工作是怎样的。并且我也初步具备了排查bug、修复bug、开发新功能的能力。此外、我自己也做过几个Java项目，能够迅速上手后端开发。</p>
-<p>我期望能有机会加入百度，和百度一起携手共进。</p>
-<p>我就先简单介绍这些，再一次感谢！</p>
-<h2 id="简单介绍公司的实习"><a href="#简单介绍公司的实习" class="headerlink" title="简单介绍公司的实习"></a>简单介绍公司的实习</h2><p>那我简单介绍一下我负责的业务以及我在其中的收益吧</p>
-<p>我负责的是…</p>
-<p>我感到收益还是很多的、最直观的感受是debug的能力增加了，能够根据前端提出的bug迅速定位代码的错误然后做出修改；</p>
-<p>能够配合前端、测试、运维高效完成开发任务、能够在产品讨论环节提出自己的想法</p>
-<p>另外、了解到了软件开发的流程和真实的工作体验、</p>
-<p>这是我的第一次实习、我感觉收益还是颇深。除了简历中提到的一些业务上的解决方案，在实习过程中，我还参与产品需求的讨论、方案架构的设计、以及配合前端、测试进行问题修复、新功能的开发等等、感受到了真实的开发氛围、重要的是，把学到的理论知识实际运用到了真实开发场景中，而不是仅仅纸上谈兵，比如说一个令我比较深刻的点是我们当时发现了一个接口响应很慢、通过排查定位到了是一个慢SQL导致的，通过学到的慢SQL的原因和解决方案逐一尝试，最终成功解决了这个接口响应很慢的问题，这在当时也是比较有成就感的一件事；此外，我觉得这次实习带给我最多的是解决问题能力的提高、可能开发过程中涉及到了不熟悉的点，最终还是能够通过各种手段解决掉；</p>
-<h2 id="介绍做的事"><a href="#介绍做的事" class="headerlink" title="介绍做的事"></a>介绍做的事</h2><p>我主要参与的项目是CMS的维护开发、CMS是一个前后端分离搭建的网站搭建平台。用户可以选择我们提供的几套网站模板，然后在模板下设立专栏、在专栏下发文章、对这个网站进行权限控制、等等。发文章时可以携带文件或附件，所以还涉及到了个人文件库部分用来专门保存用户的素材文件。我负责的事情主要有这么几个：个人文件库部分、基于RBAC进行权限控制、自定义视图，CMS平台皮肤主题的切换、还涉及到公司网站的活动埋点数据的采集和一些对CMS旧功能接口的升级开发。个人文件库就是刚才提到的用户发文的素材库、权限控制是我们给用户设定角色、分配权限；自定义视图是用户可以自己通过拖拽式设计来设计视图，它的需求背景是这样的、用户发文章时可以在文章开头携带日期、输入框等等。这些是我们一开始给用户设定好的模板。随着用户量愈多，用户对文章排版格式的需求五花八门、如果要有新的排版需求、我们需要重新写接口来拓展视图，有了自定义视图接口后用户可以随便设定需要的视图满足需求，我们也无需拓展接口，这样减少了接口开发的工作量；埋点数据的采集是我们公司预测今年活动峰值时网站QPS可能会达到1000左右，每一次请求携带100条记录，我负责采集这每秒10w条数据</p>
-<h2 id="反问"><a href="#反问" class="headerlink" title="反问"></a>反问</h2><p>面试中存在的问题</p>
-<p>部门业务</p>
-<p>这个岗位看重实习生的什么</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-SOA、分布式、微服务的区别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/24/SOA%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8C%BA%E5%88%AB/">SOA、分布式、微服务的区别</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-24T11:40:13.000Z" itemprop="datePublished">2024年10月24日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/24/SOA%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8C%BA%E5%88%AB/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="架构演变"><a href="#架构演变" class="headerlink" title="架构演变"></a>架构演变</h1><p><img src="/../images/image-20241024194148823.png" alt="image-20241024194148823"></p>
-<h2 id="单体架构"><a href="#单体架构" class="headerlink" title="单体架构"></a>单体架构</h2><p>所有的业务模块聚合在一起一块部署</p>
-<h2 id="垂直架构"><a href="#垂直架构" class="headerlink" title="垂直架构"></a>垂直架构</h2><p>将服务拆分为多个模块、但不同模块可能会有相同的业务</p>
-<h2 id="分布式架构"><a href="#分布式架构" class="headerlink" title="分布式架构"></a>分布式架构</h2><p>在垂直架构的基础上抽离出公共部分、业务模块单独部署。模块之间通过RPC远程调用</p>
-<h3 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h3><p>被调用部分配置修改、消费方也需要变更</p>
-<h2 id="SOA架构"><a href="#SOA架构" class="headerlink" title="SOA架构"></a>SOA架构</h2><p>是一个组件模型、将应用按照服务拆分、通过ESB服务总线进行交互。ESB（消息的转化和路由）提供负载均衡、流量控制、服务监控、异常处理等；</p>
-<h2 id="微服务架构"><a href="#微服务架构" class="headerlink" title="微服务架构"></a>微服务架构</h2><p>在SOA上做的升华、强调业务彻底组件化和服务化、单个应用拆分为多个可独立开发设计运行的应用、应用之间通过服务完成交互和继承</p>
-<p>SOA注重系统集成方面、微服务关注的是完全分离；</p>
-<p>SOA尽可能多共享、微服务尽可能少的共享</p>
-<p>微服务去中心化、去掉ESB总线</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-常见限流算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/24/%E5%B8%B8%E8%A7%81%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/">常见限流算法</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-24T09:57:00.000Z" itemprop="datePublished">2024年10月24日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/24/%E5%B8%B8%E8%A7%81%E9%99%90%E6%B5%81%E7%AE%97%E6%B3%95/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>1</p>
-<h1 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h1><p>把请求放到桶里、处理请求是出桶；</p>
-<p>可用队列实现</p>
-<p>优点：实现简单、可控制限流</p>
-<p>缺点：不能应对激增的流量；当桶持续慢时不能处理新的请求</p>
-<h1 id="令牌-桶算法"><a href="#令牌-桶算法" class="headerlink" title="令牌 桶算法"></a>令牌 桶算法</h1><p>边往桶里放令牌请求边拿令牌、拿到令牌的请求被处理、桶满了就不能放了</p>
-<p>优点：可以控制处理速率；可以应对激增的流量</p>
-<p>缺点：令牌产生速率和桶容量设置不合理的话可能导致请求被丢弃、系统过载；实现较复杂</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-缓存双写一致性" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/24/%E7%BC%93%E5%AD%98%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/">缓存双写一致性</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-24T07:20:14.000Z" itemprop="datePublished">2024年10月24日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/24/%E7%BC%93%E5%AD%98%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>g</p>
-<p>共三种方案</p>
-<p>Cache Aside   Read&#x2F;Write Through   Write Behind Caching</p>
-<p><img src="/../images/image-20241024153007091.png" alt="image-20241024153007091"></p>
-<h1 id="Cache-Aside"><a href="#Cache-Aside" class="headerlink" title="Cache Aside"></a>Cache Aside</h1><p>数据库为主存储、缓存为提升效率</p>
-<p>由缓存的调用者在更新数据库的时候更新缓存</p>
-<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><ul>
-<li><strong>读取操作</strong>：首先尝试从缓存中获取数据，如果缓存命中，则直接返回；否则，从数据库中读取数据并将其放入缓存，最后返回给客户端。</li>
-<li><strong>更新操作</strong>：先更新数据库再删除缓存</li>
-</ul>
-<h2 id="为什么先更新数据库"><a href="#为什么先更新数据库" class="headerlink" title="为什么先更新数据库"></a>为什么先更新数据库</h2><p>如果先删除缓存后更新数据库、线程a删了缓存、线程b发现没有缓存则去读取数据库旧值重构缓存、线程a更新数据库&#x3D;》不一致；</p>
-<p>如果先更新数据库再删除缓存、如果没有缓存、线程a去读数据库旧值、线程b更新了数据库、删除了缓存、线程a重构旧缓存；</p>
-<p><img src="/../images/image-20241024155232083.png" alt="image-20241024155232083"></p>
-<p>缓存操作的速度很快、不太可能出现第二种情况；而第一种就比较容易出现，MySQL速度没有这么快</p>
-<h2 id="为什么删除缓存"><a href="#为什么删除缓存" class="headerlink" title="为什么删除缓存"></a>为什么删除缓存</h2><p>删缓存更加轻量；</p>
-<p>更新的缓存可能长时间不被使用，从资源和性能角度考虑使用缓存的时候再构建，</p>
-<h2 id="删除缓存失败怎么办"><a href="#删除缓存失败怎么办" class="headerlink" title="删除缓存失败怎么办"></a>删除缓存失败怎么办</h2><p><strong>消息队列的重试机制</strong>，将需要删除的放到消息队列，但是需要改造业务代码，对代码有侵入性</p>
-<p>基于Canel订阅binlog日志发送到mq、消费者删除缓存，无侵入性但是增加了维护成本</p>
-<h2 id="主从同步延迟-读写分离"><a href="#主从同步延迟-读写分离" class="headerlink" title="主从同步延迟+读写分离"></a>主从同步延迟+读写分离</h2><p>这种情况下采用更新数据库+删除缓存也会出现数据不一致；</p>
-<p>可以采用延迟双删+订阅binlog+mq的方案</p>
-<h2 id="延迟双删"><a href="#延迟双删" class="headerlink" title="延迟双删"></a>延迟双删</h2><p>先删缓存、再更新数据库、再删缓存</p>
-<p>延迟时间要大于线程 B 读取数据库 + 写入缓存的时间；</p>
-<p>延迟时间要大于「主从复制」的延迟时间</p>
-<h1 id="Read-Write-Through"><a href="#Read-Write-Through" class="headerlink" title="Read&#x2F;Write Through"></a>Read&#x2F;Write Through</h1><p>只更新缓存、缓存同步去更新数据库</p>
-<h1 id="Write-Behind-Caching"><a href="#Write-Behind-Caching" class="headerlink" title="Write Behind Caching"></a>Write Behind Caching</h1><p>只更新缓存、缓存异步去更新数据库</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-Java代理" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/24/Java%E4%BB%A3%E7%90%86/">Java代理</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-24T05:27:08.000Z" itemprop="datePublished">2024年10月24日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/24/Java%E4%BB%A3%E7%90%86/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="静态代理"><a href="#静态代理" class="headerlink" title="静态代理"></a>静态代理</h1><p>静态代理是在编译是创建代理类、代理类和被代理类要实现相同的接口、代理类在重写的方法中显式调用被代理类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 被代理类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RealSubject</span> <span class="keyword">implements</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;RealSubject: Handling request.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代理类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProxySubject</span> <span class="keyword">implements</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> RealSubject realSubject;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">ProxySubject</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.realSubject = <span class="keyword">new</span> <span class="title class_">RealSubject</span>();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;ProxySubject: Pre-processing.&quot;</span>);</span><br><span class="line">        realSubject.request();</span><br><span class="line">        System.out.println(<span class="string">&quot;ProxySubject: Post-processing.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">StaticProxyDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">Subject</span> <span class="variable">subject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ProxySubject</span>();</span><br><span class="line">        subject.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h1><p>动态代理是在运行时创建代理类,需要实现invocationHandler接口重写invoke方法并用Proxy代理类创建增强后的对象</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.InvocationHandler;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Proxy;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 被代理类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RealSubject</span> <span class="keyword">implements</span> <span class="title class_">Subject</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">request</span><span class="params">()</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;RealSubject: Handling request.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 动态代理处理器</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DynamicProxyHandler</span> <span class="keyword">implements</span> <span class="title class_">InvocationHandler</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object target;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">DynamicProxyHandler</span><span class="params">(Object target)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.target = target;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">invoke</span><span class="params">(Object proxy, Method method, Object[] args)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;DynamicProxy: Pre-processing.&quot;</span>);</span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> method.invoke(target, args);</span><br><span class="line">        System.out.println(<span class="string">&quot;DynamicProxy: Post-processing.&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 测试</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DynamicProxyDemo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">RealSubject</span> <span class="variable">realSubject</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RealSubject</span>();</span><br><span class="line">        <span class="type">Subject</span> <span class="variable">proxyInstance</span> <span class="operator">=</span> (Subject) Proxy.newProxyInstance(</span><br><span class="line">                realSubject.getClass().getClassLoader(),</span><br><span class="line">                realSubject.getClass().getInterfaces(),</span><br><span class="line">                <span class="keyword">new</span> <span class="title class_">DynamicProxyHandler</span>(realSubject)</span><br><span class="line">        );</span><br><span class="line">        proxyInstance.request();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="jdk"><a href="#jdk" class="headerlink" title="jdk"></a>jdk</h2><p>依赖于Java的<strong>反射</strong>机制，通过 <code>java.lang.reflect.Proxy</code> 类和 <code>InvocationHandler</code> 接口来创建代理对象。</p>
-<h2 id="cglib"><a href="#cglib" class="headerlink" title="cglib"></a>cglib</h2><p>通过<strong>字节码生成</strong>技术，直接生成被代理类的子类，适用于没有实现接口的类。</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/" rel="tag">Java</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-MySQL隔离级别" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/24/MySQL%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/">MySQL隔离级别</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-24T03:25:40.000Z" itemprop="datePublished">2024年10月24日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/24/MySQL%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-如何建立联合索引" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/24/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/">如何建立联合索引</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-24T02:35:34.000Z" itemprop="datePublished">2024年10月24日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/24/%E5%A6%82%E4%BD%95%E5%BB%BA%E7%AB%8B%E8%81%94%E5%90%88%E7%B4%A2%E5%BC%95/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>1</p>
-<h2 id="要考虑如何安排索引字段顺序"><a href="#要考虑如何安排索引字段顺序" class="headerlink" title="要考虑如何安排索引字段顺序"></a>要考虑如何安排索引字段顺序</h2><p>比如创建了(a,b)索引后就无需创建a索引了，也就是说、如果可以通过调整顺序少维护一个索引，这个顺序可以优先考虑</p>
-<p>如果索引字段都需要各自的查询、则要考虑空间、</p>
-<p>区分度高的放前面，低的放后面；</p>
-<p>等值查询字段放前面，排序放后面；</p>
-<p>区分度一样且都是等值查询，考虑把内存小的放后面。因为可能需要单独对它进行查询，建立单独的索引省空间</p>
-<h2 id="索引下推"><a href="#索引下推" class="headerlink" title="索引下推"></a>索引下推</h2>
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-binlog的写入时机" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/24/binlog%E7%9A%84%E5%86%99%E5%85%A5%E6%97%B6%E6%9C%BA/">binlog的写入时机</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-24T01:31:49.000Z" itemprop="datePublished">2024年10月24日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/24/binlog%E7%9A%84%E5%86%99%E5%85%A5%E6%97%B6%E6%9C%BA/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
-<a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+<a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
 </nav>
 
 
@@ -870,23 +851,23 @@
       <ul>
         
           <li>
-            <a href="/2024/10/29/Condition%E4%B8%8B%E7%9A%84await%E3%80%81signal/">Condition下的await、signal</a>
+            <a href="/2024/10/30/delete%E5%92%8Ctruncate/">delete和truncate</a>
           </li>
         
           <li>
-            <a href="/2024/10/29/TODOS/">TODOS</a>
+            <a href="/2024/10/30/ku/">ku;;;</a>
           </li>
         
           <li>
-            <a href="/2024/10/29/JIT%E6%98%AF%E4%BB%80%E4%B9%88/">JIT是什么</a>
+            <a href="/2024/10/30/GC%E8%BF%87%E7%A8%8B/">GC过程</a>
           </li>
         
           <li>
-            <a href="/2024/10/29/%E4%BB%8B%E7%BB%8Ddubbo/">介绍dubbo</a>
+            <a href="/2024/10/30/%E5%8F%8D%E5%B0%84%E7%9A%84%E7%90%86%E8%A7%A3/">反射的理解</a>
           </li>
         
           <li>
-            <a href="/2024/10/29/%E5%88%86%E5%B8%83%E5%BC%8Fid/">分布式id</a>
+            <a href="/2024/10/30/%E5%9C%BA%E6%99%AF%E9%A2%98/">场景题</a>
           </li>
         
       </ul>
@@ -899,7 +880,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/HTTP/" style="font-size: 12.5px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 15px;">JUC</a> <a href="/tags/JVM/" style="font-size: 15px;">JVM</a> <a href="/tags/Java/" style="font-size: 13.75px;">Java</a> <a href="/tags/Kafka/" style="font-size: 16.25px;">Kafka</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.75px;">Redis</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 17.5px;">分布式</a> <a href="/tags/%E5%8E%8B%E6%B5%8B/" style="font-size: 10px;">压测</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 11.25px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 12.5px;">小红书</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.25px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.5px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.5px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 12.5px;">项目</a>
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/HTTP/" style="font-size: 12.5px;">HTTP</a> <a href="/tags/JUC/" style="font-size: 16.25px;">JUC</a> <a href="/tags/JVM/" style="font-size: 15px;">JVM</a> <a href="/tags/Java/" style="font-size: 13.75px;">Java</a> <a href="/tags/Kafka/" style="font-size: 16.25px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.75px;">Redis</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 17.5px;">分布式</a> <a href="/tags/%E5%8E%8B%E6%B5%8B/" style="font-size: 10px;">压测</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 11.25px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 12.5px;">小红书</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.25px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 10px;">算法</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 12.5px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 10px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.5px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.75px;">项目</a>
     </div>
   </div>
 
@@ -911,7 +892,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">86</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年10月</a><span class="archive-list-count">95</span></li></ul>
     </div>
   </div>
 
@@ -921,7 +902,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E6%B5%8B/" rel="tag">压测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">3</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8E%8B%E6%B5%8B/" rel="tag">压测</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
