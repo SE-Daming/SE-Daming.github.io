@@ -134,7 +134,8 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h3 id="1000QPS压测"><a href="#1000QPS压测" class="headerlink" title="1000QPS压测"></a>1000QPS压测</h3><h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>每秒1000QPS10w个对象需要存到ck数据库</p>
+        <h3 id="1000QPS压测"><a href="#1000QPS压测" class="headerlink" title="1000QPS压测"></a>1000QPS压测</h3><h4 id="是自己设计的吗"><a href="#是自己设计的吗" class="headerlink" title="是自己设计的吗"></a>是自己设计的吗</h4><p>是看了京东开发者平台的一篇文章、原文是负责采集魔笛平台的用户行为数据、从中抽象出的方案并讨论证明了可行性；</p>
+<h4 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h4><p>每秒1000QPS10w个对象需要存到ck数据库</p>
 <p>先把请求数据放到Kafka的不同分区和主题中（2个主题、100个分区），然后消费者（10个）监听到消息后放到redis写队列中，有两个衡量指标衡量是否转存到读队列。一个是数量阈值、一个是时间计时器。如果写队列到了一定阈值（1w）后、将写队列开关关闭、转存到读队列（while循环不断检测）。如果没到阈值但到时间了也转存到读队列。之后从读队列中拿出数据序列化并基于jdbc存到ck，开关打开。都没有的话则休眠10ms后再自旋</p>
 <p>阈值：8000 时间阈值：0.15s</p>
 <p>阈值的设定：while中判断是否达到阈值、然后拿出所有的转到读队列。阈值一方面和ck的批量写入量有关，另一个是和判断后的时间间隙有关</p>
@@ -142,12 +143,14 @@
 <p>时间阈值：100ms大约1w个对象、可能没到8000阈值（需要80ms）、经实验150ms内堆积也差不多8000个对象</p>
 <h4 id="为什么原生jdbc"><a href="#为什么原生jdbc" class="headerlink" title="为什么原生jdbc"></a>为什么原生jdbc</h4><p>避免将Java对象转成数据库中的行，减少ORM时的开销；另外，mybatis的批量写入一次最多4M数据（可设置），估算每一次请求的数据大概是5kb、5000字节、也就是说，mp的批量写入一次最多写入800条数据、再多就会一条一条写入。</p>
 <p>而ck官方建议：如果是1kb，则写入速度是5w到20w每秒；（当时测试写入1kb的5w数据大概是900多毫秒、2kb大概是1700多ms）所以批量写入的阈值设为了1w</p>
-<h4 id="为什么不直接Kafka批量写入"><a href="#为什么不直接Kafka批量写入" class="headerlink" title="为什么不直接Kafka批量写入"></a>为什么不直接Kafka批量写入</h4><p>相当于异步处理、Kafka相当于一个管道、保存到redis、避免消息积压；</p>
+<h4 id="为什么不直接Kafka批量写入"><a href="#为什么不直接Kafka批量写入" class="headerlink" title="为什么不直接Kafka批量写入"></a>为什么不直接Kafka批量写入</h4><p>Kafka也能、设置fetch.min.bytes参数、达不到时有个fetch.max.wati.ms参数阈值、</p>
+<p>但是需要去测试Kafka的最优参数配置</p>
+<p>相当于异步处理、Kafka相当于一个管道、保存到redis、避免消息积压；</p>
 <p>如果用Kafka的话、涉及到一些序列化等操作、影响吞吐量；</p>
 <p>如果用Kafka、写入异常的话、会消息挤压</p>
 <p>起到解耦的作用：解耦了Kafka和最终存储系统，架构上更灵活；（如果以后不写入ck而是写入其他的数据库，更灵活）；</p>
 <p>流量削峰的作用：</p>
-<p><strong>削峰解耦、减少序列化开销、避免消息积压、异步处理</strong></p>
+<p><strong>参数配置复杂、削峰解耦、减少序列化开销、避免消息积压、异步处理、去重</strong></p>
 <h4 id="双buffer缓冲队列"><a href="#双buffer缓冲队列" class="headerlink" title="双buffer缓冲队列"></a>双buffer缓冲队列</h4><p>原因：</p>
 <p>防止突发流量、如果只用写队列的话、判断达到了阈值，但是存在突发流量，所以转存一部分到读队列，然后开关打开。平滑流量</p>
 <p>如果只用写队列的话，存在突发流量时也插入阈值量到ck不行吗？可以，但是这时不能去写入了，有读队列的话可以边消费边写入。</p>
@@ -157,7 +160,7 @@
 <p>隔离数据处理和数据写入。提高系统吞吐量和处理效率；</p>
 <p>避免并发冲突，当写队列接收时读队列转存到数据库，不会相互干扰</p>
 <p>为了保证批量写入，如果只有一个队列的话</p>
-<p><strong>总结</strong>：平滑流量（走过的路长、）、边消费边写入、隔离数据处理、集中序列化、保证批量写入</p>
+<p><strong>总结</strong>：平滑流量（走过的路长、）、边消费边写入、隔离数据处理、集中序列化、保证批量写入、去重</p>
 <p>介绍：两个set、一个用作读、一个用作写。</p>
 <h4 id="如何保证批量插入"><a href="#如何保证批量插入" class="headerlink" title="如何保证批量插入"></a>如何保证批量插入</h4><p>用了双buffer缓存队列，引入了redis作为缓存。</p>
 
@@ -167,7 +170,7 @@
   <div class="widget-wrap" id="toc-wrap">
     <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
     <div class="widget">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1000QPS%E5%8E%8B%E6%B5%8B"><span class="toc-text">1000QPS压测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8E%9F%E7%94%9Fjdbc"><span class="toc-text">为什么原生jdbc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5Kafka%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5"><span class="toc-text">为什么不直接Kafka批量写入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8Cbuffer%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97"><span class="toc-text">双buffer缓冲队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5"><span class="toc-text">如何保证批量插入</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1000QPS%E5%8E%8B%E6%B5%8B"><span class="toc-text">1000QPS压测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%AF%E8%87%AA%E5%B7%B1%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%90%97"><span class="toc-text">是自己设计的吗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8E%9F%E7%94%9Fjdbc"><span class="toc-text">为什么原生jdbc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%9B%B4%E6%8E%A5Kafka%E6%89%B9%E9%87%8F%E5%86%99%E5%85%A5"><span class="toc-text">为什么不直接Kafka批量写入</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8Cbuffer%E7%BC%93%E5%86%B2%E9%98%9F%E5%88%97"><span class="toc-text">双buffer缓冲队列</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5"><span class="toc-text">如何保证批量插入</span></a></li></ol></li></ol>
     </div>
   </div>
 
