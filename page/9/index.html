@@ -85,6 +85,443 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-Kafka中leader的选举流程是怎样的" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/19/Kafka%E4%B8%ADleader%E7%9A%84%E9%80%89%E4%B8%BE%E6%B5%81%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/">Kafka中leader的选举流程是怎样的</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-19T07:59:34.000Z" itemprop="datePublished">2024年10月19日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/19/Kafka%E4%B8%ADleader%E7%9A%84%E9%80%89%E4%B8%BE%E6%B5%81%E7%A8%8B%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-Kafka消息挤压了，怎么办" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/19/Kafka%E6%B6%88%E6%81%AF%E6%8C%A4%E5%8E%8B%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E/">Kafka消息挤压了，怎么办</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-19T07:58:59.000Z" itemprop="datePublished">2024年10月19日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/19/Kafka%E6%B6%88%E6%81%AF%E6%8C%A4%E5%8E%8B%E4%BA%86%EF%BC%8C%E6%80%8E%E4%B9%88%E5%8A%9E/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="消息积压的原因"><a href="#消息积压的原因" class="headerlink" title="消息积压的原因"></a>消息积压的原因</h2><h3 id="生产快"><a href="#生产快" class="headerlink" title="生产快"></a>生产快</h3><h3 id="消费慢"><a href="#消费慢" class="headerlink" title="消费慢"></a>消费慢</h3><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>1、增加主题的分区数，同时增加消费者数，扩展消费者组</p>
+<p>2、提高消费者每次从服务端拉取的字节数<em>fetch.max.bytes</em>（默认是50M）、每次拉取的最大条数<em>max.poll.records</em>。（达到这俩参数的其中一个就会拉取停止）</p>
+<p>3、优化消费者处理逻辑</p>
+<p>4、生产者限流</p>
+<p>5、持续监控Kafka集群，比如用eagle</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-Kafka消息重复" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/19/Kafka%E6%B6%88%E6%81%AF%E9%87%8D%E5%A4%8D/">Kafka消息重复</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-19T07:53:50.000Z" itemprop="datePublished">2024年10月19日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/19/Kafka%E6%B6%88%E6%81%AF%E9%87%8D%E5%A4%8D/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="生产者重复"><a href="#生产者重复" class="headerlink" title="生产者重复"></a>生产者重复</h2><p>acks设为-1时，leader收到消息后ISR同步了消息，此时leader还未返回ack宕机了。生产者认为broker没有收到消息会重复发送消息给broker中的新选举的leader</p>
+<p><img src="/../images/image-20241019155807156.png" alt="image-20241019155807156"></p>
+<h2 id="消费者重复"><a href="#消费者重复" class="headerlink" title="消费者重复"></a>消费者重复</h2><p>设置手动提交offset时可能出现重复消费</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-Kafka如何保证消息可靠性" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/19/Kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/">Kafka如何保证消息可靠性</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-19T07:40:20.000Z" itemprop="datePublished">2024年10月19日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/19/Kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E5%8F%AF%E9%9D%A0%E6%80%A7/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="broker"><a href="#broker" class="headerlink" title="broker"></a>broker</h1><h2 id="多副本机制"><a href="#多副本机制" class="headerlink" title="多副本机制"></a>多副本机制</h2><p>每个分区可以有多个副本，这些副本分为一个leader和多个follower，当leader故障时，会从follower中选举出新的leader，增加了数据可用性</p>
+<h2 id="确认机制"><a href="#确认机制" class="headerlink" title="确认机制"></a>确认机制</h2><p>可以设置三种不同的确认级别<em>acks</em></p>
+<h3 id="acks-0：消息发送到分区时不需要等待确认"><a href="#acks-0：消息发送到分区时不需要等待确认" class="headerlink" title="acks&#x3D;0：消息发送到分区时不需要等待确认"></a>acks&#x3D;0：消息发送到分区时不需要等待确认</h3><h3 id="akcs-1：消息发送到分区后只需leader确认"><a href="#akcs-1：消息发送到分区后只需leader确认" class="headerlink" title="akcs&#x3D;1：消息发送到分区后只需leader确认"></a>akcs&#x3D;1：消息发送到分区后只需leader确认</h3><h3 id="acks-ALL：消息发送到分区后leader和follower都需要确认"><a href="#acks-ALL：消息发送到分区后leader和follower都需要确认" class="headerlink" title="acks&#x3D;ALL：消息发送到分区后leader和follower都需要确认"></a>acks&#x3D;ALL：消息发送到分区后leader和follower都需要确认</h3><p>设置<strong>replication-factor</strong>&#x3D;3，每个分区至少3个副本</p>
+<p>设置<strong>min-insync-replica</strong>&gt;1 至少写入到2个副本</p>
+<h2 id="消息持久性"><a href="#消息持久性" class="headerlink" title="消息持久性"></a>消息持久性</h2><p>Kafka会将消息持久化到磁盘，其中每一个分区对应于一个磁盘文件，确保系统故障或重启时不会丢失数据</p>
+<h1 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h1><p>发送消息时，selector从NetworkClient中取出发送请求后发送给broker，发送成功则等待broker的应答<em>acks</em>，发送失败会重试，可以把retries参数设为合理值</p>
+<h1 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h1><p>消费者消费时可以设置手动提交<em>offset</em>，确保消息不会丢失</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-Kafka如何保证消息顺序性" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/19/Kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E9%A1%BA%E5%BA%8F%E6%80%A7/">Kafka如何保证消息顺序性</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-19T07:14:37.000Z" itemprop="datePublished">2024年10月19日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/19/Kafka%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%B6%88%E6%81%AF%E9%A1%BA%E5%BA%8F%E6%80%A7/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="为什么保证顺序性"><a href="#为什么保证顺序性" class="headerlink" title="为什么保证顺序性"></a>为什么保证顺序性</h2><p>创建订单，订单支付是两个顺序的操作</p>
+<h2 id="如何保证顺序性"><a href="#如何保证顺序性" class="headerlink" title="如何保证顺序性"></a>如何保证顺序性</h2><h3 id="生产顺序性"><a href="#生产顺序性" class="headerlink" title="生产顺序性"></a>生产顺序性</h3><p>在同一个分区内，消息是追加写到文件末尾的，可以保证消息写的顺序性</p>
+<p>如果希望某一类消息有序，通过设置指定key&#x2F;partition使消息发送到同一个partition中，然后指定一个消费者来消费,保证生产的顺序性</p>
+<h3 id="消费顺序性"><a href="#消费顺序性" class="headerlink" title="消费顺序性"></a>消费顺序性</h3><p>每次消费时都会从上次的offset处消费，能够保证消费的顺序性；</p>
+<p>每一个分区只能由一个消费者消费，保证顺序性</p>
+<h2 id="消息发送重试时"><a href="#消息发送重试时" class="headerlink" title="消息发送重试时"></a>消息发送重试时</h2><h3 id="发送顺序"><a href="#发送顺序" class="headerlink" title="发送顺序"></a>发送顺序</h3><p>如果创建订单发送失败，订单支付发送成功，这样也会导致顺序性失效</p>
+<p>1: Kafka中有个<em>max.in.flight.requests.per.connection</em>的参数,设为1，它告诉生产者在收到服务端响应之前只能发送一条消息，但会降低吞吐量</p>
+<p>2: <em>enable.idempotence&#x3D;true</em> 开启生产者幂等性，原理与<em>producer id</em>和<em>Sequence Number</em>两个参数有关</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-索引下推是什么" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/18/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E6%98%AF%E4%BB%80%E4%B9%88/">索引下推（ICP）是什么</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-18T14:22:22.000Z" itemprop="datePublished">2024年10月18日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/18/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E6%98%AF%E4%BB%80%E4%B9%88/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="索引下推是什么"><a href="#索引下推是什么" class="headerlink" title="索引下推是什么"></a>索引下推是什么</h2><p>索引优化功能，允许存储引擎在索引遍历过程中执行where的条件，直接 过滤掉不满足条件的结果从而减少回表次数，提高查询效率。</p>
+<p>它就是为了<strong>减少回表次数</strong>的</p>
+<h2 id="索引下推原理"><a href="#索引下推原理" class="headerlink" title="索引下推原理"></a>索引下推原理</h2><p>select * from stu where name&#x3D;’zhangsan’ and age&#x3D;18 （name，age是联合索引）</p>
+<p>MySQL架构可简单分为server层和存储引擎层，</p>
+<p>当没有索引下推时，存储引擎层查询到name是张三的id后根据这些id进行回表，需要回表多次，然后把全部的记录返回给server进行筛选</p>
+<p>有索引下推时，存储引擎层查询到name是张三的id并且去过滤掉age是18的，然后回表后把数据返回server</p>
+<h2 id="没有ICP"><a href="#没有ICP" class="headerlink" title="没有ICP"></a>没有ICP</h2><p><img src="/../images/image-20241018224047549.png" alt="image-20241018224047549"></p>
+<h2 id="有ICP"><a href="#有ICP" class="headerlink" title="有ICP"></a>有ICP</h2><p><img src="/../images/image-20241018224102558.png" alt="image-20241018224102558"></p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-Redis渐进式哈希" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -384,488 +821,10 @@
 </article>
 
 
-  <article id="post-Java优先队列" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/18/Java%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/">Java优先队列</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-18T04:44:59.000Z" itemprop="datePublished">2024年10月18日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/18/Java%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">pq.poll();</span><br><span class="line">pq.offer();<span class="comment">//队列满返回false</span></span><br><span class="line">pq.add();<span class="comment">//队列满抛异常</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">PriorityQueue&lt;String&gt; pq = <span class="keyword">new</span> <span class="title class_">PriorityQueue</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(String s1, String s2)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Integer.compare(s1.length(), s2.length()); <span class="comment">// 按长度升序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 添加元素</span></span><br><span class="line">pq.add(<span class="string">&quot;ale&quot;</span>);</span><br><span class="line">pq.add(<span class="string">&quot;banana&quot;</span>);</span><br><span class="line">pq.add(<span class="string">&quot;kiwi&quot;</span>);</span><br><span class="line">pq.add(<span class="string">&quot;grape&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打印并移除元素，按长度优先级</span></span><br><span class="line"><span class="keyword">while</span> (!pq.isEmpty()) &#123;</span><br><span class="line">    System.out.println(pq.poll()); <span class="comment">// 输出 ale,kiwi, grape,banana</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-volatile浅析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/18/volatile%E6%B5%85%E6%9E%90/">volatile浅析</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-18T03:58:24.000Z" itemprop="datePublished">2024年10月18日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/18/volatile%E6%B5%85%E6%9E%90/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="volatile作用"><a href="#volatile作用" class="headerlink" title="volatile作用"></a>volatile作用</h2><p>保证可见性、禁止指令重排</p>
-<h2 id="可见性原理"><a href="#可见性原理" class="headerlink" title="可见性原理"></a>可见性原理</h2><p>指示JVM使用这个变量时去主存中获取</p>
-<p>具体些说：每一个线程都有自己的本地内存，线程间共享主内存。</p>
-<p>volatile内存可见性主要通过lock前缀指令实现，它会锁定当前内存区域的缓存，并且立即将当前缓存行写入到主内存，会写主内存的时候通过MESI协议使其他线程缓存的改变量失效，导致其他线程也要去主内存去重新读取</p>
-<h2 id="有序性原理"><a href="#有序性原理" class="headerlink" title="有序性原理"></a>有序性原理</h2><p>插入特定的内存屏障禁止指令重排序</p>
-<p>volatile 的有序性是通过插入内存屏障（Memory Barrier），在内存屏障前后禁止重排序优化，以此实现有序性的。</p>
-<h4 id="什么是内存屏障？"><a href="#什么是内存屏障？" class="headerlink" title="什么是内存屏障？"></a>什么是内存屏障？</h4><p>内存屏障（Memory Barrier 或 Memory Fence）是一种硬件级别的同步操作，它强制处理器按照特定顺序执行内存访问操作，确保内存操作的顺序性，阻止编译器和 CPU 对内存操作进行不必要的重排序。内存屏障可以确保跨越屏障的读写操作不会交叉进行，以此维持程序的内存一致性模型。</p>
-<p>在 Java 内存模型（JMM）中，volatile 关键字用于修饰变量时，能够保证该变量的可见性和有序性。关于有序性，volatile 通过内存屏障的插入来实现：</p>
-<ul>
-<li><strong>写内存屏障（Store Barrier &#x2F; Write Barrier）</strong>： 当线程写入 volatile 变量时，JMM 会在写操作前插入 StoreStore 屏障，确保在这次写操作之前的所有普通写操作都已完成。接着在写操作后插入 StoreLoad 屏障，强制所有后来的读写操作都在此次写操作完成之后执行，这就确保了其他线程能立即看到 volatile 变量的最新值。</li>
-<li><strong>读内存屏障（Load Barrier &#x2F; Read Barrier）</strong>： 当线程读取 volatile 变量时，JMM 会在读操作前插入 LoadLoad 屏障，确保在此次读操作之前的所有读操作都已完成。而在读操作后插入 LoadStore 屏障，防止在此次读操作之后的写操作被重排序到读操作之前，这样就确保了对 volatile 变量的读取总是能看到之前对同一变量或其他相关变量的写入结果。</li>
-</ul>
-<p>通过这种方式，volatile 关键字有效地实现了内存操作的顺序性，从而保证了多线程环境下对 volatile 变量的操作遵循 happens-before 原则，确保了并发编程的正确性。</p>
-<h2 id="MESI协议"><a href="#MESI协议" class="headerlink" title="MESI协议"></a>MESI协议</h2><p>全称为 Modified,Exclusive ，Shared,Invalid，是一种高速缓存一致性协议，为了解决CPU在并发环境下多个CPU缓存不一致而提出的</p>
-<p>它定义个高速缓存中数据的四种状态</p>
-<ol>
-<li><strong>Modified（M）</strong>：表示缓存行已经被修改，但还没有被写回主存储器。在这种状态下，只有一个 CPU 能独占这个修改状态。</li>
-<li><strong>Exclusive（E）</strong>：表示缓存行与主存储器相同，并且是主存储器的唯一拷贝。这种状态下，只有一个 CPU 能独占这个状态。</li>
-<li><strong>Shared（S）</strong>：表示此高速缓存行可能存储在计算机的其他高速缓存中，并且与主存储器匹配。在这种状态下，各个 CPU 可以并发的对这个数据进行读取，但都不能进行写操作。</li>
-<li><strong>Invalid（I）</strong>：表示此缓存行无效或已过期，不能使用。</li>
-</ol>
-<p>MESI 协议的主要用途是确保在多个 CPU 共享内存时，各个 CPU 的缓存数据能够保持一致性。当某个 CPU 对共享数据进行修改时，它会将这个数据的状态从 S（共享）或 E（独占）状态转变为 M（修改）状态，并等待适当的时机将这个修改写回主存储器。同时，它会向其他 CPU 广播一个“无效消息”，使得其他 CPU 将自己缓存中对应的数据状态转变为I（无效）状态，从而在下次访问这个数据时能够从主存储器或其他 CPU 的缓存中重新获取正确的数据。</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JUC/" rel="tag">JUC</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-MySQL索引高度计算" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/18/MySQL%E7%B4%A2%E5%BC%95%E9%AB%98%E5%BA%A6%E8%AE%A1%E7%AE%97/">MySQL索引高度计算</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-18T02:53:45.000Z" itemprop="datePublished">2024年10月18日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/18/MySQL%E7%B4%A2%E5%BC%95%E9%AB%98%E5%BA%A6%E8%AE%A1%E7%AE%97/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="B-树三层就可存储千万级别数据"><a href="#B-树三层就可存储千万级别数据" class="headerlink" title="B+树三层就可存储千万级别数据"></a>B+树三层就可存储千万级别数据</h2><p><img src="/../images/image-20241018105856519.png" alt="image-20241018105856519"></p>
-<p><img src="/../images/image-20241018111115021.png" alt="image-20241018111115021"></p>
-<h3 id="以聚集索引为例"><a href="#以聚集索引为例" class="headerlink" title="以聚集索引为例"></a>以聚集索引为例</h3><p>MySQL 是以页的形式组织数据的</p>
-<h3 id="若有为2层"><a href="#若有为2层" class="headerlink" title="若有为2层"></a>若有为2层</h3><p>根节点存放主键和指针</p>
-<p>设主键为bigint，8字节、指针固定6字节</p>
-<p>一页是16k&#x2F;（8+6）&#x3D;1000，说明根节点可储存1000个指针</p>
-<p>假设一行数据是300字节，则一个数据页16k&#x2F;300&#x3D;50条数据</p>
-<p>1000*50&#x3D;5w数据</p>
-<h3 id="若为3层"><a href="#若为3层" class="headerlink" title="若为3层"></a>若为3层</h3><p>同样根节点存储1000个指针指向1000个数据页，每个数据页同样有1000个指针指向第三层的数据页</p>
-<p>第三层每一个数据页50条记录</p>
-<p>则总数据1000x1000x50&#x3D;5000w</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-快手" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/17/%E5%BF%AB%E6%89%8B/">快手</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-17T15:39:22.000Z" itemprop="datePublished">2024年10月17日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/17/%E5%BF%AB%E6%89%8B/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="1-mysql索引为什么要使用b-树，而不使用b树、AVL"><a href="#1-mysql索引为什么要使用b-树，而不使用b树、AVL" class="headerlink" title="1.mysql索引为什么要使用b+树，而不使用b树、AVL"></a>1.mysql索引为什么要使用b+树，而不使用b树、AVL</h2><h3 id="为什么不用B树"><a href="#为什么不用B树" class="headerlink" title="为什么不用B树"></a>为什么不用B树</h3><p>B树的所有节点既存放k也有value，B+树只有叶子节点，非只有k</p>
-<p>B树的叶子节点是独立的，B+树叶子节点间通过链表连接</p>
-<p>B树检索时可能没到叶子节点就结束了，B+树的效率很稳定</p>
-<p>范围查找时B树找到下限后进行中序遍历然后找上线，B+树只需遍历链表</p>
-<p>B+树层高一般3-4层就可存储千万数据，磁盘io最多也3，4次。</p>
-<p>综合：B+树更少的io次数，更高效的查询效率，更适合范围查询</p>
-<h3 id="为什么不用AVL"><a href="#为什么不用AVL" class="headerlink" title="为什么不用AVL"></a>为什么不用AVL</h3><p>AVL每个节点只保存一个数据，磁盘io次数更多</p>
-<p>AVL需要旋转来保持平衡，效率低下</p>
-<h2 id="2-为什么千万级别的数据b-树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）"><a href="#2-为什么千万级别的数据b-树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）" class="headerlink" title="2.为什么千万级别的数据b+树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）"></a>2.为什么千万级别的数据b+树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）</h2><h2 id="3-最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况："><a href="#3-最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况：" class="headerlink" title="3.最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况："></a>3.最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况：</h2><p>a&#x3D;1 and b &#x3D; 2 and d &#x3D; 3 and c &#x3D;4<br>a&#x3D;1 and b &#x3D; 2 and c &gt; 1（这里说太快了，想都没想就说了，说成c不会走索引，实际应该是c会走，但d不走，这里都会犯错不该）</p>
-<h2 id="4-mysql事务特性以及怎么实现的？"><a href="#4-mysql事务特性以及怎么实现的？" class="headerlink" title="4.mysql事务特性以及怎么实现的？"></a>4.mysql事务特性以及怎么实现的？</h2><h2 id="5-MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read-view生成时机的不同，好！）"><a href="#5-MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read-view生成时机的不同，好！）" class="headerlink" title="5.MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read view生成时机的不同，好！）"></a>5.MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read view生成时机的不同，好！）</h2><h2 id="6-MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）"><a href="#6-MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）" class="headerlink" title="6.MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）"></a>6.MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）</h2><h2 id="7-java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）"><a href="#7-java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）" class="headerlink" title="7.java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）"></a>7.java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）</h2><h2 id="8-int占几个字节（4个字节，算是猜对了）"><a href="#8-int占几个字节（4个字节，算是猜对了）" class="headerlink" title="8.int占几个字节（4个字节，算是猜对了）"></a>8.int占几个字节（4个字节，算是猜对了）</h2><h2 id="9-讲讲ConcurrentHashMap（jdk1-7和jdk1-8的都说了，对比不同和提升）"><a href="#9-讲讲ConcurrentHashMap（jdk1-7和jdk1-8的都说了，对比不同和提升）" class="headerlink" title="9.讲讲ConcurrentHashMap（jdk1.7和jdk1.8的都说了，对比不同和提升）"></a>9.讲讲ConcurrentHashMap（jdk1.7和jdk1.8的都说了，对比不同和提升）</h2><h2 id="10-什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）"><a href="#10-什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）" class="headerlink" title="10.什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）"></a>10.什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）</h2><h2 id="11-concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）"><a href="#11-concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）" class="headerlink" title="11.concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）"></a>11.concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）</h2><h2 id="12-那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）"><a href="#12-那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）" class="headerlink" title="12.那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）"></a>12.那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）</h2><h2 id="13-那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1-5倍，HashMap讲的比较详细）"><a href="#13-那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1-5倍，HashMap讲的比较详细）" class="headerlink" title="13.那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1.5倍，HashMap讲的比较详细）"></a>13.那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1.5倍，HashMap讲的比较详细）</h2><h2 id="14-redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）"><a href="#14-redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）" class="headerlink" title="14.redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）"></a>14.redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）</h2><h2 id="15-redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）"><a href="#15-redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）" class="headerlink" title="15.redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）"></a>15.redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）</h2>
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-hot100" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/17/hot100/">hot100</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-17T15:33:07.000Z" itemprop="datePublished">2024年10月17日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/17/hot100/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="31-下一个排列"><a href="#31-下一个排列" class="headerlink" title="31 下一个排列"></a>31 下一个排列</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">将nums = [1,2,7,4,3,1]变成nums = [1,3,1,2,4,7]</span><br></pre></td></tr></table></figure>
-
-<p>steps：</p>
-<p>先找出最大的索引 k 满足 nums[k] &lt; nums[k+1]，如果不存在，就翻转整个数组；<br>再找出另一个最大索引 l 满足 nums[l] &gt; nums[k]；<br>交换 nums[l] 和 nums[k]；<br>最后翻转 nums[k+1:]。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">nextPermutation</span><span class="params">(<span class="type">int</span>[] nums)</span> &#123;</span><br><span class="line">        <span class="type">int</span> i=nums.length-<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[i]&lt;nums[i+<span class="number">1</span>])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            i--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(i&lt;<span class="number">0</span>)&#123;</span><br><span class="line">            reverse(nums,<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">int</span> j=nums.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(j&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(nums[j]&gt;nums[i])&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            j--;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(nums,i,j);</span><br><span class="line">        reverse(nums,i+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">swap</span><span class="params">(<span class="type">int</span>[]nums,<span class="type">int</span> i,<span class="type">int</span> j)</span>&#123;</span><br><span class="line">        <span class="type">int</span> tmp=nums[i];</span><br><span class="line">        nums[i]=nums[j];</span><br><span class="line">        nums[j]=tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">reverse</span><span class="params">(<span class="type">int</span>[]nums,<span class="type">int</span> begin)</span>&#123;</span><br><span class="line">        <span class="type">int</span> end=nums.length-<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span>(begin&lt;end)&#123;</span><br><span class="line">            swap(nums,begin,end);</span><br><span class="line">            begin++;</span><br><span class="line">            end--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="142-环形链表II"><a href="#142-环形链表II" class="headerlink" title="142 环形链表II"></a>142 环形链表II</h2><p>找出环形链表的起始位置</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//快指针和慢指针相遇时，维护一个ptr、它和慢指针同时走，相遇时即为ruo</span></span><br><span class="line"><span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        ListNode slow=head;</span><br><span class="line">        ListNode fast=head;</span><br><span class="line">        <span class="keyword">while</span>(fast!=<span class="literal">null</span>)&#123;</span><br><span class="line">            slow=slow.next;</span><br><span class="line">            <span class="keyword">if</span>(fast.next!=<span class="literal">null</span>)</span><br><span class="line">            fast=fast.next.next;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(slow==fast)&#123;</span><br><span class="line">                ListNode ptr=head;</span><br><span class="line">                <span class="keyword">while</span>(ptr!=slow)&#123;</span><br><span class="line">                    ptr=ptr.next;</span><br><span class="line">                    slow=slow.next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> slow;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="接雨水"><a href="#接雨水" class="headerlink" title="接雨水"></a>接雨水</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//维护一个单调递减栈、当遇到比栈顶元素大的时，以栈顶元素左边一个为左边界，以该元素为右边界，计算雨水面积，重复直到该元素小于栈顶。</span></span><br><span class="line"><span class="comment">//递减则入栈否则计算</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">trap</span><span class="params">(<span class="type">int</span>[] height)</span> &#123;</span><br><span class="line">    <span class="type">int</span> ans=<span class="number">0</span>;</span><br><span class="line">    Deque&lt;Integer&gt;stack=<span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;height.length;i++)&#123;</span><br><span class="line">        <span class="keyword">while</span>(!stack.isEmpty()&amp;&amp;height[stack.peek()]&lt;height[i])&#123;</span><br><span class="line">            <span class="type">int</span> cur=stack.pop();</span><br><span class="line">            <span class="keyword">if</span>(stack.isEmpty())&#123;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> l=stack.peek();</span><br><span class="line">            <span class="type">int</span> r=i;</span><br><span class="line">            <span class="type">int</span> h=Math.min(height[l],height[r])-height[cur];</span><br><span class="line">            ans+=(r-l-<span class="number">1</span>)*h;</span><br><span class="line">        &#125;</span><br><span class="line">        stack.push(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="LRU"><a href="#LRU" class="headerlink" title="LRU"></a>LRU</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1、定义双向链表；2、移到头部、头部增加、删除尾部、删除节点</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">LRUCache</span> &#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title class_">DLinkedNode</span>&#123;</span><br><span class="line">        <span class="type">int</span> k;</span><br><span class="line">        <span class="type">int</span> v;</span><br><span class="line">        DLinkedNode pre;</span><br><span class="line">        DLinkedNode next;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">DLinkedNode</span><span class="params">()</span> &#123;&#125;</span><br><span class="line">        <span class="keyword">public</span> <span class="title function_">DLinkedNode</span><span class="params">(<span class="type">int</span> _key, <span class="type">int</span> _value)</span> &#123;k = _key; v = _value;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    HashMap&lt;Integer,DLinkedNode&gt;map;</span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line">    <span class="type">int</span> capacity;</span><br><span class="line">    DLinkedNode head,tail;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">LRUCache</span><span class="params">(<span class="type">int</span> capacity)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.capacity=capacity;</span><br><span class="line">        size=<span class="number">0</span>;</span><br><span class="line">        head=<span class="keyword">new</span> <span class="title class_">DLinkedNode</span>();</span><br><span class="line">        tail=<span class="keyword">new</span> <span class="title class_">DLinkedNode</span>();</span><br><span class="line">        head.next=tail;</span><br><span class="line">        tail.pre=head;</span><br><span class="line">        map=<span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">get</span><span class="params">(<span class="type">int</span> key)</span> &#123;</span><br><span class="line">        DLinkedNode node=map.get(key);</span><br><span class="line">        <span class="keyword">if</span>(node!=<span class="literal">null</span>)&#123;</span><br><span class="line">            moveToHead(node);</span><br><span class="line">            <span class="keyword">return</span> node.v;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">put</span><span class="params">(<span class="type">int</span> key, <span class="type">int</span> value)</span> &#123;</span><br><span class="line">        DLinkedNode node=map.get(key);</span><br><span class="line">        <span class="keyword">if</span>(node==<span class="literal">null</span>)&#123;</span><br><span class="line">           <span class="type">DLinkedNode</span> <span class="variable">newNode</span> <span class="operator">=</span><span class="keyword">new</span> <span class="title class_">DLinkedNode</span>(key,value);</span><br><span class="line">            map.put(key,newNode);</span><br><span class="line">            addToHead(newNode);</span><br><span class="line">            <span class="keyword">if</span>(++size&gt;capacity)&#123;</span><br><span class="line">                DLinkedNode tail=removeTail();</span><br><span class="line">                map.remove(tail.k);</span><br><span class="line">                --size;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            node.v=value;</span><br><span class="line">            moveToHead(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">moveToHead</span><span class="params">(DLinkedNode node)</span>&#123;</span><br><span class="line">       removeNode(node);</span><br><span class="line">       addToHead(node);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">addToHead</span><span class="params">(DLinkedNode node)</span>&#123;</span><br><span class="line">        node.pre = head;</span><br><span class="line">        node.next = head.next;</span><br><span class="line">        head.next.pre = node;</span><br><span class="line">        head.next = node;</span><br><span class="line">    &#125;</span><br><span class="line">    DLinkedNode <span class="title function_">removeTail</span><span class="params">()</span>&#123;</span><br><span class="line">        DLinkedNode res=tail.pre;</span><br><span class="line">        removeNode(res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">removeNode</span><span class="params">(DLinkedNode node)</span>&#123;</span><br><span class="line">        node.pre.next=node.next;</span><br><span class="line">        node.next.pre=node.pre;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Your LRUCache object will be instantiated and called as such:</span></span><br><span class="line"><span class="comment"> * LRUCache obj = new LRUCache(capacity);</span></span><br><span class="line"><span class="comment"> * int param_1 = obj.get(key);</span></span><br><span class="line"><span class="comment"> * obj.put(key,value);</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="非递归中序遍历"><a href="#非递归中序遍历" class="headerlink" title="非递归中序遍历"></a>非递归中序遍历</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title function_">inorderTraversal</span><span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    List&lt;Integer&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();</span><br><span class="line">    Deque&lt;TreeNode&gt; stk = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;TreeNode&gt;();</span><br><span class="line">    <span class="keyword">while</span>(root!=<span class="literal">null</span>||!stk.isEmpty())&#123;</span><br><span class="line">        <span class="keyword">while</span>(root!=<span class="literal">null</span>)&#123;</span><br><span class="line">            stk.push(root);</span><br><span class="line">            root=root.left;</span><br><span class="line">        &#125;</span><br><span class="line">        root=stk.pop();</span><br><span class="line">        res.add(root.val);</span><br><span class="line">        root=root.right;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-基于SPI修改Sharding-JDBC实现Nacos公共配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/17/%E5%9F%BA%E4%BA%8ESPI%E4%BF%AE%E6%94%B9Sharding-JDBC%E5%AE%9E%E7%8E%B0Nacos%E5%85%AC%E5%85%B1%E9%85%8D%E7%BD%AE/">基于SPI修改Sharding-JDBC实现Nacos公共配置</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-17T07:28:53.000Z" itemprop="datePublished">2024年10月17日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/17/%E5%9F%BA%E4%BA%8ESPI%E4%BF%AE%E6%94%B9Sharding-JDBC%E5%AE%9E%E7%8E%B0Nacos%E5%85%AC%E5%85%B1%E9%85%8D%E7%BD%AE/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>shardingsphereJDBC在5.3.0之后不支持nacos的动态配置和统一管理，我联想到数据库连接驱动是以SPI的方式使用的、然后我去看了shardingjdbc的包，发现他也是以SPI的形式表现的，我读了源码发现有个<em>ShardingSphereDriverURLManager</em>类，它负责读取shardingjdbc的配置，具体做法是静态方法<em>getContent</em>调用接口的<em>accept</em>方法将所有实现了<em>ShardingSphereDriverURLProvider</em>接口的类加载，这个实现类的路径是以SPI机制在META-INF&#x2F;services下ShardingSphereDriverURLProvider文件中存取。</p>
-<p>所以我实现了<em>ShardingSphereDriverURLProvider</em>接口，这个接口中有两个核心方法、一个是<em>accept</em>、一个是<em>getContent</em>、accept是检测配置文件中url是否匹配jdbc：开头的格式、、getContent是读取配置并加载。我实现了<em>ShardingSphereDriverURLProvider</em>接口并重写了这两个方法、把url匹配规则设为含有nacos的、getContent里设定了nacos的配置（账号、密码、命名空间、配置文件名等等）</p>
-<p>Nacos配置监听器</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/9/index.html">https://se-daming.github.io/page/9/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
-<a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
+<a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/">下一页</a>
 </nav>
 
 
@@ -880,23 +839,23 @@
       <ul>
         
           <li>
-            <a href="/2024/11/23/docker%E4%BD%BF%E7%94%A8/">docker使用</a>
+            <a href="/2024/12/21/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
           </li>
         
           <li>
-            <a href="/2024/11/13/%E8%B6%8A%E6%9D%83%E8%AE%BF%E9%97%AE/">越权访问</a>
+            <a href="/2024/12/21/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/">一致性算法</a>
           </li>
         
           <li>
-            <a href="/2024/11/02/Redis%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">Redis网络模型</a>
+            <a href="/2024/12/21/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93/">分布式数据库</a>
           </li>
         
           <li>
-            <a href="/2024/11/02/Spring%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">Spring常用注解</a>
+            <a href="/2024/12/21/%E5%88%86%E5%B8%83%E5%BC%8F%E7%BC%93%E5%AD%98/">分布式缓存</a>
           </li>
         
           <li>
-            <a href="/2024/11/02/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">docker常用命令</a>
+            <a href="/2024/12/21/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/">分布式事务</a>
           </li>
         
       </ul>
@@ -921,7 +880,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年11月</a><span class="archive-list-count">105</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">111</span></li></ul>
     </div>
   </div>
 
