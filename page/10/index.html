@@ -85,6 +85,82 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-索引下推是什么" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/18/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E6%98%AF%E4%BB%80%E4%B9%88/">索引下推（ICP）是什么</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-18T14:22:22.000Z" itemprop="datePublished">2024年10月18日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/18/%E7%B4%A2%E5%BC%95%E4%B8%8B%E6%8E%A8%E6%98%AF%E4%BB%80%E4%B9%88/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="索引下推是什么"><a href="#索引下推是什么" class="headerlink" title="索引下推是什么"></a>索引下推是什么</h2><p>索引优化功能，允许存储引擎在索引遍历过程中执行where的条件，直接 过滤掉不满足条件的结果从而减少回表次数，提高查询效率。</p>
+<p>它就是为了<strong>减少回表次数</strong>的</p>
+<h2 id="索引下推原理"><a href="#索引下推原理" class="headerlink" title="索引下推原理"></a>索引下推原理</h2><p>select * from stu where name&#x3D;’zhangsan’ and age&#x3D;18 （name，age是联合索引）</p>
+<p>MySQL架构可简单分为server层和存储引擎层，</p>
+<p>当没有索引下推时，存储引擎层查询到name是张三的id后根据这些id进行回表，需要回表多次，然后把全部的记录返回给server进行筛选</p>
+<p>有索引下推时，存储引擎层查询到name是张三的id并且去过滤掉age是18的，然后回表后把数据返回server</p>
+<h2 id="没有ICP"><a href="#没有ICP" class="headerlink" title="没有ICP"></a>没有ICP</h2><p><img src="/../images/image-20241018224047549.png" alt="image-20241018224047549"></p>
+<h2 id="有ICP"><a href="#有ICP" class="headerlink" title="有ICP"></a>有ICP</h2><p><img src="/../images/image-20241018224102558.png" alt="image-20241018224102558"></p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/10/index.html">https://se-daming.github.io/page/10/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-Redis渐进式哈希" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -791,77 +867,6 @@
 </article>
 
 
-  <article id="post-基于SPI修改Sharding-JDBC实现Nacos公共配置" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/17/%E5%9F%BA%E4%BA%8ESPI%E4%BF%AE%E6%94%B9Sharding-JDBC%E5%AE%9E%E7%8E%B0Nacos%E5%85%AC%E5%85%B1%E9%85%8D%E7%BD%AE/">基于SPI修改Sharding-JDBC实现Nacos公共配置</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-17T07:28:53.000Z" itemprop="datePublished">2024年10月17日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/17/%E5%9F%BA%E4%BA%8ESPI%E4%BF%AE%E6%94%B9Sharding-JDBC%E5%AE%9E%E7%8E%B0Nacos%E5%85%AC%E5%85%B1%E9%85%8D%E7%BD%AE/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>shardingsphereJDBC在5.3.0之后不支持nacos的动态配置和统一管理，我联想到数据库连接驱动是以SPI的方式使用的、然后我去看了shardingjdbc的包，发现他也是以SPI的形式表现的，我读了源码发现有个<em>ShardingSphereDriverURLManager</em>类，它负责读取shardingjdbc的配置，具体做法是静态方法<em>getContent</em>调用接口的<em>accept</em>方法将所有实现了<em>ShardingSphereDriverURLProvider</em>接口的类加载，这个实现类的路径是以SPI机制在META-INF&#x2F;services下ShardingSphereDriverURLProvider文件中存取。</p>
-<p>所以我实现了<em>ShardingSphereDriverURLProvider</em>接口，这个接口中有两个核心方法、一个是<em>accept</em>、一个是<em>getContent</em>、accept是检测配置文件中url是否匹配jdbc：开头的格式、、getContent是读取配置并加载。我实现了<em>ShardingSphereDriverURLProvider</em>接口并重写了这两个方法、把url匹配规则设为含有nacos的、getContent里设定了nacos的配置（账号、密码、命名空间、配置文件名等等）</p>
-<p>Nacos配置监听器</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/10/index.html">https://se-daming.github.io/page/10/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
@@ -880,6 +885,10 @@
       <ul>
         
           <li>
+            <a href="/2025/02/03/Kafka%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB/">Kafka为什么这么快</a>
+          </li>
+        
+          <li>
             <a href="/2025/01/23/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/">开源协议</a>
           </li>
         
@@ -893,10 +902,6 @@
         
           <li>
             <a href="/2024/12/26/%E5%A6%82%E4%BD%95%E6%8F%90%E9%AB%98%E7%B3%BB%E7%BB%9FQPS/">如何提高系统QPS</a>
-          </li>
-        
-          <li>
-            <a href="/2024/12/21/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
           </li>
         
       </ul>
@@ -921,7 +926,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年01月</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年02月</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
     </div>
   </div>
 
