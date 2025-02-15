@@ -85,80 +85,6 @@
 
       <div class="outer">
         <section id="main">
-  <article id="post-经纬恒润" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2025-02-15T04:50:05.185Z" itemprop="datePublished">2025年02月15日</time>
-</span>
-      
-      
-      
-<a href="/2025/02/15/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="介绍一下DRS"><a href="#介绍一下DRS" class="headerlink" title="介绍一下DRS"></a>介绍一下DRS</h1><p>区别于传统线下诊断，汽车上安装了ECU，当车辆出现故障时只需要连接云端就能诊断出车辆具体故障信息DTC。</p>
-<h2 id="国际化方案"><a href="#国际化方案" class="headerlink" title="国际化方案"></a>国际化方案</h2><h3 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h3><h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><p>两种数据存储方案—yml资源文件、数据库</p>
-<p>资源文件：易于管理维护、可和前端共享；但是难以应对大内容量和频繁更新</p>
-<p>数据库：支持多语言内容的动态更新、不需要重新部署、适用频繁更新；存储和查询开销大、性能问题</p>
-<h3 id="其他方案"><a href="#其他方案" class="headerlink" title="其他方案"></a>其他方案</h3><h3 id="为什么要用后端实现"><a href="#为什么要用后端实现" class="headerlink" title="为什么要用后端实现"></a>为什么要用后端实现</h3><h2 id="高并发优化"><a href="#高并发优化" class="headerlink" title="高并发优化"></a>高并发优化</h2><h3 id="为什么用RabbitMQ、相较于Kafka的优缺点"><a href="#为什么用RabbitMQ、相较于Kafka的优缺点" class="headerlink" title="为什么用RabbitMQ、相较于Kafka的优缺点"></a>为什么用RabbitMQ、相较于Kafka的优缺点</h3><h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><h3 id="几个关注的地方"><a href="#几个关注的地方" class="headerlink" title="几个关注的地方"></a>几个关注的地方</h3><ol>
-<li><p><strong>资源使用</strong>：CPU、内存、磁盘 I&#x2F;O、网络带宽。</p>
-</li>
-<li><p><strong>性能</strong>：请求处理时间、并发连接数、服务器负载。</p>
-</li>
-<li><p><strong>可靠性</strong>：错误率、文件上传成功率。</p>
-</li>
-<li><p><strong>消息队列</strong>：消息积压情况、消费者处理速度。</p>
-</li>
-</ol>
-<h2 id="权限控制"><a href="#权限控制" class="headerlink" title="权限控制"></a>权限控制</h2><h3 id="垂直越权"><a href="#垂直越权" class="headerlink" title="垂直越权"></a>垂直越权</h3><p>用户拥有自己没有的操作权限，比如普通用户有VIP用户的权限</p>
-<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><h5 id="Gateway网关处统一拦截处理"><a href="#Gateway网关处统一拦截处理" class="headerlink" title="Gateway网关处统一拦截处理"></a>Gateway网关处统一拦截处理</h5><h5 id="自定义注解PreAuthronize-AOP处理"><a href="#自定义注解PreAuthronize-AOP处理" class="headerlink" title="自定义注解PreAuthronize+AOP处理"></a>自定义注解PreAuthronize+AOP处理</h5><p>该注解有hasRole  hasPermits标记、AOP中的查询比对用户的角色权限，有权限放行，没有返回无权限e</p>
-<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p><img src="C:\Users\123z'l'q\Desktop\daily\source\images\image-20250214204516048.png" alt="image-20250214204516048"></p>
-<h3 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h3><p>用户拥有自己没有的数据权限，比如普通用户可以通过接口调用访问到其他同级用户的数据</p>
-<h3 id="对比-1"><a href="#对比-1" class="headerlink" title="对比"></a>对比</h3><p><img src="C:\Users\123z'l'q\Desktop\daily\source\images\image-20250214203625864.png" alt="image-20250214203625864"></p>
-<h2 id="CICD"><a href="#CICD" class="headerlink" title="CICD"></a>CICD</h2><h3 id="说说k8s和Jenkins的作用"><a href="#说说k8s和Jenkins的作用" class="headerlink" title="说说k8s和Jenkins的作用"></a>说说k8s和Jenkins的作用</h3><h3 id="说几个常用命令"><a href="#说几个常用命令" class="headerlink" title="说几个常用命令"></a>说几个常用命令</h3>
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/index.html">https://se-daming.github.io/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
   <article id="post-库存与订单优化" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -808,10 +734,76 @@
 </article>
 
 
+  <article id="post-分布式锁" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/12/21/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/">分布式锁</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-12-21T00:49:02.000Z" itemprop="datePublished">2024年12月21日</time>
+</span>
+      
+      
+      
+<a href="/2024/12/21/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/index.html">https://se-daming.github.io/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
 
     <nav id="page-nav">
 
-<span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+<span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
 </nav>
 
 
@@ -824,10 +816,6 @@
     <h3 class="widget-title"><i class="fa fa-posts"></i> 最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2025/02/15/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/">(no title)</a>
-          </li>
         
           <li>
             <a href="/2025/02/15/%E5%BA%93%E5%AD%98%E4%B8%8E%E8%AE%A2%E5%8D%95%E4%BC%98%E5%8C%96/">库存与订单优化</a>
@@ -843,6 +831,10 @@
         
           <li>
             <a href="/2025/02/03/Kafka%E9%99%90%E6%B5%81/">Kafka限流</a>
+          </li>
+        
+          <li>
+            <a href="/2025/02/03/Kafka%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%99%E4%B9%88%E5%BF%AB/">Kafka为什么这么快</a>
           </li>
         
       </ul>
@@ -867,7 +859,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年02月</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年02月</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
     </div>
   </div>
 
