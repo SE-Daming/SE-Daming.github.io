@@ -142,7 +142,8 @@
 <h2 id="为什么要volatile"><a href="#为什么要volatile" class="headerlink" title="为什么要volatile"></a>为什么要volatile</h2><p>保证有序性、防止指令重排</p>
 <p>new对象时先分配内存、再初始化、再将对象地址赋值给引用；</p>
 <p>没有volatile可能先分配内存再属性赋值最后实例化，其他线程判断null时通过第一重检查直接返回，但是此时并未初始化</p>
-<h2 id="哪里会出现指令重排序"><a href="#哪里会出现指令重排序" class="headerlink" title="哪里会出现指令重排序"></a>哪里会出现指令重排序</h2><h2 id="双重判断的作用"><a href="#双重判断的作用" class="headerlink" title="双重判断的作用"></a>双重判断的作用</h2><p>第二次if——-防止多次创建实例</p>
+<h2 id="哪里会出现指令重排序"><a href="#哪里会出现指令重排序" class="headerlink" title="哪里会出现指令重排序"></a>哪里会出现指令重排序</h2><p><img src="/../images/image-20250221162038109.png" alt="image-20250221162038109"></p>
+<h2 id="双重判断的作用"><a href="#双重判断的作用" class="headerlink" title="双重判断的作用"></a>双重判断的作用</h2><p>第二次if——-防止多次创建实例</p>
 <p>第一次if——防止线程串行执行、效率低下</p>
 <h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><p>static</p>
 <p>volatile</p>
