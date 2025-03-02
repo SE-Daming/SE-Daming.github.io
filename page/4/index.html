@@ -85,6 +85,352 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-越权访问" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/13/%E8%B6%8A%E6%9D%83%E8%AE%BF%E9%97%AE/">越权访问</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-11-13T12:24:36.000Z" itemprop="datePublished">2024年11月13日</time>
+</span>
+      
+      
+      
+<a href="/2024/11/13/%E8%B6%8A%E6%9D%83%E8%AE%BF%E9%97%AE/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h1><h1 id="垂直越权"><a href="#垂直越权" class="headerlink" title="垂直越权"></a>垂直越权</h1>
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-Redis网络模型" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/02/Redis%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">Redis网络模型</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-11-02T08:31:15.000Z" itemprop="datePublished">2024年11月02日</time>
+</span>
+      
+      
+      
+<a href="/2024/11/02/Redis%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>1</p>
+<p>Redis 的网络模型基于 <strong>Reactor 模式</strong>，通过 <strong>I&#x2F;O 多路复用</strong> 技术（如 <code>epoll</code>、<code>select</code> 或 <code>kqueue</code>）来实现单线程处理多个客户端连接。</p>
+<h2 id="IO多路复用"><a href="#IO多路复用" class="headerlink" title="IO多路复用"></a>IO多路复用</h2><p>I&#x2F;O 多路复用是一种技术，允许一个线程同时监控多个文件描述符（如 Socket 连接），并在其中任意一个可读或可写时得到通知，从而避免无效等待，充分利用 CPU 资源。允许单线程同时处理多个客户端连接</p>
+<ul>
+<li><p>select：最早的 I&#x2F;O 多路复用机制，但存在文件描述符数量限制（通常为 1024）和性能问题</p>
+</li>
+<li><p>poll：解决了 select 的文件描述符数量限制，但仍然需要遍历所有连接，性能较差</p>
+</li>
+<li><p><strong>epoll</strong>（Linux）：高效的 I&#x2F;O 多路复用机制，使用红黑树管理文件描述符，仅返回就绪的连接，性能优异</p>
+</li>
+</ul>
+<h2 id="事件驱动模型"><a href="#事件驱动模型" class="headerlink" title="事件驱动模型"></a>事件驱动模型</h2><p>Redis 的核心是一个事件循环（Event Loop），它不断监听文件描述符的事件（如可读、可写），并调用相应的事件处理器（如连接处理器、命令处理器）来处理事件</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Redis/" rel="tag">Redis</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-Spring常用注解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/02/Spring%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/">Spring常用注解</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-11-02T02:38:32.000Z" itemprop="datePublished">2024年11月02日</time>
+</span>
+      
+      
+      
+<a href="/2024/11/02/Spring%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-docker常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/02/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">docker常用命令</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-11-02T02:35:50.000Z" itemprop="datePublished">2024年11月02日</time>
+</span>
+      
+      
+      
+<a href="/2024/11/02/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-maven常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/11/02/maven%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">maven常用命令</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-11-02T02:35:42.000Z" itemprop="datePublished">2024年11月02日</time>
+</span>
+      
+      
+      
+<a href="/2024/11/02/maven%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-git常用命令" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -422,372 +768,10 @@
 </article>
 
 
-  <article id="post-delete和truncate" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/30/delete%E5%92%8Ctruncate/">delete和truncate</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-30T06:49:12.000Z" itemprop="datePublished">2024年10月30日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/30/delete%E5%92%8Ctruncate/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p><img src="/../images/image-20241030144926151.png" alt="image-20241030144926151"></p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-GC过程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/30/GC%E8%BF%87%E7%A8%8B/">GC过程</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-30T03:02:33.000Z" itemprop="datePublished">2024年10月30日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/30/GC%E8%BF%87%E7%A8%8B/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-反射的理解" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/30/%E5%8F%8D%E5%B0%84%E7%9A%84%E7%90%86%E8%A7%A3/">反射的理解</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-30T02:55:52.000Z" itemprop="datePublished">2024年10月30日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/30/%E5%8F%8D%E5%B0%84%E7%9A%84%E7%90%86%E8%A7%A3/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-场景题" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/30/%E5%9C%BA%E6%99%AF%E9%A2%98/">场景题</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-30T02:37:29.000Z" itemprop="datePublished">2024年10月30日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/30/%E5%9C%BA%E6%99%AF%E9%A2%98/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="如果服务的qps远大于了接口能消费的qps，你该怎么办？"><a href="#如果服务的qps远大于了接口能消费的qps，你该怎么办？" class="headerlink" title="如果服务的qps远大于了接口能消费的qps，你该怎么办？"></a>如果服务的qps远大于了接口能消费的qps，你该怎么办？</h2><p>限流、mq削峰异步处理、负载均衡、缓存、CDN、优化接口处理逻辑</p>
-<h2 id="如果发生了内存溢出，你该怎么去排查？"><a href="#如果发生了内存溢出，你该怎么去排查？" class="headerlink" title="如果发生了内存溢出，你该怎么去排查？"></a>如果发生了内存溢出，你该怎么去排查？</h2><p>看监控和错误日志、查看GC统计数据、分析GC频率和停顿时间、优化数据结构，重构复杂逻辑</p>
-<h2 id="实现一个消息中心-口述"><a href="#实现一个消息中心-口述" class="headerlink" title="实现一个消息中心 口述"></a>实现一个消息中心 口述</h2><h3 id="这个消息中心如果要保证一分钟之内最多只能发M条消息该怎么做"><a href="#这个消息中心如果要保证一分钟之内最多只能发M条消息该怎么做" class="headerlink" title="这个消息中心如果要保证一分钟之内最多只能发M条消息该怎么做"></a>这个消息中心如果要保证一分钟之内最多只能发M条消息该怎么做</h3><p>令牌桶限流、一分钟分发M个令牌；</p>
-<p>计数器记录，每分钟重置一次</p>
-<h3 id="怎么保证这个消息中心的可扩展性，可以后续接入信息、短信、IM等"><a href="#怎么保证这个消息中心的可扩展性，可以后续接入信息、短信、IM等" class="headerlink" title="怎么保证这个消息中心的可扩展性，可以后续接入信息、短信、IM等"></a>怎么保证这个消息中心的可扩展性，可以后续接入信息、短信、IM等</h3><p>模块化设计、消息路由</p>
-<p><strong>模块化设计</strong>：将不同的消息发送方式（如信息、短信、IM）设计成独立的模块，各模块通过统一的接口进行交互，方便后续扩展。</p>
-<p><strong>消息路由</strong>：实现一个消息路由系统，根据消息类型将消息分发到相应的处理模块。这样可以方便地添加新的消息类型，而不影响现有功能。</p>
-<h3 id="怎么保证这个消息中心的线程安全，同时保持尽量高的性能"><a href="#怎么保证这个消息中心的线程安全，同时保持尽量高的性能" class="headerlink" title="怎么保证这个消息中心的线程安全，同时保持尽量高的性能"></a>怎么保证这个消息中心的线程安全，同时保持尽量高的性能</h3><p>锁、原子操作、安全的数据类型<em>ConcurrentLinkedQueue</em></p>
-<h2 id="十万-亿-个单词-从中找出访问频率最高的单词"><a href="#十万-亿-个单词-从中找出访问频率最高的单词" class="headerlink" title="十万(亿)个单词  从中找出访问频率最高的单词"></a><strong>十万(亿)个单词  从中找出访问频率最高的单词</strong></h2><h2 id="怎么对比两个超级大的文本，每一行都是string，对比拿到一样的内容"><a href="#怎么对比两个超级大的文本，每一行都是string，对比拿到一样的内容" class="headerlink" title="怎么对比两个超级大的文本，每一行都是string，对比拿到一样的内容"></a>怎么对比两个超级大的文本，每一行都是string，对比拿到一样的内容</h2><h2 id="设计一个邮件系统，并设计库表"><a href="#设计一个邮件系统，并设计库表" class="headerlink" title="设计一个邮件系统，并设计库表"></a>设计一个邮件系统，并设计库表</h2><h2 id="我有一堆海量的数据要存，你准备用什么数据结构"><a href="#我有一堆海量的数据要存，你准备用什么数据结构" class="headerlink" title="我有一堆海量的数据要存，你准备用什么数据结构"></a>我有一堆海量的数据要存，你准备用什么数据结构</h2><h2 id="有10瓶药，每瓶有很多粒药，其中有一瓶是变质的。好药每颗重1克，变质的药每颗1-1克。问怎样用天秤（带刻度）称一次找出变质的那瓶药。"><a href="#有10瓶药，每瓶有很多粒药，其中有一瓶是变质的。好药每颗重1克，变质的药每颗1-1克。问怎样用天秤（带刻度）称一次找出变质的那瓶药。" class="headerlink" title="有10瓶药，每瓶有很多粒药，其中有一瓶是变质的。好药每颗重1克，变质的药每颗1.1克。问怎样用天秤（带刻度）称一次找出变质的那瓶药。"></a>有10瓶药，每瓶有很多粒药，其中有一瓶是变质的。好药每颗重1克，变质的药每颗1.1克。问怎样用天秤（带刻度）称一次找出变质的那瓶药。</h2><h2 id="线上项目，没有日志，没后台数据的情况下怎么找出问题"><a href="#线上项目，没有日志，没后台数据的情况下怎么找出问题" class="headerlink" title="线上项目，没有日志，没后台数据的情况下怎么找出问题"></a>线上项目，没有日志，没后台数据的情况下怎么找出问题</h2><p>用一些系统工具—<strong>jstack</strong>（用于生成线程堆栈信息，排查线程阻塞和死锁）、<strong>jmap</strong>（用于生成堆内存快照，排查内存泄漏）、<strong>top</strong>（用于实时监控系统资源使用情况）、<strong>arthas</strong>（Java 诊断工具，支持动态调试和监控）；引入监控工具–<strong>Prometheus + Grafana</strong>（用于监控和可视化应用性能指标）、<strong>ELK</strong>（用于集中管理和分析日志）、<strong>Zipkin</strong>（用于分布式链路追踪，分析请求调用链路）。</p>
-<h2 id="如何设计一个死信队列"><a href="#如何设计一个死信队列" class="headerlink" title="如何设计一个死信队列"></a>如何设计一个死信队列</h2><h2 id="8l的桶-6l的桶-怎么得到4l的水"><a href="#8l的桶-6l的桶-怎么得到4l的水" class="headerlink" title="8l的桶 6l的桶 怎么得到4l的水"></a>8l的桶 6l的桶 怎么得到4l的水</h2><h2 id="25匹马，一次最多比赛5匹，最少几次得出最快的三只"><a href="#25匹马，一次最多比赛5匹，最少几次得出最快的三只" class="headerlink" title="25匹马，一次最多比赛5匹，最少几次得出最快的三只"></a>25匹马，一次最多比赛5匹，最少几次得出最快的三只</h2><h2 id="单核CPU下线程、进程、协程的最大创建数量"><a href="#单核CPU下线程、进程、协程的最大创建数量" class="headerlink" title="单核CPU下线程、进程、协程的最大创建数量"></a>单核CPU下线程、进程、协程的最大创建数量</h2><h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>单核CPU通过时间片轮转实现多线程并发，但物理上同一时刻只能运行一个线程。实际可创建的线程数受以下因素影响：</p>
-<p><strong>虚拟内存限制</strong>：在32位系统中，用户空间约3G，若每个线程栈分配8MB，最多约300个线程</p>
-<p><strong>系统参数限制</strong>：64位系统下，受全局线程数（<code>threads-max</code>）、进程ID上限（<code>pid_max</code>）和虚拟内存区域限制（<code>max_map_count</code>）约束，单进程理论可创建数万至数十万线程，但实际测试中单核CPU因性能瓶颈通常在5万左右达到极限；和CPU性能有关系</p>
-<h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>单核CPU同一时刻只能执行一个进程，但通过快速切换实现多进程并发，进程数量受以下因素限制</p>
-<p><strong>系统参数</strong>：Linux中 pid_max 默认32768，但实际运行进程数受内存和CPU处理能力影响，通常远低于此值</p>
-<p><strong>内存限制</strong>：每个进程需独立的内存空间，若物理内存不足，进程创建会被拒绝</p>
-<h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><p>协程是用户态轻量级线程，创建成本极低（初始2-4KB栈），单核CPU下协程数量主要受内存限制。例如：</p>
-<p>若每个协程占用4KB内存，1GB内存可支持约25万个协程</p>
-<h2 id="进程、线程、协程的区别"><a href="#进程、线程、协程的区别" class="headerlink" title="进程、线程、协程的区别"></a>进程、线程、协程的区别</h2><p><img src="/../images/image-20250226202029546.png" alt="image-20250226202029546"></p>
-<p>进程是资源分配的最小单位，完全隔离；线程共享进程资源；协程共享线程资源</p>
-<p>协程通过用户态调度避免内核切换，单核下可支持数万级并发，远高于线程（千级）和进程（百级）</p>
-<h2 id="一个进程可以创建多少线程？和什么有关"><a href="#一个进程可以创建多少线程？和什么有关" class="headerlink" title="一个进程可以创建多少线程？和什么有关"></a>一个进程可以创建多少线程？和什么有关</h2><p>操作系统位数、<strong>虚拟内存空间、系统参数限制</strong>、物理资源瓶颈（CPU性能、内存）、线程栈大小、编程环境和运行时</p>
-<h2 id="项目中提到通过sdk的方式暴露给开发人员使用，但是如果你这个代码发生了变动所有其他人员都需要更新包，有什么方法让其他人非感知到地进行升级吗"><a href="#项目中提到通过sdk的方式暴露给开发人员使用，但是如果你这个代码发生了变动所有其他人员都需要更新包，有什么方法让其他人非感知到地进行升级吗" class="headerlink" title="项目中提到通过sdk的方式暴露给开发人员使用，但是如果你这个代码发生了变动所有其他人员都需要更新包，有什么方法让其他人非感知到地进行升级吗"></a>项目中提到通过sdk的方式暴露给开发人员使用，但是如果你这个代码发生了变动所有其他人员都需要更新包，有什么方法让其他人非感知到地进行升级吗</h2><h2 id="小游戏，桌子上有大量的石头，甲乙两个人，甲先取石头，乙后取石头，每次取石头的数量为-1～3，最后取石头的人获胜，怎么制定规则保证甲一定赢。"><a href="#小游戏，桌子上有大量的石头，甲乙两个人，甲先取石头，乙后取石头，每次取石头的数量为-1～3，最后取石头的人获胜，怎么制定规则保证甲一定赢。" class="headerlink" title="小游戏，桌子上有大量的石头，甲乙两个人，甲先取石头，乙后取石头，每次取石头的数量为 1～3，最后取石头的人获胜，怎么制定规则保证甲一定赢。"></a>小游戏，桌子上有大量的石头，甲乙两个人，甲先取石头，乙后取石头，每次取石头的数量为 1～3，最后取石头的人获胜，怎么制定规则保证甲一定赢。</h2>
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-全局异常处理怎么做的" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/30/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84/">全局异常处理怎么做的</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-30T02:32:55.000Z" itemprop="datePublished">2024年10月30日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/30/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%80%8E%E4%B9%88%E5%81%9A%E7%9A%84/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>定义全局异常处理类*@*<em>RestControllerAdvice</em>标记</p>
-<p>里面用*@ExceptionHandler({Exception.class})*标记要处理的方法</p>
-<p>定义异常和状态码枚举类</p>
-<p>抛出</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/" rel="tag">spring</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
-<a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
+<a class="extend prev" rel="prev" href="/page/3/">上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/5/">下一页</a>
 </nav>
 
 
@@ -802,23 +786,23 @@
       <ul>
         
           <li>
-            <a href="/2025/02/28/http3%E5%8D%8F%E8%AE%AE/">http3协议</a>
+            <a href="/2025/03/02/%E5%A4%9A%E8%A1%A8join%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96/">多表join如何优化</a>
           </li>
         
           <li>
-            <a href="/2025/02/27/SQL/">SQL</a>
+            <a href="/2025/03/02/%E5%A6%82%E4%BD%95%E5%81%9C%E6%AD%A2%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B/">如何停止一个线程</a>
           </li>
         
           <li>
-            <a href="/2025/02/26/Kafka%E9%87%8D%E5%B9%B3%E8%A1%A1/">Kafka重平衡</a>
+            <a href="/2025/03/02/MySQL%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E4%BA%8C%E5%8F%89%E6%A0%91%E3%80%81%E8%B7%B3%E8%A1%A8%EF%BC%8C%E8%80%8C%E6%98%AFB-%E6%A0%91/">MySQL为什么不用二叉树、跳表，而是B+树</a>
           </li>
         
           <li>
-            <a href="/2025/02/26/%E4%BB%8B%E7%BB%8DG1%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/">介绍G1垃圾回收器</a>
+            <a href="/2025/03/02/MySQL-Redis-ES%E7%9A%84%E5%8C%BA%E5%88%AB/">MySQL,Redis,ES的区别</a>
           </li>
         
           <li>
-            <a href="/2025/02/26/%E8%BE%93%E5%85%A5URL%E5%90%8E%E5%8F%91%E7%94%9F%E4%BB%80%E4%B9%88/">输入URL后发生什么</a>
+            <a href="/2025/03/01/redis%E6%98%AF%E5%8D%95%E7%BA%BF%E7%A8%8B%E8%BF%98%E6%98%AF%E5%A4%9A%E7%BA%BF%E7%A8%8B/">redis是单线程还是多线程</a>
           </li>
         
       </ul>
@@ -831,7 +815,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/JUC/" style="font-size: 15.56px;">JUC</a> <a href="/tags/JVM/" style="font-size: 16.67px;">JVM</a> <a href="/tags/Java/" style="font-size: 13.33px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.78px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.89px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring/" style="font-size: 12.22px;">Spring</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hr%E9%9D%A2/" style="font-size: 10px;">hr面</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.67px;">分布式</a> <a href="/tags/%E5%9C%BA%E6%99%AF/" style="font-size: 10px;">场景</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 12.22px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 14.44px;">小红书</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.11px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">暑期面经</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.11px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">系统架构</a> <a href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" style="font-size: 11.11px;">经纬恒润</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 17.78px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 11.11px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.22px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.33px;">项目</a>
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/JUC/" style="font-size: 16.25px;">JUC</a> <a href="/tags/JVM/" style="font-size: 16.25px;">JVM</a> <a href="/tags/Java/" style="font-size: 13.75px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.5px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.75px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hr%E9%9D%A2/" style="font-size: 10px;">hr面</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.25px;">分布式</a> <a href="/tags/%E5%9C%BA%E6%99%AF/" style="font-size: 10px;">场景</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 12.5px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 15px;">小红书</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.25px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">暑期面经</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.25px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">系统架构</a> <a href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" style="font-size: 11.25px;">经纬恒润</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 17.5px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 11.25px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.5px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.75px;">项目</a>
     </div>
   </div>
 
@@ -843,7 +827,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年02月</a><span class="archive-list-count">16</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年03月</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
     </div>
   </div>
 
@@ -853,7 +837,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
