@@ -190,7 +190,30 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h2 id="优化器作用"><a href="#优化器作用" class="headerlink" title="优化器作用"></a>优化器作用</h2><p>根据<strong>是否使用临时表、是否排序、扫描行数</strong>去选择使用<strong>哪个索引</strong>、多个join时各个表的<strong>连接顺序</strong></p>
+<h2 id="优化器逻辑"><a href="#优化器逻辑" class="headerlink" title="优化器逻辑"></a>优化器逻辑</h2><p>优化器要统计索引基数、预估语句扫描行数</p>
+<p>1、基数cardinality：一个索引上不同值得个数，基数越大索引区分度越好、优化器更偏向使用</p>
+<p>如何统计基数：采样统计。默认选择N个数据页计算平均值*索引页面数；当变更的数据超过1&#x2F;M时重新统计</p>
+<p>【了解】</p>
+<p>在 MySQL 中，有两种存储索引统计的方式，可以通过设置参数 innodb_stats_persistent 的值来选择：</p>
+<ul>
+<li>设置为 on 的时候，表示统计信息会持久化存储。这时，默认的 N 是 20，M 是 10。</li>
+<li>设置为 off 的时候，表示统计信息只存储在内存中。这时，默认的 N 是 8，M 是 16。</li>
+</ul>
+<p>2、扫描行数预估错误</p>
+<p><img src="/../images/image-20250304142809917.png" alt="image-20250304142809917"></p>
+<p>（a为索引列）</p>
+<p>如果选择索引a、那么每次都要回表，要把这个代价算进去，如果全表扫描，不需要回表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">analyze <span class="keyword">table</span> t;<span class="comment">--重新统计索引信息、纠正基数误差</span></span><br><span class="line"><span class="keyword">show</span>  index <span class="keyword">from</span> t;<span class="comment">--看索引的基数</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="索引选择异常处理"><a href="#索引选择异常处理" class="headerlink" title="索引选择异常处理"></a>索引选择异常处理</h2><p>1、force index强制纠正索引</p>
+<p>2、修改SQL语句，引导优化器使用期望的索引</p>
+<p>3、新建合适的索引、删掉误用的索引</p>
+<h2 id="选错索引原因"><a href="#选错索引原因" class="headerlink" title="选错索引原因"></a>选错索引原因</h2><p>基数估算误差</p>
+<p>回表代价误判</p>
+
         
         
           <blockquote id="copyright">

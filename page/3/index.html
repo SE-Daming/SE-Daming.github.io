@@ -259,8 +259,28 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>1</p>
-<h1 id="什么是高可用"><a href="#什么是高可用" class="headerlink" title="什么是高可用"></a>什么是高可用</h1><h1 id="MySQL如何实现"><a href="#MySQL如何实现" class="headerlink" title="MySQL如何实现"></a>MySQL如何实现</h1>
+        <h2 id="什么是高可用"><a href="#什么是高可用" class="headerlink" title="什么是高可用"></a>什么是高可用</h2><p>某个节点出现 故障不影响系统的正常运行</p>
+<h2 id="MySQL如何实现高可用"><a href="#MySQL如何实现高可用" class="headerlink" title="MySQL如何实现高可用"></a>MySQL如何实现高可用</h2><p>主从集群+哨兵：负载均衡、容灾和备份、高可用</p>
+<h2 id="主从同步流程"><a href="#主从同步流程" class="headerlink" title="主从同步流程"></a>主从同步流程</h2><p>略</p>
+<h2 id="相关问题"><a href="#相关问题" class="headerlink" title="相关问题"></a>相关问题</h2><h3 id="在mysql主从同步过程中，如果因为某些网络问题，导致某些命令在从节点被重放了多次，怎么处理这种问题？"><a href="#在mysql主从同步过程中，如果因为某些网络问题，导致某些命令在从节点被重放了多次，怎么处理这种问题？" class="headerlink" title="在mysql主从同步过程中，如果因为某些网络问题，导致某些命令在从节点被重放了多次，怎么处理这种问题？"></a>在mysql主从同步过程中，如果因为某些网络问题，导致某些命令在从节点被重放了多次，怎么处理这种问题？</h3><p>开启GTID（全局事务标识符），从库有专门集合记录全局事务id；</p>
+<p>用replace insert（先删除旧的、再加新的）；</p>
+<p>手动核对从库relay-log和主库binlog的差异，避免重复</p>
+<h3 id="在mysql的主从同步过程中，如果主节点还未把数据传送给从节点前，主节点挂了，怎么让客户端读到最新的数据？换句话说怎么保证数据的强一致性"><a href="#在mysql的主从同步过程中，如果主节点还未把数据传送给从节点前，主节点挂了，怎么让客户端读到最新的数据？换句话说怎么保证数据的强一致性" class="headerlink" title="在mysql的主从同步过程中，如果主节点还未把数据传送给从节点前，主节点挂了，怎么让客户端读到最新的数据？换句话说怎么保证数据的强一致性"></a>在mysql的主从同步过程中，如果主节点还未把数据传送给从节点前，主节点挂了，怎么让客户端读到最新的数据？换句话说怎么保证数据的强一致性</h3><p><strong>半同步复制</strong>；</p>
+<p><strong>强制读主库</strong></p>
+<p><strong>组复制MGR</strong>：</p>
+<ul>
+<li>基于Paxos协议，事务需多数节点确认后才提交。</li>
+<li>主库故障时，剩余节点选举新主，客户端自动重定向。</li>
+</ul>
+<p>如果主库彻底宕机需要结合redo-log恢复；</p>
+<h3 id="主从同步延迟怎么办"><a href="#主从同步延迟怎么办" class="headerlink" title="主从同步延迟怎么办"></a>主从同步延迟怎么办</h3><p>1、优化网络带宽、提高从节点服务器配置</p>
+<p>2、增加主节点的复制缓冲区大小</p>
+<p>3、启用并行复制，提高从节点的复制效率</p>
+<p>4、拆分大事务、优化SQL语句</p>
+<p>5、启用半同步复制</p>
+<p>6、强制读主库</p>
+<p>7、监控报警人工处理</p>
+
         
         
           <blockquote id="copyright">

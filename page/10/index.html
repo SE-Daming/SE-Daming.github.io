@@ -251,8 +251,7 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>1</p>
-<p>未正确使用索引；</p>
+        <p>未正确使用索引(优化器索引选择错误)；</p>
 <p>复杂查询，使用多个连接，子查询</p>
 <p>表数据量太大；</p>
 <p>锁竞争；</p>
@@ -504,7 +503,7 @@
 </article>
 
 
-  <article id="post-Redis集群" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <article id="post-Redis高可用" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
     
@@ -512,7 +511,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/20/Redis%E9%9B%86%E7%BE%A4/">Redis集群</a>
+      <a class="p-name article-title" href="/2024/10/20/Redis%E9%AB%98%E5%8F%AF%E7%94%A8/">Redis集群</a>
     </h1>
   
 
@@ -528,7 +527,7 @@
       
       
       
-<a href="/2024/10/20/Redis%E9%9B%86%E7%BE%A4/#comments" class="article-comment-link">
+<a href="/2024/10/20/Redis%E9%AB%98%E5%8F%AF%E7%94%A8/#comments" class="article-comment-link">
   
   <i class="fa fa-commt"></i>
   留言
@@ -554,6 +553,10 @@
 <h5 id="slave如何知道与master的差异呢"><a href="#slave如何知道与master的差异呢" class="headerlink" title="slave如何知道与master的差异呢"></a>slave如何知道与master<strong>的差异呢</strong></h5><p>与raplication-backlog有关、这个文件是固定大小的环形数组，会记录redis命令和offset、包括master当前的offset、slave同步到的offset</p>
 <p>依据offset、它记录了主从之间在replication-backlog的差异。</p>
 <p>缓冲区尽量大一些，防止频繁全量同步</p>
+<h3 id="主从模式的局限"><a href="#主从模式的局限" class="headerlink" title="主从模式的局限"></a>主从模式的局限</h3><p>被动检测：从节点只能通过复制线程知道主节点是否存活</p>
+<p>无自动切换：主节点故障后无故障转移、从节点无法自动晋升为主节点、需人工干预</p>
+<p>数据不一致：主节点故障前未完成数据同步，从节点数据丢失</p>
+<p>脑裂：从节点可能误认为主节点下线，人工晋升时数据冲突</p>
 <h2 id="哨兵集群"><a href="#哨兵集群" class="headerlink" title="哨兵集群"></a>哨兵集群</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p><strong>监控、选主、通知</strong></p>
 <h3 id="监控"><a href="#监控" class="headerlink" title="监控"></a>监控</h3><h4 id="主观下线"><a href="#主观下线" class="headerlink" title="主观下线"></a>主观下线</h4><p>一个sentinel检测到某个节点未在及时响应ping，则认为主观下线</p>
 <h4 id="客观下线"><a href="#客观下线" class="headerlink" title="客观下线"></a>客观下线</h4><p>超过quonum数量的sentinel都认为某节点主观下线，则该节点客观下线</p>
@@ -569,6 +572,15 @@
 <h2 id="cluster集群"><a href="#cluster集群" class="headerlink" title="cluster集群"></a>cluster集群</h2><p>一个切片集群中有16384个哈希槽，会经平均分配或手动分配映射到具体的节点</p>
 <p>当操作数据时先计算他的哈希槽的索引确定在哪台节点然后去操作</p>
 <h3 id="如何计算哈希槽的索引"><a href="#如何计算哈希槽的索引" class="headerlink" title="如何计算哈希槽的索引"></a>如何计算哈希槽的索引</h3><p>如果没有”{}“，则根据key来计算，如果有”{}“，根据里面的内容计算</p>
+<h2 id="脑裂"><a href="#脑裂" class="headerlink" title="脑裂"></a>脑裂</h2><h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><h4 id="哨兵如何感知其他节点的存活"><a href="#哨兵如何感知其他节点的存活" class="headerlink" title="哨兵如何感知其他节点的存活"></a>哨兵如何感知其他节点的存活</h4><p>PING机制：每秒向主节点、从节点和其他哨兵发送PING命令检测存活状态，如果主节点在down-after-millseconds（默认30s）内未响应则认为其主观下线，并与其他哨兵协商客观下线；</p>
+<p>命令链接：哨兵定期向主节点发送INFO命令，获取从节点列表；</p>
+<p>哨兵间自动发现：哨兵通过主节点的sentinel：hello广播自身信息和接收其他节点信息</p>
+<h3 id="主从模式下，从节点如何知道主节点的状态（没有哨兵）"><a href="#主从模式下，从节点如何知道主节点的状态（没有哨兵）" class="headerlink" title="主从模式下，从节点如何知道主节点的状态（没有哨兵）"></a>主从模式下，从节点如何知道主节点的状态（没有哨兵）</h3><p>无法自动感知。如果主节点宕机，从节点的复制线程会中断并记录错误日志,但无故障自动转移</p>
+<h3 id="哨兵挂了会怎样"><a href="#哨兵挂了会怎样" class="headerlink" title="哨兵挂了会怎样"></a>哨兵挂了会怎样</h3><p>单哨兵宕机：若哨兵集群仍有半数以上存活，则其他哨兵继续完成监控选主通知；若该哨兵是leader，则重新选举leader</p>
+<p>多哨兵宕机：若哨兵存活不足半数，则无法出发客观下线，需人工干预；客户端无法获取最新主节点地址，请求失败</p>
+<h3 id="如果有一个主节点挂了，在客户端看来是怎么样的，此时redis还可用吗？"><a href="#如果有一个主节点挂了，在客户端看来是怎么样的，此时redis还可用吗？" class="headerlink" title="如果有一个主节点挂了，在客户端看来是怎么样的，此时redis还可用吗？"></a>如果有一个主节点挂了，在客户端看来是怎么样的，此时redis还可用吗？</h3><p>如果有哨兵则短暂不可用；没有哨兵则请求失败</p>
+<h3 id="如果这个主节点及其从节点全挂了，redis还可用吗？"><a href="#如果这个主节点及其从节点全挂了，redis还可用吗？" class="headerlink" title="如果这个主节点及其从节点全挂了，redis还可用吗？"></a>如果这个主节点及其从节点全挂了，redis还可用吗？</h3><p>单分片不可用：其他集群分片可用。如果只有一个分片，则整个服务不可用</p>
+<h3 id="如果redis所有主节点宕机了会怎么样？"><a href="#如果redis所有主节点宕机了会怎么样？" class="headerlink" title="如果redis所有主节点宕机了会怎么样？"></a>如果redis所有主节点宕机了会怎么样？</h3><p>服务完全不可用</p>
 
         
         
