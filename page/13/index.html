@@ -85,6 +85,162 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-MySQL索引高度计算" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/18/MySQL%E7%B4%A2%E5%BC%95%E9%AB%98%E5%BA%A6%E8%AE%A1%E7%AE%97/">MySQL索引高度计算</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-18T02:53:45.000Z" itemprop="datePublished">2024年10月18日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/18/MySQL%E7%B4%A2%E5%BC%95%E9%AB%98%E5%BA%A6%E8%AE%A1%E7%AE%97/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="B-树三层就可存储千万级别数据"><a href="#B-树三层就可存储千万级别数据" class="headerlink" title="B+树三层就可存储千万级别数据"></a>B+树三层就可存储千万级别数据</h2><p><img src="/../images/image-20241018105856519.png" alt="image-20241018105856519"></p>
+<p><img src="/../images/image-20241018111115021.png" alt="image-20241018111115021"></p>
+<h3 id="以聚集索引为例"><a href="#以聚集索引为例" class="headerlink" title="以聚集索引为例"></a>以聚集索引为例</h3><p>MySQL 是以页的形式组织数据的</p>
+<h3 id="若有为2层"><a href="#若有为2层" class="headerlink" title="若有为2层"></a>若有为2层</h3><p>根节点存放主键和指针</p>
+<p>设主键为bigint，8字节、指针固定6字节</p>
+<p>一页是16k&#x2F;（8+6）&#x3D;1000，说明根节点可储存1000个指针</p>
+<p>假设一行数据是300字节，则一个数据页16k&#x2F;300&#x3D;50条数据</p>
+<p>1000*50&#x3D;5w数据</p>
+<h3 id="若为3层"><a href="#若为3层" class="headerlink" title="若为3层"></a>若为3层</h3><p>同样根节点存储1000个指针指向1000个数据页，每个数据页同样有1000个指针指向第三层的数据页</p>
+<p>第三层每一个数据页50条记录</p>
+<p>则总数据1000x1000x50&#x3D;5000w</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/13/index.html">https://se-daming.github.io/page/13/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-快手" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/17/%E5%BF%AB%E6%89%8B/">快手</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-17T15:39:22.000Z" itemprop="datePublished">2024年10月17日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/17/%E5%BF%AB%E6%89%8B/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="1-mysql索引为什么要使用b-树，而不使用b树、AVL"><a href="#1-mysql索引为什么要使用b-树，而不使用b树、AVL" class="headerlink" title="1.mysql索引为什么要使用b+树，而不使用b树、AVL"></a>1.mysql索引为什么要使用b+树，而不使用b树、AVL</h2><h3 id="为什么不用B树"><a href="#为什么不用B树" class="headerlink" title="为什么不用B树"></a>为什么不用B树</h3><p>B树的所有节点既存放k也有value，B+树只有叶子节点，非只有k</p>
+<p>B树的叶子节点是独立的，B+树叶子节点间通过链表连接</p>
+<p>B树检索时可能没到叶子节点就结束了，B+树的效率很稳定</p>
+<p>范围查找时B树找到下限后进行中序遍历然后找上线，B+树只需遍历链表</p>
+<p>B+树层高一般3-4层就可存储千万数据，磁盘io最多也3，4次。</p>
+<p>综合：B+树更少的io次数，更高效的查询效率，更适合范围查询</p>
+<h3 id="为什么不用AVL"><a href="#为什么不用AVL" class="headerlink" title="为什么不用AVL"></a>为什么不用AVL</h3><p>AVL每个节点只保存一个数据，磁盘io次数更多</p>
+<p>AVL需要旋转来保持平衡，效率低下</p>
+<h2 id="2-为什么千万级别的数据b-树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）"><a href="#2-为什么千万级别的数据b-树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）" class="headerlink" title="2.为什么千万级别的数据b+树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）"></a>2.为什么千万级别的数据b+树只需要三到四层？（具体的计算过程忘记了，这个问题是上个问题自己引出来的，长记性：不要给自己挖坑）</h2><h2 id="3-最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况："><a href="#3-最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况：" class="headerlink" title="3.最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况："></a>3.最左匹配原则：联合索引（a，b，c，d），判断各个条件下走索引的情况：</h2><p>a&#x3D;1 and b &#x3D; 2 and d &#x3D; 3 and c &#x3D;4<br>a&#x3D;1 and b &#x3D; 2 and c &gt; 1（这里说太快了，想都没想就说了，说成c不会走索引，实际应该是c会走，但d不走，这里都会犯错不该）</p>
+<h2 id="4-mysql事务特性以及怎么实现的？"><a href="#4-mysql事务特性以及怎么实现的？" class="headerlink" title="4.mysql事务特性以及怎么实现的？"></a>4.mysql事务特性以及怎么实现的？</h2><h2 id="5-MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read-view生成时机的不同，好！）"><a href="#5-MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read-view生成时机的不同，好！）" class="headerlink" title="5.MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read view生成时机的不同，好！）"></a>5.MVCC能保证哪个事务隔离级别（读已提交和可重复读，这里自己提了两种隔离级别read view生成时机的不同，好！）</h2><h2 id="6-MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）"><a href="#6-MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）" class="headerlink" title="6.MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）"></a>6.MVCC有哪些好处（我觉得最重要的是并发读无需加锁和隔离性吧，还有解决脏读和可重复读这些）</h2><h2 id="7-java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）"><a href="#7-java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）" class="headerlink" title="7.java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）"></a>7.java基础数据类型（平时没怎么用过byte忘记还有这个了，说应该是七种，实际是八种，我真是癫了）</h2><h2 id="8-int占几个字节（4个字节，算是猜对了）"><a href="#8-int占几个字节（4个字节，算是猜对了）" class="headerlink" title="8.int占几个字节（4个字节，算是猜对了）"></a>8.int占几个字节（4个字节，算是猜对了）</h2><h2 id="9-讲讲ConcurrentHashMap（jdk1-7和jdk1-8的都说了，对比不同和提升）"><a href="#9-讲讲ConcurrentHashMap（jdk1-7和jdk1-8的都说了，对比不同和提升）" class="headerlink" title="9.讲讲ConcurrentHashMap（jdk1.7和jdk1.8的都说了，对比不同和提升）"></a>9.讲讲ConcurrentHashMap（jdk1.7和jdk1.8的都说了，对比不同和提升）</h2><h2 id="10-什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）"><a href="#10-什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）" class="headerlink" title="10.什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）"></a>10.什么情况下链表会转成红黑树，红黑树什么情况下会转为链表（8和6，这里提了一下为什么是8和6，前面看过）</h2><h2 id="11-concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）"><a href="#11-concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）" class="headerlink" title="11.concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）"></a>11.concurrentHashMap的get方法是否加锁？（没有加锁，提了一下底层用来volatile来修饰value和size，保证可见性）</h2><h2 id="12-那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）"><a href="#12-那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）" class="headerlink" title="12.那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）"></a>12.那你解释一下volatile这个关键字（讲了讲可见性怎么实现的，说了一下总线嗅探，以及MESI协议）</h2><h2 id="13-那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1-5倍，HashMap讲的比较详细）"><a href="#13-那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1-5倍，HashMap讲的比较详细）" class="headerlink" title="13.那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1.5倍，HashMap讲的比较详细）"></a>13.那你了解ArrayList和hashMap的扩容机制吗？（ArrayList很久没看了，就记得是扩为1.5倍，HashMap讲的比较详细）</h2><h2 id="14-redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）"><a href="#14-redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）" class="headerlink" title="14.redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）"></a>14.redis的多路复用有了解过吗？（不会，有了解过但忘记了，半年前看的早忘了）</h2><h2 id="15-redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）"><a href="#15-redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）" class="headerlink" title="15.redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）"></a>15.redis的分布式锁你的理解（因为我是项目中对redisson分布式锁进行封装，我觉得这种问题问你理解就是想看看你为什么要选择这种分布式锁实现方式，应该要对比redis本身的setnx的缺点，还有为什么选择redisson分布式锁，比redis原生的好在哪，我觉得问理解还可以说分布式锁的意义，总之这种题比较开放）</h2>
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/13/index.html">https://se-daming.github.io/page/13/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-hot100" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -779,168 +935,6 @@
 </article>
 
 
-  <article id="post-索引浅析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/%E7%B4%A2%E5%BC%95%E6%B5%85%E6%9E%90/">索引浅析</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T07:01:21.000Z" itemprop="datePublished">2024年10月16日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/16/%E7%B4%A2%E5%BC%95%E6%B5%85%E6%9E%90/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>1</p>
-<h3 id="索引树的高度如何计算"><a href="#索引树的高度如何计算" class="headerlink" title="索引树的高度如何计算"></a>索引树的高度如何计算</h3>
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/13/index.html">https://se-daming.github.io/page/13/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-SQL优化的几种方式" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/16/SQL%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">SQL优化的几种方式</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-16T06:50:38.000Z" itemprop="datePublished">2024年10月16日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/16/SQL%E4%BC%98%E5%8C%96%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2><h3 id="插入优化"><a href="#插入优化" class="headerlink" title="插入优化"></a>插入优化</h3><p>1、使用批量插入</p>
-<p>2、手动提交事务</p>
-<p>3、主键顺序插入，减少页分裂和页合并的次数</p>
-<p>4、大批量数据使用load命令</p>
-<h4 id="主键设计"><a href="#主键设计" class="headerlink" title="主键设计"></a>主键设计</h4><p>尽量降低主键的长度、主键应当是有序自增的、避免使用UUID或其他业务主键，如身份证、业务操作时尽量不更改主键</p>
-<h4 id="为什么不用UUID"><a href="#为什么不用UUID" class="headerlink" title="为什么不用UUID"></a>为什么不用UUID</h4><p>非递增、太长（36字符）导致占用内存大，索引树的高度大，磁盘IO次数多，性能差</p>
-<h3 id="查询优化"><a href="#查询优化" class="headerlink" title="查询优化"></a>查询优化</h3><p>查询时尽量使用索引查询</p>
-<h4 id="索引优化"><a href="#索引优化" class="headerlink" title="索引优化"></a>索引优化</h4><p>尽量使用覆盖索引、多字段排序时要遵循最左前缀法则、</p>
-<h4 id="深度分页"><a href="#深度分页" class="headerlink" title="深度分页"></a>深度分页</h4><p>延迟关联或子查询优化</p>
-<h4 id="group-by"><a href="#group-by" class="headerlink" title="group by"></a>group by</h4><h4 id="order-by优化"><a href="#order-by优化" class="headerlink" title="order by优化"></a>order by优化</h4><p>MySQL排序有using index和using filesort两种实现方式，要尽量优化成效率高的using index，避免额外排序</p>
-<p>也就是说，要对排序字段创建索引并尽量使用覆盖索引；如果不可避免的出现filesort可以适当增加排序缓冲区的大小</p>
-<h3 id="更新优化"><a href="#更新优化" class="headerlink" title="更新优化"></a>更新优化</h3><p>分批更新、限制更新的行数，避免大事务；</p>
-<p>在更新的列上有索引，避免行锁升级为表锁</p>
-<h3 id="删除优化"><a href="#删除优化" class="headerlink" title="删除优化"></a>删除优化</h3><p>大批数据删除要分批次删除，避免大事务阻塞；用LIMIT控制行数</p>
-<h4 id="delete和truncate区别"><a href="#delete和truncate区别" class="headerlink" title="delete和truncate区别"></a>delete和truncate区别</h4><p>delete是DML、truncate是DDL</p>
-<p>delete删除后可回滚、truncate不能</p>
-<p>delete对每一行删除会记录日志，速度慢；truncate不记录，直接释放整个数据页，不支持where条件</p>
-<p>delete删除后表的结构属性不变；truncate删除后AUTO-INCREMENT重置</p>
-<h3 id="explain关键字"><a href="#explain关键字" class="headerlink" title="explain关键字"></a>explain关键字</h3><p><img src="/../images/image-20241016150948729.png" alt="image-20241016150948729"></p>
-<p>type:连接类型。性能：NULL（select 1） &gt; system （表只有一行、系统表）&gt; const（常量查找，主键或唯一索引） &gt; eq_ref（主键或唯一索引的等值匹配） &gt; ref （非唯一索引的查找）&gt; range（根据索引查找匹配行） &gt; index（扫描整个索引而不是全表扫描） &gt; ALL（全表扫描）</p>
-<p>除了ALL都表示用到了索引</p>
-<p>key：实际用到的索引</p>
-<p>possible_keys：可能用到的索引</p>
-<p>rows ：MySQL估计需要读取的行数</p>
-<p>extra 额外信息：using index（MySQL仅通过索引来满足查询而无需读取实际数据行）、using where、using filesort（对结果排序时如果索引不能满足则读取实际数据行然后在内存中排序）、using temporary</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/13/index.html">https://se-daming.github.io/page/13/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
@@ -959,6 +953,14 @@
       <ul>
         
           <li>
+            <a href="/2025/03/06/%E9%9B%B6%E6%8B%B7%E8%B4%9D/">零拷贝</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/06/select-poll-epoll%E7%9A%84%E5%8C%BA%E5%88%AB/">select,poll,epoll的区别</a>
+          </li>
+        
+          <li>
             <a href="/2025/03/05/synchronized/">synchronized</a>
           </li>
         
@@ -968,14 +970,6 @@
         
           <li>
             <a href="/2025/03/03/%E4%BC%98%E5%8C%96%E5%99%A8%E5%A6%82%E4%BD%95%E8%AF%84%E4%BC%B0%E8%B5%B0%E5%85%A8%E8%A1%A8%E8%BF%98%E6%98%AF%E8%B5%B0%E7%B4%A2%E5%BC%95/">优化器如何评估走全表还是走索引</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/02/%E5%A4%9A%E8%A1%A8join%E5%A6%82%E4%BD%95%E4%BC%98%E5%8C%96/">多表join如何优化</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/02/%E5%A6%82%E4%BD%95%E5%81%9C%E6%AD%A2%E4%B8%80%E4%B8%AA%E7%BA%BF%E7%A8%8B/">如何停止一个线程</a>
           </li>
         
       </ul>
@@ -988,7 +982,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/JUC/" style="font-size: 17.5px;">JUC</a> <a href="/tags/JVM/" style="font-size: 16.25px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.5px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/Redis/" style="font-size: 18.75px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hr%E9%9D%A2/" style="font-size: 10px;">hr面</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.25px;">分布式</a> <a href="/tags/%E5%9C%BA%E6%99%AF/" style="font-size: 10px;">场景</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 12.5px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 15px;">小红书</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.25px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">暑期面经</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.25px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">系统架构</a> <a href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" style="font-size: 11.25px;">经纬恒润</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 17.5px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 11.25px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.5px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.75px;">项目</a>
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/JUC/" style="font-size: 17.5px;">JUC</a> <a href="/tags/JVM/" style="font-size: 16.25px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.5px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/OS/" style="font-size: 11.25px;">OS</a> <a href="/tags/Redis/" style="font-size: 18.75px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring/" style="font-size: 12.5px;">Spring</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hr%E9%9D%A2/" style="font-size: 10px;">hr面</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.25px;">分布式</a> <a href="/tags/%E5%9C%BA%E6%99%AF/" style="font-size: 10px;">场景</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 12.5px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 15px;">小红书</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.25px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">暑期面经</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.25px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">系统架构</a> <a href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" style="font-size: 11.25px;">经纬恒润</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 17.5px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 11.25px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.5px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.75px;">项目</a>
     </div>
   </div>
 
@@ -1000,7 +994,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年03月</a><span class="archive-list-count">24</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年03月</a><span class="archive-list-count">26</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
     </div>
   </div>
 
@@ -1010,7 +1004,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
