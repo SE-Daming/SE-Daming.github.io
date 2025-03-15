@@ -148,6 +148,7 @@
 <p>3、**<code>jmap -dump:format=b,file=heap.hprof &lt;PID&gt;</code>**导出内存快照、用MAT或jprofile分析堆转储文件，查看占内存大的对象类型、分析GC Roots引用链。若存在内存泄漏则修复代码，若是内存不足则调整JVM参数（堆内存、元空间、线程栈）</p>
 <h2 id="现在有一栋楼一共100层，有两颗玻璃球，玻璃球从-0-到-n-层落下去不会摔坏，从-n-到-100-层摔下去会摔坏，现在求至少多少次一定能试验出n的值多少。"><a href="#现在有一栋楼一共100层，有两颗玻璃球，玻璃球从-0-到-n-层落下去不会摔坏，从-n-到-100-层摔下去会摔坏，现在求至少多少次一定能试验出n的值多少。" class="headerlink" title="现在有一栋楼一共100层，有两颗玻璃球，玻璃球从 0 到 n 层落下去不会摔坏，从 n 到 100 层摔下去会摔坏，现在求至少多少次一定能试验出n的值多少。"></a>现在有一栋楼一共100层，有两颗玻璃球，玻璃球从 0 到 n 层落下去不会摔坏，从 n 到 100 层摔下去会摔坏，现在求至少多少次一定能试验出n的值多少。</h2><h3 id="进阶-1000-层-3-个玻璃球-至少多少次。"><a href="#进阶-1000-层-3-个玻璃球-至少多少次。" class="headerlink" title="- 进阶 1000 层 3 个玻璃球 至少多少次。"></a>- 进阶 1000 层 3 个玻璃球 至少多少次。</h3><h4 id="最后-F-层-N-个玻璃球，列出数学函数"><a href="#最后-F-层-N-个玻璃球，列出数学函数" class="headerlink" title="- 最后 F 层 N 个玻璃球，列出数学函数"></a>- 最后 F 层 N 个玻璃球，列出数学函数</h4><h2 id="设计一个RPC需要考虑什么"><a href="#设计一个RPC需要考虑什么" class="headerlink" title="设计一个RPC需要考虑什么"></a>设计一个RPC需要考虑什么</h2><p>序列化方式；网络协议；扩展性（多语言支持、插件式架构）；负载均衡、流量控制、超时和重试；服务注册与发现；</p>
 <p>同步&#x2F;异步调用</p>
+<h2 id="设计一个xx系统，需要考虑什么"><a href="#设计一个xx系统，需要考虑什么" class="headerlink" title="设计一个xx系统，需要考虑什么"></a>设计一个xx系统，需要考虑什么</h2><p>需求分析、架构设计【单体、微服务、DDD】、数据库设计【关系型、非关系型、分库分表、分片、数据一致性要求】、接口与通信设计【API设计、通信协议】、技术选型、功能实现、性能优化【缓存设计、数据库优化、异步化】、安全设计【认证与授权、数据加密风控审计】、测试部署、扩展性【模块化、CICD、配置中心】、可用性【限流、日志、故障恢复、集群部署、熔断】</p>
 
         
         
@@ -288,7 +289,8 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><h1 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h1><p>里面有ThreadLocalMap保存了ThreadLocal和value的关系</p>
+        <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><p>Java中用于实现线程本地存储的类，为每个线程创建了一个独立的副本，使得每个线程可以访问自己的副本而不会与其他线程形成冲突，主要用于在多线程下实现线程隔离，避免共享变量带来的并发安全问题 </p>
+<h1 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h1><p>里面有ThreadLocalMap保存了ThreadLocal和value的关系</p>
 <p>k是弱引用</p>
 <p>value是强引用</p>
 <h1 id="为什么k是弱引用"><a href="#为什么k是弱引用" class="headerlink" title="为什么k是弱引用"></a>为什么k是弱引用</h1><p>如果是强引用，ThreadLocalMap里的Entry中引用了k，导致引用链一直存在，不能被回收，造成内存泄漏</p>
@@ -432,7 +434,7 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">head -10f run.log  #查看日志前10条</span><br><span class="line">top #查询cpu占有率</span><br><span class="line">ps aux #查询有哪些进程</span><br><span class="line">find /path -type f -name&quot;*.java&quot; #如何统计一个文件夹下所有的Java文件</span><br><span class="line">kill -9 PID#杀死某个进程应该怎么操作，</span><br><span class="line">netstat -tulnp|grep: 8081#给一个端口号怎么找到进程</span><br><span class="line">Linux的文件权限有哪些，chmod 777命令含义</span><br><span class="line">grep -o &quot;error&quot; file.txt | wc -l#从“file.txt”中查找“error”字符串并统计其出现的次数，应该使用以下哪个命令？</span><br><span class="line">ln -s original.txt filelink#如何创建一个名为“filelink”的软链接，该软链接指向名为“original.txt”的文件？</span><br></pre></td></tr></table></figure>
+        <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">head -10f run.log  #查看日志前10条</span><br><span class="line">top #查询cpu占有率</span><br><span class="line">ps aux #查询有哪些进程</span><br><span class="line">find /path -type f -name&quot;*.java&quot; #如何统计一个文件夹下所有的Java文件</span><br><span class="line">kill -9 PID#杀死某个进程应该怎么操作，</span><br><span class="line">netstat -tulnp|grep: 8081#给一个端口号怎么找到进程</span><br><span class="line">Linux的文件权限有哪些，chmod 777命令含义</span><br><span class="line">grep -o &quot;error&quot; file.txt | wc -l#从“file.txt”中查找“error”字符串并统计其出现的次数，应该使用以下哪个命令？</span><br><span class="line">ln -s original.txt filelink#如何创建一个名为“filelink”的软链接，该软链接指向名为“original.txt”的文件？</span><br><span class="line">cp -r source target#文件夹复制</span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">权限控制</span></span><br><span class="line">ls -l file.txt#查看文件权限</span><br><span class="line">-rw-r--r-- 1 root root 4 Mar 15 14:15 test.txt#第一个-代表文件，d代表目录；【所有者权限rw-】【组权限r--】【其他用户权限w--】【所有者】【所属组】【文件大小】</span><br><span class="line">chmod u+r test.txt#给user增加r权限【+增加权限  -减少权限 =设置权限为  u用户  g用户组 o其他y】</span><br></pre></td></tr></table></figure>
 
 <p>怎么从暂存区回滚到工作区，怎么解决冲突问题 git</p>
 

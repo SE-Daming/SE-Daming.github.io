@@ -134,7 +134,8 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><h1 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h1><p>里面有ThreadLocalMap保存了ThreadLocal和value的关系</p>
+        <h1 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h1><p>Java中用于实现线程本地存储的类，为每个线程创建了一个独立的副本，使得每个线程可以访问自己的副本而不会与其他线程形成冲突，主要用于在多线程下实现线程隔离，避免共享变量带来的并发安全问题 </p>
+<h1 id="底层实现"><a href="#底层实现" class="headerlink" title="底层实现"></a>底层实现</h1><p>里面有ThreadLocalMap保存了ThreadLocal和value的关系</p>
 <p>k是弱引用</p>
 <p>value是强引用</p>
 <h1 id="为什么k是弱引用"><a href="#为什么k是弱引用" class="headerlink" title="为什么k是弱引用"></a>为什么k是弱引用</h1><p>如果是强引用，ThreadLocalMap里的Entry中引用了k，导致引用链一直存在，不能被回收，造成内存泄漏</p>

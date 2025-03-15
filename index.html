@@ -438,11 +438,13 @@
 <h3 id="轻量级锁"><a href="#轻量级锁" class="headerlink" title="轻量级锁"></a>轻量级锁</h3><p>一个对象有多个线程访问，但是访问时间是错开的，不存在竞争，用轻量级锁优化；</p>
 <p><img src="/../images/image-20250305190505490.png" alt="image-20250305190505490"></p>
 <p><img src="/../images/image-20250305190514641.png" alt="image-20250305190514641"></p>
-<p><strong>加锁：</strong>线程在栈帧中创建<strong>Lock Record</strong>锁记录，通过CAS尝试把<strong>锁记录地址</strong>替换为Mark Word，并把对象头的Mark Word替换成锁记录；成功：则获取到轻量级锁，锁状态为00。失败：1、如果是自己持有锁，是自己则再创建一个锁记录，锁记录地址为null；2、不是自己则有其他线程持有轻量级锁，进入锁膨胀过程（先自旋、失败次数一定时升级为重量级锁）；</p>
+<p><strong>加锁：</strong>线程在栈帧中创2建<strong>Lock Record</strong>锁记录，通过CAS尝试把<strong>锁记录地址</strong>替换为Mark Word，并把对象头的Mark Word替换成锁记录；成功：则获取到轻量级锁，锁状态为00。失败：1、如果是自己持有锁，是自己则再创建一个锁记录，锁记录地址为null；2、不是自己则有其他线程持有轻量级锁，进入锁膨胀过程（先自旋、失败次数一定时升级为重量级锁）；</p>
 <p><strong>解锁：</strong>当锁记录地址为null则清理掉，锁记录减一；不为null则CAS将Mark Word恢复给对象头，1、成功则解锁 2、失败则锁升级为了重量级锁，进入重量级锁解锁流程</p>
 <h3 id="重量级锁（锁膨胀）"><a href="#重量级锁（锁膨胀）" class="headerlink" title="重量级锁（锁膨胀）"></a>重量级锁（锁膨胀）</h3><p><strong>加锁：</strong>当线程2尝试获取锁时获取失败，为对象申请monitor对象，并把对象头的锁记录替换成monitor的地址，后两位设为10。owner设为线程1，自己进入monitor的等待队列等待。并把</p>
 <p><strong>解锁：</strong>线程1解锁时发现解锁失败，按照monitor地址找到monitor，将owner置为null，唤醒等待队列的线程</p>
 <h2 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h2><p>锁升级、锁消除、锁粗话、自适应自旋锁（锁升级的时候动态调整自旋次数）</p>
+<h2 id="锁代码块和方法的区别"><a href="#锁代码块和方法的区别" class="headerlink" title="锁代码块和方法的区别"></a>锁代码块和方法的区别</h2><p><img src="/../images/image-20250315155304572.png" alt="image-20250315155304572"></p>
+<p>字节码层面：代码块显式插入monitor-enter &#x2F;exit指令；方法是隐式标记acc-synchronized指令</p>
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="monitor创建使用的时机"><a href="#monitor创建使用的时机" class="headerlink" title="monitor创建使用的时机"></a>monitor创建使用的时机</h3><ul>
 <li>当线程首次通过<code>synchronized</code>竞争对象锁时，若锁状态升级为重量级锁，JVM会为该对象关联一个Monitor对象。</li>
 <li>调用<code>wait()</code>、<code>notify()</code>等方法时，需要操作Monitor的等待队列（<code>_WaitSet</code>）或竞争队列（<code>_EntryList</code>），此时必须关联Monitor</li>
