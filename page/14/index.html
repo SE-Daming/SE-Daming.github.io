@@ -85,6 +85,292 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-百度" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/16/%E7%99%BE%E5%BA%A6/">百度</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-16T15:42:46.000Z" itemprop="datePublished">2024年10月16日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/16/%E7%99%BE%E5%BA%A6/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><h2 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h2></li>
+</ol>
+<p>  byte1 short2 int4 long8 char2 float4 double8 boolean</p>
+<ol start="2">
+<li><h2 id="面向对象三大特性"><a href="#面向对象三大特性" class="headerlink" title="面向对象三大特性"></a>面向对象三大特性</h2></li>
+</ol>
+<p>  封装：通过 public private default protected来实现，主要为了限制其他类和包使用<br>  继承：一个对象可继承自另一个对象<br>  多态：一个变量可有多种表现形态。主要由继承来实现，比如teacher和stu都继承自person，则person既可以表现成stu也可以。。。</p>
+<ol start="3">
+<li><h2 id="重载重写-多态-虚方法表"><a href="#重载重写-多态-虚方法表" class="headerlink" title="重载重写+多态+虚方法表"></a>重载重写+多态+虚方法表</h2></li>
+</ol>
+<p>  重载是一个类中有多个方法方法名相同，但是参数或参数类型、返回值不同<br>  重写是当继承自另一个类是，子类重写父类的方法<br>  多态如何实现？<br>  虚方法表是多态实现的一个必要条件，它记录了方法的实现类的地址，用来确定引用变量调用子类方法时具体调用的哪个方法</p>
+<ol start="4">
+<li><h2 id="集合的几个接口介绍一下，并说区别"><a href="#集合的几个接口介绍一下，并说区别" class="headerlink" title="集合的几个接口介绍一下，并说区别"></a>集合的几个接口介绍一下，并说区别</h2></li>
+</ol>
+<p>  集合包含list、set、queue三个主要接口、除此之外还有map<br>  list是可重复的一些数据、set是不可重复的数据、map是键值对类型数据的集合<br>  list下包含arraylist、linkedlist、vector的子类实现<br>  set包含hashset、treeset的实现<br>  map包含hashmap、linkedhashmap、hashtable、treemap的实现</p>
+<ol start="5">
+<li><h2 id="ArrayList和LinkedList的区别"><a href="#ArrayList和LinkedList的区别" class="headerlink" title="ArrayList和LinkedList的区别"></a>ArrayList和LinkedList的区别</h2></li>
+</ol>
+<p>  底层实现不同：a是动态数组、l是链表<br>  插入和删除效率不同：a的插入需要移动后面元素，时间复杂度是On，删除时也需要移动元素，On<br>                   l的插入要先找到对应元素然后o1插入，总的来说也是on，删除同理<br>  l更适合在头部插入元素，O1、而a是On<br>  a支持索引查找，O1、l是On<br>  大多数情况下使用啊</p>
+<ol start="6">
+<li><h2 id="HashMap一整套（数据结构，扩容）"><a href="#HashMap一整套（数据结构，扩容）" class="headerlink" title="HashMap一整套（数据结构，扩容）"></a>HashMap一整套（数据结构，扩容）</h2></li>
+</ol>
+<p>  8之前是数组+链表；8之后是数组+链表+红黑树；<br>  扩容过程:先创建原来2倍容量的数组，然后将旧数组元素拷贝到新的数组，然后改变引用指向新的数组</p>
+<ol start="7">
+<li><h2 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h2></li>
+<li><h2 id="Volatile"><a href="#Volatile" class="headerlink" title="Volatile"></a>Volatile</h2></li>
+</ol>
+<p>  是Java中的一个关键字，用来解决可见性和防止指令重排<br>  当一个变量如果没被volatile标记、则他被修改时可能会先放到缓冲区，其他变量读到的仍然是修改前的数值。<br>  指令重排：JVM会对class文件的命令在不影响结果的前提下进行重排序</p>
+<ol start="9">
+<li><h2 id="Java的锁类型"><a href="#Java的锁类型" class="headerlink" title="Java的锁类型"></a>Java的锁类型</h2></li>
+</ol>
+<p>  包含公平锁、分公平锁；可重入锁，不可重入锁<br>  主要包含sync实现的和R锁<br>  sync对比R：非公平、可公可非；不可重入，可重入；修饰代码块、方法， 修饰代码块；自动释放，手动释放；重量、轻量；基于监视器monitor实现，基于AQS实现；R可带超时的获取尝试</p>
+<ol start="10">
+<li><h2 id="AQS的非公平实现（顺便把AQS一整套说了）"><a href="#AQS的非公平实现（顺便把AQS一整套说了）" class="headerlink" title="AQS的非公平实现（顺便把AQS一整套说了）"></a>AQS的非公平实现（顺便把AQS一整套说了）</h2></li>
+<li><h2 id="线程创建方式（线程和线程体）"><a href="#线程创建方式（线程和线程体）" class="headerlink" title="线程创建方式（线程和线程体）"></a>线程创建方式（线程和线程体）</h2><p>继承thread类重写run方法；实现runnable接口的run方法；实现callable接口的call方法；线程池创建；</p>
+</li>
+<li><h2 id="为什么会有线程安全"><a href="#为什么会有线程安全" class="headerlink" title="为什么会有线程安全"></a>为什么会有线程安全</h2><p>多线程下对同一资源进行操作，比如对同一变量自增，需要先读取然后修改。这个过程不是原子性的，可能出现读到的相同，修改后出现问题</p>
+</li>
+<li><h2 id="JVM内存模型"><a href="#JVM内存模型" class="headerlink" title="JVM内存模型"></a>JVM内存模型</h2><p>分为线程共享和线程私有<br>堆内存、运行时常量池；Java虚拟机栈、本地方法栈、程序计数器；字符串常量池</p>
+</li>
+<li><h2 id="GC算法"><a href="#GC算法" class="headerlink" title="GC算法"></a>GC算法</h2><p>标记清除、标记复制、标记整理<br>对需要清除的区域先标记再清除；会导致内存碎片问题</p>
+<p>将内存区域分为TO、from两部分、对需要清除的区域先标记再将未标记的部分整理到to区，将from指向to；内存利用率不高</p>
+<p>先标记需要清除的，然后将其复制到内存一侧；效率不高</p>
+</li>
+<li><h2 id="垃圾回收器搭配"><a href="#垃圾回收器搭配" class="headerlink" title="垃圾回收器搭配"></a>垃圾回收器搭配</h2><p>serial，serial old<br>paraneel、paraneel new<br>serial CMS<br>g1 </p>
+</li>
+<li><h2 id="三色标记算法"><a href="#三色标记算法" class="headerlink" title="三色标记算法"></a>三色标记算法</h2></li>
+<li><h2 id="CMS-G1"><a href="#CMS-G1" class="headerlink" title="CMS,G1"></a>CMS,G1</h2><p>CMS是老年代的回收，G1是新生代和老年代；<br>CMS用标记清除算法，G1用标记整理算法<br>CMS：初始标记、并发标记、最终标记、并发清除<br>G1：初始标记、并发标记、并发标记、并发清除<br>CMS会产生内存碎片和浮动垃圾，严重时退化成serial</p>
+</li>
+<li><h2 id="Springboot启动流程"><a href="#Springboot启动流程" class="headerlink" title="Springboot启动流程"></a>Springboot启动流程</h2></li>
+<li><h2 id="MySQL索引（ACID，事务隔离，MVCC）"><a href="#MySQL索引（ACID，事务隔离，MVCC）" class="headerlink" title="MySQL索引（ACID，事务隔离，MVCC）"></a>MySQL索引（ACID，事务隔离，MVCC）</h2></li>
+<li><h2 id="MySQL锁"><a href="#MySQL锁" class="headerlink" title="MySQL锁"></a>MySQL锁</h2><p>用来解决并发下的问题<br>全局锁、表级锁、行级锁<br>表锁、元数据锁、意向锁；<br>行锁、间隙锁、临建锁，建立在索引上的，没索引则升级为表锁</p>
+</li>
+<li><h2 id="MySQL三大日志"><a href="#MySQL三大日志" class="headerlink" title="MySQL三大日志"></a>MySQL三大日志</h2><p>redolog、undolog、binlog<br>重做日志，用来做崩溃后的恢复；用来事务回滚和MVCC；数据备份用的</p>
+</li>
+<li><h2 id="MySQL慢SQL排查"><a href="#MySQL慢SQL排查" class="headerlink" title="MySQL慢SQL排查"></a>MySQL慢SQL排查</h2></li>
+<li><h2 id="假设慢SQL不是索引的问题，可能是哪些原因"><a href="#假设慢SQL不是索引的问题，可能是哪些原因" class="headerlink" title="假设慢SQL不是索引的问题，可能是哪些原因"></a>假设慢SQL不是索引的问题，可能是哪些原因</h2><p>表数据量过大、考虑分表；<br>表或查询记录被上锁；<br>MySQL抖了一下，刷新脏页到磁盘时</p>
+</li>
+<li><h2 id="InnoDB的各种特性"><a href="#InnoDB的各种特性" class="headerlink" title="InnoDB的各种特性"></a>InnoDB的各种特性</h2><p>事务、外键、行级锁、崩溃后数据恢复、mvcc</p>
+</li>
+<li><h2 id="说一下项目难点，并说说怎么解决"><a href="#说一下项目难点，并说说怎么解决" class="headerlink" title="说一下项目难点，并说说怎么解决"></a>说一下项目难点，并说说怎么解决</h2></li>
+<li><h2 id="手撕快排"><a href="#手撕快排" class="headerlink" title="手撕快排"></a>手撕快排</h2></li>
+</ol>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/14/index.html">https://se-daming.github.io/page/14/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-分片上传和断点续传如何实现" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/16/%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0%E5%92%8C%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0/">分片上传和断点续传如何实现</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-16T14:25:07.000Z" itemprop="datePublished">2024年10月16日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/16/%E5%88%86%E7%89%87%E4%B8%8A%E4%BC%A0%E5%92%8C%E6%96%AD%E7%82%B9%E7%BB%AD%E4%BC%A0%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>j用到的技术：Redis、MD5</p>
+<h3 id="分片上传"><a href="#分片上传" class="headerlink" title="分片上传"></a>分片上传</h3><p>前端将文件分片后携带文件id、各个分片的索引，总分片数。文件MD5</p>
+<p>后端将总分片数、已经上传的分片保存到redis。当所有分片上传完成后，后端组装这些分片并计算出MD5值验证是否组装成功。</p>
+<h3 id="断点续传"><a href="#断点续传" class="headerlink" title="断点续传"></a>断点续传</h3><p>继续上传时先查询已经上传的分片、从该分片索引处继续上传</p>
+<h3 id="具体步骤"><a href="#具体步骤" class="headerlink" title="具体步骤"></a>具体步骤</h3><p>参数：大文件名、小文件、分片序号、总分片数、大文件md5</p>
+<p>redis存的：一个list、key为md5、value为小文件临时路径（会将小文件暂时存储在临时文件）</p>
+<p>当上传时会判断redis分片数（list的大小）是否等于总分片数、等于则合并（并删除redis的）、小于则上传（保存到redis的list、创建临时文件）</p>
+<h3 id="上传失败（MD5验证不通过）"><a href="#上传失败（MD5验证不通过）" class="headerlink" title="上传失败（MD5验证不通过）"></a>上传失败（MD5验证不通过）</h3><p>则给用户反馈上传失败并清除redis的list</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> String <span class="title function_">uploadChunk</span><span class="params">(<span class="meta">@RequestParam(&quot;file&quot;)</span> <span class="type">byte</span>[] fileChunk,</span></span><br><span class="line"><span class="params">                          <span class="meta">@RequestParam(&quot;fileName&quot;)</span> String fileName,</span></span><br><span class="line"><span class="params">                          <span class="meta">@RequestParam(&quot;chunkIndex&quot;)</span> <span class="type">int</span> chunkIndex,</span></span><br><span class="line"><span class="params">                          <span class="meta">@RequestParam(&quot;totalChunks&quot;)</span> <span class="type">int</span> totalChunks,</span></span><br><span class="line"><span class="params">                          <span class="meta">@RequestParam(&quot;md5&quot;)</span> String md5)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check file size limit</span></span><br><span class="line">    <span class="keyword">if</span> (fileChunk.length &gt; CHUNK_SIZE) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Chunk exceeds maximum size.&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">String</span> <span class="variable">redisKey</span> <span class="operator">=</span> <span class="string">&quot;upload:&quot;</span> + md5;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if all chunks have been uploaded</span></span><br><span class="line">    <span class="keyword">if</span> (redisTemplate.hasKey(redisKey) &amp;&amp; redisTemplate.opsForList().size(redisKey) &gt;= totalChunks) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;All chunks already uploaded.&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Save the chunk to a temporary file</span></span><br><span class="line">    <span class="type">File</span> <span class="variable">tempFile</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(UPLOAD_DIR + fileName + <span class="string">&quot;.part&quot;</span> + chunkIndex);<span class="comment">//从0开始</span></span><br><span class="line">    <span class="keyword">try</span> (<span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(tempFile)) &#123;</span><br><span class="line">        fos.write(fileChunk);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Save chunk info in Redis</span></span><br><span class="line">    redisTemplate.opsForList().rightPush(redisKey, tempFile.getAbsolutePath());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Check if all chunks are uploaded</span></span><br><span class="line">    <span class="keyword">if</span> (redisTemplate.opsForList().size(redisKey) == totalChunks) &#123;</span><br><span class="line">        mergeChunks(fileName, md5, totalChunks);</span><br><span class="line">        redisTemplate.delete(redisKey); <span class="comment">// Clean up</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Upload complete.&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;Chunk uploaded successfully.&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">mergeChunks</span><span class="params">(String fileName, String md5, <span class="type">int</span> totalChunks)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">    <span class="type">File</span> <span class="variable">mergedFile</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(UPLOAD_DIR + fileName);</span><br><span class="line">    <span class="keyword">try</span> (<span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(mergedFile)) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; totalChunks; i++) &#123;</span><br><span class="line">            <span class="type">File</span> <span class="variable">chunkFile</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">File</span>(UPLOAD_DIR + fileName + <span class="string">&quot;.part&quot;</span> + i);</span><br><span class="line">            Files.copy(chunkFile.toPath(), fos);</span><br><span class="line">            chunkFile.delete(); <span class="comment">// Delete chunk after merging</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Optionally validate the MD5 hash</span></span><br><span class="line">    <span class="type">String</span> <span class="variable">calculatedMd5</span> <span class="operator">=</span> DigestUtils.md5Hex(<span class="keyword">new</span> <span class="title class_">FileInputStream</span>(mergedFile));</span><br><span class="line">    <span class="keyword">if</span> (!calculatedMd5.equals(md5)) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IOException</span>(<span class="string">&quot;MD5 mismatch.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/14/index.html">https://se-daming.github.io/page/14/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-Kafka的架构是怎样的" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2024/10/16/Kafka%E7%9A%84%E6%9E%B6%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/">Kafka的架构是怎样的</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2024-10-16T10:15:04.000Z" itemprop="datePublished">2024年10月16日</time>
+</span>
+      
+      
+      
+<a href="/2024/10/16/Kafka%E7%9A%84%E6%9E%B6%E6%9E%84%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="角色"><a href="#角色" class="headerlink" title="角色"></a>角色</h2><p>生产者、broker、消费者、topic、partition、leader、follower、ISR、zookeeper</p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>生产者将消息发送到broker的某个topic的某个partition中，消费者从topic中获取数据，使用zk来管理集群状态和配置。这就是基础架构</p>
+<h2 id="生产者发送消息"><a href="#生产者发送消息" class="headerlink" title="生产者发送消息"></a>生产者发送消息</h2><p>主要涉及到两个线程sender和main</p>
+<p>main线程中生产者调用send方法携带消息经拦截器-分区器-序列化器到达发送缓冲区双端队列RecordAccumulator，当队列中消息量达到batch-size或linger-ms的阈值则sender线程从中拉取消息到broker。过程是拉取消息构建相应的请求到NetworkClient，最多有五个请求，selector负责从中拉取消息发送到broker的分区，等待ack应答，如果acks参数设为0则不等待应答直接返回成功，如果设为1则partition的leader需要应答，如果设为-1则leader和ISR都要应答；当selector收到成功应答后则返回成功，并且清理掉缓冲队列中的信息，否则retries重试发送给分区。</p>
+<p><img src="/../images/image-20241017164008592.png" alt="image-20241017164008592"></p>
+<h2 id="消费者消费消息"><a href="#消费者消费消息" class="headerlink" title="消费者消费消息"></a>消费者消费消息</h2><p>采用pull拉的方式主动拉取消息，但这样可能导致没数据时陷入循环，一直返回空数据</p>
+<h3 id="消费者工作流程"><a href="#消费者工作流程" class="headerlink" title="消费者工作流程"></a>消费者工作流程</h3><p><img src="/../images/image-20241019162921787.png" alt="image-20241019162921787"></p>
+<h3 id="消费过程"><a href="#消费过程" class="headerlink" title="消费过程"></a>消费过程</h3><p>消费者发送消费请求<em>sendFetches</em>后创建网络请求<em>ConsumerNetworkClient</em>，携带着每批次最小抓取大小<em>Fetch-min-bytes</em>、最大抓取大小<em>Fetch-max-bytes</em>、超时时间<em>Fetch-max-wait-ms</em>调用send方法发送请求给broker，通过回调方法<em>onSuccess</em>返回数据到队列<em>completedFetches</em>中，消费者每一批次最大拉取<em>Max-poll-records</em>条数据后经过反序列化、拦截器后处理数据</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/14/index.html">https://se-daming.github.io/page/14/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-ConcurrentHashMap解析" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -618,245 +904,6 @@
 </article>
 
 
-  <article id="post-https连接是如何创建的" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/15/https%E8%BF%9E%E6%8E%A5%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E7%9A%84/">https连接是如何创建的</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-15T00:49:33.000Z" itemprop="datePublished">2024年10月15日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/15/https%E8%BF%9E%E6%8E%A5%E6%98%AF%E5%A6%82%E4%BD%95%E5%88%9B%E5%BB%BA%E7%9A%84/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h2 id="https握手过程"><a href="#https握手过程" class="headerlink" title="https握手过程"></a>https握手过程</h2><p>https在建立TCP连接后会进行TLS连接，主要涉及四次握手</p>
-<p>客户端发送Client hello请求给服务端，携带支持的TLS版本、一个随机数、（加密）密码套件列表</p>
-<p>服务端响应Server hello，携带确认的TLS版本，一个随机数，server端安全证书，确认的密码套件</p>
-<p>客户端收到响应后先确认CA证书的真实性如果没问题则从证书中取出公钥然后用它加密报文发送：一个随机数、加密通信算法改变通知（表示以后的通信都用会话密钥加密）、客户端握手阶段结束。客户端根据这三个随机数计算出会话密钥</p>
-<p>服务端收到第三个随机数后通过协商的加密算法计算出会话密钥，向客户端发送：加密算法改变通知、服务端握手结束</p>
-<p>以上是非对称加密(用于密钥交换)：客户端公钥加密、服务端私钥解密；之后的数据传输是对称加密</p>
-<h2 id="为什么要对称加密"><a href="#为什么要对称加密" class="headerlink" title="为什么要对称加密"></a>为什么要对称加密</h2><p>对称加密算法计算效率高、<strong>速度快、资源消耗低</strong>；</p>
-<p>与非对称加密互补，保证<strong>高效安全</strong></p>
-<h2 id="http-VS-https"><a href="#http-VS-https" class="headerlink" title="http  VS https"></a>http  VS https</h2><p>端口不同、80 443</p>
-<p>https在建立TCP连接轴要经过TLS&#x2F;SSL握手过程再建立http连接</p>
-<p>https是加密传输、http是明文传输</p>
-<p>https要额外申请CA证书</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/14/index.html">https://se-daming.github.io/page/14/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-http报文格式是怎样的" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/14/http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/">http报文格式是怎样的</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-14T09:42:31.000Z" itemprop="datePublished">2024年10月14日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/14/http%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F%E6%98%AF%E6%80%8E%E6%A0%B7%E7%9A%84/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id=""><a href="#" class="headerlink" title=""></a></h3><p><img src="/../images/image-20241014174623505.png" alt="HTTP报文格式"></p>
-<h3 id="请求报文"><a href="#请求报文" class="headerlink" title="请求报文"></a>请求报文</h3><p>请求行、首部行、空行、请求实体</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">GET /example.com/index.html HTTP1.1</span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>www.example.com</span><br><span class="line">Connection:close</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0</span><br><span class="line">Accept-language:CN</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="响应报文"><a href="#响应报文" class="headerlink" title="响应报文"></a>响应报文</h3><p>状态行、首部行、空行、相应实体</p>
-<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP1.1 200 OK</span><br><span class="line">Connection:close</span><br><span class="line"><span class="attribute">Last-Modified</span><span class="punctuation">: </span>Tue,18 Aug 2020</span><br><span class="line">Cotent-Length:6123</span><br><span class="line">Cotent-Type:text/html</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="Connection字段是什么"><a href="#Connection字段是什么" class="headerlink" title="Connection字段是什么"></a>Connection字段是什么</h3><p>发送完该消息后关闭TCP连接</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/14/index.html">https://se-daming.github.io/page/14/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-http2相对于http1-1到底有哪些改变" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/10/14/http2%E7%9B%B8%E5%AF%B9%E4%BA%8Ehttp1-1%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E4%BA%9B%E6%94%B9%E5%8F%98/">http2相对于http1.1到底有哪些改变</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-10-14T07:58:01.000Z" itemprop="datePublished">2024年10月14日</time>
-</span>
-      
-      
-      
-<a href="/2024/10/14/http2%E7%9B%B8%E5%AF%B9%E4%BA%8Ehttp1-1%E5%88%B0%E5%BA%95%E6%9C%89%E5%93%AA%E4%BA%9B%E6%94%B9%E5%8F%98/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h3 id="HTTP2的目的"><a href="#HTTP2的目的" class="headerlink" title="HTTP2的目的"></a>HTTP2的目的</h3><p>减少感知时延，提高响应速度</p>
-<h3 id="手段"><a href="#手段" class="headerlink" title="手段"></a>手段</h3><p>经单一TCP连接使请求和响应多路复用</p>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p>提供报文优先次序、服务器主动推送（如果没发送任何请求，只是建立了TCP连接可以主动推送吗）、首部字段压缩</p>
-<h3 id="HTTP1-1存在的问题-HOL-队首阻塞"><a href="#HTTP1-1存在的问题-HOL-队首阻塞" class="headerlink" title="HTTP1.1存在的问题   HOL 队首阻塞"></a>HTTP1.1存在的问题   HOL 队首阻塞</h3><p>HTTP1使用持续TCP连接，允许经单一TCP连接请求相应一个web页面。这样每个web页面平等共享带宽，导致HOL</p>
-<p>假如一个web页面有一个大视频对象和视频下面很多小对象，使用同一TCP连接请求、该大视频会花费很长时间，小对象被延迟了。这就是HOL队首阻塞</p>
-<h3 id="HTTP1-1解决HOL"><a href="#HTTP1-1解决HOL" class="headerlink" title="HTTP1.1解决HOL"></a>HTTP1.1解决HOL</h3><p>打开多个并行TCP连接、web页面的多个对象并行发送给浏览器</p>
-<h3 id="HTTP2解决HOL"><a href="#HTTP2解决HOL" class="headerlink" title="HTTP2解决HOL"></a>HTTP2解决HOL</h3><p>将每个报文分成二进制小帧，并且在同个TCP连接上交错发请求和响应报文，之后在接收端将其组装，这也是HTTP2最为重要的改进</p>
-<h3 id="成帧过程"><a href="#成帧过程" class="headerlink" title="成帧过程"></a>成帧过程</h3><p>主要通过HTTP2的成帧子层完成.当服务器要发送HTTP响应时，该响应首先划分成帧，响应的首部字段成为一帧，报文体成为一帧。通过成帧子层该响应的帧与其他响应的帧交错经过单一TCP连接发送。当帧到达客户端时先在成帧子层组装成初始的响应报文，然后由浏览器处理。类似地、HTTP请求也划分成帧交错发送</p>
-<h3 id="服务器推送"><a href="#服务器推送" class="headerlink" title="服务器推送"></a>服务器推送</h3><p>HTTP1.1中，服务器只是被动响应，浏览器请求什么就响应什么。HTTP2中服务器可以主动推送，即为一个请求发送多个响应，从而消除额外等待时延</p>
-<h3 id="首部压缩"><a href="#首部压缩" class="headerlink" title="首部压缩"></a>首部压缩</h3><p>HTTP2会压缩请求头。如果发送的多个请求的请求头一样或类似。协议会消除重复的部分。这由HPACK算法实现：客户端和服务端同时维护一张头信息表，所有字段会存入这个表，生成一个索引号，以后就只发送索引号不发送字段，从而提高速度</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>HTTP2相对于HTTP1主要提高了响应性能，做了头部压缩、二进制成帧、请求响应多路复用、服务器主动推送</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/14/index.html">https://se-daming.github.io/page/14/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
@@ -875,23 +922,23 @@
       <ul>
         
           <li>
+            <a href="/2025/03/17/%E9%9D%A2%E7%BB%8F/">面经</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/17/Kafka%E9%80%89%E4%B8%BE%E6%B5%81%E7%A8%8B/">Kafka选举流程</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/17/DNS/">DNS</a>
+          </li>
+        
+          <li>
             <a href="/2025/03/13/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%B7%A5%E5%85%B7%E7%B1%BB/">为什么不用线程池工具类</a>
           </li>
         
           <li>
             <a href="/2025/03/13/%E8%99%9A%E5%81%87%E5%94%A4%E9%86%92/">虚假唤醒</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/06/%E9%9B%B6%E6%8B%B7%E8%B4%9D/">零拷贝</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/06/select-poll-epoll%E7%9A%84%E5%8C%BA%E5%88%AB/">select,poll,epoll的区别</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/05/synchronized/">synchronized</a>
           </li>
         
       </ul>
@@ -904,7 +951,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/JUC/" style="font-size: 18.75px;">JUC</a> <a href="/tags/JVM/" style="font-size: 16.25px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.5px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/OS/" style="font-size: 11.25px;">OS</a> <a href="/tags/Redis/" style="font-size: 18.75px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring/" style="font-size: 13.75px;">Spring</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hr%E9%9D%A2/" style="font-size: 10px;">hr面</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.25px;">分布式</a> <a href="/tags/%E5%9C%BA%E6%99%AF/" style="font-size: 10px;">场景</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 12.5px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 15px;">小红书</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.25px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">暑期面经</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.25px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">系统架构</a> <a href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" style="font-size: 11.25px;">经纬恒润</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 17.5px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 11.25px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.5px;">集合</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.75px;">项目</a>
+      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/JUC/" style="font-size: 18.75px;">JUC</a> <a href="/tags/JVM/" style="font-size: 16.25px;">JVM</a> <a href="/tags/Java/" style="font-size: 15px;">Java</a> <a href="/tags/Kafka/" style="font-size: 17.5px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/OS/" style="font-size: 11.25px;">OS</a> <a href="/tags/Redis/" style="font-size: 18.75px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring/" style="font-size: 13.75px;">Spring</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hr%E9%9D%A2/" style="font-size: 10px;">hr面</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 16.25px;">分布式</a> <a href="/tags/%E5%9C%BA%E6%99%AF/" style="font-size: 10px;">场景</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 12.5px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 15px;">小红书</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.25px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">暑期面经</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" style="font-size: 10px;">百度首面</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.25px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">系统架构</a> <a href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" style="font-size: 11.25px;">经纬恒润</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 17.5px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 11.25px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.5px;">集合</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.75px;">项目</a>
     </div>
   </div>
 
@@ -916,7 +963,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年03月</a><span class="archive-list-count">28</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年03月</a><span class="archive-list-count">31</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
     </div>
   </div>
 
@@ -926,7 +973,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
