@@ -85,6 +85,246 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-经纬恒润" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/02/16/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/">经纬恒润</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2025-02-16T06:46:01.000Z" itemprop="datePublished">2025年02月16日</time>
+</span>
+      
+      
+      
+<a href="/2025/02/16/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="介绍一下DRS"><a href="#介绍一下DRS" class="headerlink" title="介绍一下DRS"></a>介绍一下DRS</h1><p>DRS系统是基于车云远程的诊断解决方案，具备整车级或单ECU级的如参数读写、故障读清、例程标定、动作测试和程序升级等传统常见诊断功能，并且支持基于云任务的车端主动诊断如车辆故障主动预警、关键数据采集、智能诊断等新型诊断方式，并在国内、欧洲等海外市场上量产使用</p>
+<h2 id="国际化方案"><a href="#国际化方案" class="headerlink" title="国际化方案"></a>国际化方案</h2><h3 id="业务背景"><a href="#业务背景" class="headerlink" title="业务背景"></a>业务背景</h3><p>静态资源–按钮、菜单：前端实现</p>
+<p>动态资源—提示信息、诊断报告：后端实现</p>
+<h3 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h3><p>两种数据存储方案—yml资源文件、数据库</p>
+<p>资源文件：易于管理维护、可和前端共享；但是难以应对大内容量和频繁更新</p>
+<p>数据库：支持多语言内容的动态更新、不需要重新部署、适用频繁更新；存储和查询开销大、性能问题</p>
+<p>我们的方案是用spring的i18n框架messageSource，（实现简单、快速上限），创建yml资源文件，在请求头的accept-language判断语言、通过ms的getMessage获取文本</p>
+<h3 id="为什么要用后端实现"><a href="#为什么要用后端实现" class="headerlink" title="为什么要用后端实现"></a>为什么要用后端实现</h3><p>DRS有多终端、车端、web、移动端，后端同一返回降低维护成本；</p>
+<p>DRS的诊断协议标准化要求后端附加语言描述，前端只负责渲染；</p>
+<p>一些DTC故障码、诊断报告、维修建议等业务核心内容需要后端统一管理资源文件；</p>
+<p>后端用数据库实现的话可以方便扩展新语言、无需重复部署</p>
+<p>先进行了灰度发布和AB测试	</p>
+<h2 id="高并发优化"><a href="#高并发优化" class="headerlink" title="高并发优化"></a>高并发优化</h2><p>改造前：之前的实现逻辑:im服务中当车辆和云端连接后，车辆会上传自己的版本，云端比对最新版本和车端版本，如果不匹配则生成版本同步指令、下发车端版本同步指令信息。车端接收到版本同步信息后去调用file文件拉取最新版本<br>问题:当服务器配置很低时，如果版本发布比较频繁，频繁的版本更新会对 file服务造成压力，故要基于mq削峰；<strong>服务器带宽有限</strong>，网络资源被打满【瞬时最高100QPS，需要削峰，服务器只能处理12QPS，需要限流】</p>
+<p>改造后：版本不匹配时将指令放到rabbitmq、</p>
+<p>消费者从RabbitMQ拉取消息，<strong>检查车辆在线状态</strong>（通过IM服务查询）。若车辆在线，调用IM服务下发升级指令；若离线，延迟重试或记录日志。</p>
+<p>车云连接后  ：im中map保存vin和channel关系</p>
+<p>车辆断开后：需要移除map中的关系</p>
+<p>map中要无限扩大吗</p>
+<h3 id="【随笔】"><a href="#【随笔】" class="headerlink" title="【随笔】"></a>【随笔】</h3><p>假设最大100QPS，处理能力15QPS，一小时处理54000条记录。为什么削峰？处理能力有限。</p>
+<p>为什么限流？服务器处理能力有限。即使最大100QPS，车辆也在7秒内响应下载请求收到服务器推送。【不对、7，14，21，……】</p>
+<p>不会越来越堆积：业务背景决定的，1h内最多也没有5w辆车上线，</p>
+<h3 id="QPS、服务器配置"><a href="#QPS、服务器配置" class="headerlink" title="QPS、服务器配置"></a>QPS、服务器配置</h3><p>4C16G+1Gbps带宽（1000兆比特每秒）；20M 100QPS ；下载速度约10MB&#x2F;s（2s下载完成）、可支持最大12QPS</p>
+<p>每秒处理6个请求</p>
+<h3 id="MQ在其中的作用"><a href="#MQ在其中的作用" class="headerlink" title="MQ在其中的作用"></a>MQ在其中的作用</h3><p>削峰、限流</p>
+<p>消费者设定preFetch-count参数限制每次下达指令的个数</p>
+<h4 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h4><p>将vin和版本信息存储到mq</p>
+<h4 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h4><p>进行业务层面的处理：车辆上线记录、版本更新记录、诊断记录；然后调用im服务给车辆下达指令</p>
+<h3 id="死信队列怎么用的"><a href="#死信队列怎么用的" class="headerlink" title="死信队列怎么用的"></a>死信队列怎么用的</h3><p>当消费失败时进入延迟队列，60s后转移到消费队列重试消费。消费3次失败后转移到死信队列</p>
+<p>当指令下达失败的时候；</p>
+<p>当消费失败重试次数最大的时候</p>
+<h4 id="消息进入DLX"><a href="#消息进入DLX" class="headerlink" title="消息进入DLX"></a>消息进入DLX</h4><p>消费者拒绝消息且不重新入队列；</p>
+<p>消息过期（队列级别和消息级别）未被消费；</p>
+<p>队列达到最大长度；</p>
+<p>队列达到最大字节</p>
+<h3 id="限流了消息挤压怎么办"><a href="#限流了消息挤压怎么办" class="headerlink" title="限流了消息挤压怎么办"></a>限流了消息挤压怎么办</h3><p>【背景】每秒最多100的请求只能处理12个，那剩余的那些怎么办？不会越来越多？</p>
+<p>扩展消费者&#x3D;》那么不是违背初衷了吗？对服务器的压力也很大</p>
+<p>思路：生产者限流，拒绝消息；</p>
+<h3 id="为什么用RabbitMQ、相较于Kafka的优缺点"><a href="#为什么用RabbitMQ、相较于Kafka的优缺点" class="headerlink" title="为什么用RabbitMQ、相较于Kafka的优缺点"></a>为什么用RabbitMQ、相较于Kafka的优缺点</h3><h3 id="需要横向扩展、分布式部署怎么办"><a href="#需要横向扩展、分布式部署怎么办" class="headerlink" title="需要横向扩展、分布式部署怎么办"></a>需要横向扩展、分布式部署怎么办</h3><h3 id="车辆离线怎么办"><a href="#车辆离线怎么办" class="headerlink" title="车辆离线怎么办"></a>车辆离线怎么办</h3><p><strong>重试 → 持久化存储 → 补偿触发 → 死信处理</strong></p>
+<p>1.60秒后重试（通过延迟队列）、重试3次后持久化存储vin和文件版本</p>
+<p>2.车辆上线时查询数据库中的<code>待处理</code>消息，重新投递到MQ，并标记为<code>已处理</code></p>
+<ol start="3">
+<li>超过最大重试次数（10）的消息进入死信队列，并触发告警&#x2F;人工介入。</li>
+</ol>
+<p>【问题】：这个在消费者端进行吗？不会阻塞消费吗</p>
+<h3 id="难点"><a href="#难点" class="headerlink" title="难点"></a>难点</h3><p><em>（分布式环境下）im服务如何找到vin对应的channel？</em>  （我们的项目的微服务单机架构，但是我发现我启动本地后有时候消费者找不到channel，所以引出此问题）</p>
+<p><em>车辆离线怎么办</em></p>
+<p>用map，用完后remove：不支持分布式部署，</p>
+<p>用redis存储channelId、im服务中</p>
+<p><strong>解决方案：</strong></p>
+<ol>
+<li><p><strong>注册中心（nacos&#x2F;redis） + 路由转发</strong>：动态定位目标实例并转发请求。（本地map和redis全局映射）</p>
+<p>redis记录channelId和服务的映射关系、需要拿channel时先从redis拿到服务示例然后通过dubbo转发操作指令、im服务暴露return-channel的接口</p>
+</li>
+<li><p><strong>消息广播</strong>：通过消息队列实现跨节点消息传递。</p>
+</li>
+<li><p><strong>网关路由</strong>：在网关层实现请求路由。</p>
+<p>网关记录channelId和服务的关系、路由到对应服务</p>
+</li>
+</ol>
+<h3 id="容灾和降级"><a href="#容灾和降级" class="headerlink" title="容灾和降级"></a>容灾和降级</h3><p>车辆离线、找不到对应的channel</p>
+<h3 id="幂等性如何保证"><a href="#幂等性如何保证" class="headerlink" title="幂等性如何保证"></a>幂等性如何保证</h3><p>生产者重复、消费者重复消费、业务重试机制</p>
+<h3 id="mq可靠性"><a href="#mq可靠性" class="headerlink" title="mq可靠性"></a>mq可靠性</h3><p>生产者confirm模式确保投递到broker、消费者手动ack</p>
+<p>我们的解决方案是业务层面重试，消费者中查询车机版本是否是最新版本，是的话跳过</p>
+<p>其他方案：唯一消息id+状态标记（redis的setnx）</p>
+<h3 id="快手"><a href="#快手" class="headerlink" title="[快手]"></a>[快手]</h3><p>什么场景？</p>
+<p>rabbitMQ缓解压力的原理？为什么CPU会降低？</p>
+<p>量级多大？</p>
+<p>千级别的QPS压力不大、通过RabbitMQ中转一下压力还是很大、为什么会降低CPU、io？RabbitMQ做什么逻辑吗？生产消费做什么逻辑吗？</p>
+<p>生产消息限流了？业务场景不需要实时消费吗？堆积消息不会越来越多吗？什么叫死信队列？什么时候进死信队列？消费失败会进吗？进了的话再投递的话又失败怎么办？会循环的吗？重试是基于死信队列的吗（业务中）？达到阈值之后死信队列还会继续重发消息吗？会不会造成事件风暴？1wQPS设定1000、死信队列不会无限扩张吗？RabbitMQ如何实现死信队列的？如果让你实现，你怎么去实现？延迟队列</p>
+<p>MQ用在哪种场景？消费不了，堆积怎么办？（大多数QPS就几百、几十，引入MQ没问题，限流。平稳度过），QPS一直一万、限流1000，引入新的问题</p>
+<p>大多数MQ怎么做重试机制？RabbitMQ如何实现的？</p>
+<p>自我介绍引出哪块比较熟悉，（我对MQ比较熟悉，并做过…），</p>
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><h3 id="几个关注的地方"><a href="#几个关注的地方" class="headerlink" title="几个关注的地方"></a>几个关注的地方</h3><ol>
+<li><p><strong>资源使用</strong>：CPU、内存、磁盘 I&#x2F;O、网络带宽。</p>
+</li>
+<li><p><strong>性能</strong>：请求处理时间、并发连接数、服务器负载。</p>
+</li>
+<li><p><strong>可靠性</strong>：错误率、文件上传成功率。</p>
+</li>
+<li><p><strong>消息队列</strong>：消息积压情况、消费者处理速度。</p>
+</li>
+</ol>
+<h2 id="权限控制"><a href="#权限控制" class="headerlink" title="权限控制"></a>权限控制</h2><h3 id="垂直越权"><a href="#垂直越权" class="headerlink" title="垂直越权"></a>垂直越权</h3><p>低权限用户通过绕过权限控制机制获取高权限用户的权限、比如普通用户通过接口调用到VIP用户的专属接口（新增用户、查看诊断数据），根本原因是系统只在前端做了页面隐藏而没有在后端接口做权限控制</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><h5 id="Gateway网关处统一拦截处理"><a href="#Gateway网关处统一拦截处理" class="headerlink" title="Gateway网关处统一拦截处理"></a>Gateway网关处统一拦截处理</h5><p>网关统一处理如何标识单个接口：数据库中menu表记录了接口URL和某个权限的映射关系</p>
+<h5 id="自定义注解PreAuthronize-AOP处理"><a href="#自定义注解PreAuthronize-AOP处理" class="headerlink" title="自定义注解PreAuthronize+AOP处理"></a>自定义注解PreAuthronize+AOP处理</h5><p>该注解有hasRole  hasPermits标记、AOP中的查询比对用户的角色权限，有权限放行，没有返回无权限e</p>
+<h4 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h4><p><img src="/..%5Cimages%5Cimage-20250214204516048.png" alt="image-20250214204516048"></p>
+<h3 id="水平越权"><a href="#水平越权" class="headerlink" title="水平越权"></a>水平越权</h3><p>用户拥有自己没有的数据权限，比如普通用户可以通过接口调用访问到其他同级用户的数据</p>
+<h3 id="对比-1"><a href="#对比-1" class="headerlink" title="对比"></a>对比</h3><p><img src="/..%5Cimages%5Cimage-20250214203625864.png" alt="image-20250214203625864"></p>
+<h3 id="按钮级别的权限和前端怎么联动"><a href="#按钮级别的权限和前端怎么联动" class="headerlink" title="按钮级别的权限和前端怎么联动"></a>按钮级别的权限和前端怎么联动</h3><p>权限对于数据库里的数据是什么？权限代表的什么？哪种资源？修改用户对于绑定的后端资源是什么？（一个接口？一个方法？一个逻辑？）</p>
+<p>这个接口在后端的存储是什么？</p>
+<p>权限表里存储的是什么？</p>
+<p>一组资源对应的一个权限如何存储关系？数据存储是多条还是一条？一条怎么存储多个资源？</p>
+<h2 id="CICD"><a href="#CICD" class="headerlink" title="CICD"></a>CICD</h2><h3 id="说说k8s和Jenkins的作用"><a href="#说说k8s和Jenkins的作用" class="headerlink" title="说说k8s和Jenkins的作用"></a>说说k8s和Jenkins的作用</h3><h3 id="说几个常用命令"><a href="#说几个常用命令" class="headerlink" title="说几个常用命令"></a>说几个常用命令</h3>
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
+  <article id="post-库存与订单优化" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/02/15/%E5%BA%93%E5%AD%98%E4%B8%8E%E8%AE%A2%E5%8D%95%E4%BC%98%E5%8C%96/">库存与订单优化</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2025-02-15T02:55:13.000Z" itemprop="datePublished">2025年02月15日</time>
+</span>
+      
+      
+      
+<a href="/2025/02/15/%E5%BA%93%E5%AD%98%E4%B8%8E%E8%AE%A2%E5%8D%95%E4%BC%98%E5%8C%96/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>k.</p>
+<h2 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h2><p>模仿小红书的一分购商品抢购功能，要保证库存和订单的正确性，防止超卖、超买、以及实现订单超时自动取消</p>
+<p>超买：setnx （userID,orderID）</p>
+<p>超卖：</p>
+<p>流程：判断库存是否充足、看用户是否购买、下单减库存</p>
+<p>订单超时取消：</p>
+<h2 id="为什么将库存保存到redis"><a href="#为什么将库存保存到redis" class="headerlink" title="为什么将库存保存到redis"></a>为什么将库存保存到redis</h2><h2 id="redis和数据库数据一致性保证"><a href="#redis和数据库数据一致性保证" class="headerlink" title="redis和数据库数据一致性保证"></a>redis和数据库数据一致性保证</h2><h2 id="还有其他设计方案吗"><a href="#还有其他设计方案吗" class="headerlink" title="还有其他设计方案吗"></a>还有其他设计方案吗</h2><p>库存在MySQL：乐观锁update时where防止超卖；sync解决超买</p>
+<p>库存在Redis：1、sync+incrby解决超买超卖，但库存可能变成负数、预扣减库存没下单回滚时有问题；</p>
+<p>2、lua脚本解决超买超卖，</p>
+<h2 id="自动取消订单如何实现"><a href="#自动取消订单如何实现" class="headerlink" title="自动取消订单如何实现"></a>自动取消订单如何实现</h2><p>延迟消息是指消息在投递到队列之前，会等待一定的时间。只有在时间到达后，消息才会被消费者处理。</p>
+<p>将订单信息放到没有消费的队列中，并设置TTL10min、10min钟后没有被消费的消息会被转移到死信队列（要绑定死信交换机），专门用于消费TTL到期、消息被拒绝、队列满了的消息</p>
+<p>然后从死信队列中拿出订单看是否支付，未支付则取消订单，恢复库存</p>
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-发文幂等性" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -426,7 +666,7 @@
 <p>如果主库彻底宕机需要结合redo-log恢复；</p>
 <h3 id="主从同步延迟怎么办"><a href="#主从同步延迟怎么办" class="headerlink" title="主从同步延迟怎么办"></a>主从同步延迟怎么办</h3><p>1、优化网络带宽、提高从节点服务器配置</p>
 <p>2、增加主节点的复制缓冲区大小</p>
-<p>3、启用并行复制，提高从节点的复制效率</p>
+<p>3、启用并行复制，提高从节点的复制效率【MySQL 5.7后从库的SQL线程可分为协调线程和多个worker线程，实现并行回放relay-log】</p>
 <p>4、拆分大事务、优化SQL语句</p>
 <p>5、启用半同步复制</p>
 <p>6、强制读主库</p>
@@ -649,10 +889,55 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>1互斥、可重入、超时释放、容错</p>
+        <p>互斥、可重入、超时释放、容错、高可用、死锁预防</p>
 <p>MySQL唯一约束；版本号或时间戳</p>
 <p>redis的setnx</p>
 <p>zk的节点</p>
+<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="单节点"><a href="#单节点" class="headerlink" title="单节点"></a>单节点</h2><h3 id="基本实现【加锁、解锁、重入、超时续期】"><a href="#基本实现【加锁、解锁、重入、超时续期】" class="headerlink" title="基本实现【加锁、解锁、重入、超时续期】"></a>基本实现【加锁、解锁、重入、超时续期】</h3><p>setnx+expire + lua 互斥、防止死锁  【不可重入】</p>
+<p>加锁：set key nx ex value</p>
+<p>解锁：判断是否是自己的锁、是则删除。通过lua实现</p>
+<p><strong>潜在问题</strong>：死锁风险【未设置过期时间】、锁误删【lua脚本检验是否是自己的锁】、锁续期问题【业务超时锁提前释放】、不可重入【通过hash实现】</p>
+<p><strong>lua的作用</strong>：保证原子性：将所有redis脚本的命令一次性执行，防止插入其他客户端的操作</p>
+<h4 id="Redission实现"><a href="#Redission实现" class="headerlink" title="Redission实现"></a>Redission实现</h4><p>Lua+Hash 实现原子操作和可重入，并设置过期时间</p>
+<p>Watch Dog实现自动续期：后台线程每10s检查锁持有状态，若仍持有则默认延期30s</p>
+<h2 id="多节点–红锁"><a href="#多节点–红锁" class="headerlink" title="多节点–红锁"></a>多节点–红锁</h2><p>为了实现高可用，避免单点故障</p>
+<p><strong>红锁的步骤</strong>:假设有N个redis节点  。1、客户端获取当前时间 2、客户端按顺序依次向N个节点请求加锁操作【防止redis节点宕机，有个加锁超时时间，加锁时间超过超时时间则向下一个节点申请加锁】 3、客户端向所有节点申请完加锁操作，计算整个加锁时间的总耗时。当满足两个条件时认为加锁成功：</p>
+<p>1、获取到了超过半数的节点的锁  2、加锁总耗时小于锁的超时时间</p>
+<p>如果没满足这两个条件，则向所有节点发起释放锁的操作</p>
+<h1 id="Zookeeper（curator）"><a href="#Zookeeper（curator）" class="headerlink" title="Zookeeper（curator）"></a>Zookeeper（curator）</h1><ol>
+<li><p><strong>锁节点路径设计</strong></p>
+<ul>
+<li><p>在ZooKeeper中创建一个持久化节点作为锁的根路径（如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/locks</span><br></pre></td></tr></table></figure>
+
+<p>），所有客户端在此路径下创建</p>
+<p>临时顺序节点</p>
+<p>（Ephemeral Sequential Znode）。例如，客户端A创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/locks/lock_000000001</span><br></pre></td></tr></table></figure>
+
+<p>，客户端B创建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/locks/lock_000000002</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p><strong>尝试获取锁</strong></p>
+<ul>
+<li><p>客户端创建临时顺序节点后，获取根路径下的所有子节点，并按序号排序。若当前客户端创建的节点序号最小，则成功获取锁；否则，客户端需</p>
+<p>监听前一个节点的删除事件</p>
+<p>（通过Watcher机制）</p>
+</li>
+</ul>
+</li>
+<li><p><strong>等待锁释放</strong></p>
+<ul>
+<li>若未获取锁，客户端对前一个节点注册Watcher监听。当前一个节点被删除（锁释放）时，ZooKeeper通知当前客户端重新检查节点顺序，进入下一轮锁竞争</li>
+</ul>
+</li>
+<li><p><strong>释放锁</strong></p>
+<ul>
+<li>客户端完成操作后主动删除自身创建的临时节点。若客户端异常退出，由于节点是临时性的，ZooKeeper会自动删除该节点，避免死锁</li>
+</ul>
+</li>
+</ol>
 
         
         
@@ -687,138 +972,6 @@
 </article>
 
 
-  <article id="post-一致性算法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/21/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/">一致性算法</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-12-21T00:48:46.000Z" itemprop="datePublished">2024年12月21日</time>
-</span>
-      
-      
-      
-<a href="/2024/12/21/%E4%B8%80%E8%87%B4%E6%80%A7%E7%AE%97%E6%B3%95/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
-  <article id="post-分布式数据库" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2024/12/21/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93/">分布式数据库</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2024-12-21T00:48:33.000Z" itemprop="datePublished">2024年12月21日</time>
-</span>
-      
-      
-      
-<a href="/2024/12/21/%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/page/4/index.html">https://se-daming.github.io/page/4/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
@@ -837,6 +990,14 @@
       <ul>
         
           <li>
+            <a href="/2025/03/24/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C/">一致性哈希</a>
+          </li>
+        
+          <li>
+            <a href="/2025/03/22/MySQL%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3/">MySQL主从延迟如何解决</a>
+          </li>
+        
+          <li>
             <a href="/2025/03/19/explain%E5%B7%A5%E5%85%B7/">explain工具</a>
           </li>
         
@@ -846,14 +1007,6 @@
         
           <li>
             <a href="/2025/03/18/%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F/">类的生命周期</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/17/%E6%A8%A1%E7%B3%8A%E7%9A%84/">模糊的</a>
-          </li>
-        
-          <li>
-            <a href="/2025/03/17/%E9%9D%A2%E7%BB%8F/">面经</a>
           </li>
         
       </ul>
@@ -878,7 +1031,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年03月</a><span class="archive-list-count">35</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年03月</a><span class="archive-list-count">37</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">113</span></li></ul>
     </div>
   </div>
 
@@ -888,7 +1041,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">15</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E7%B3%8A%E5%85%AB%E8%82%A1/" rel="tag">模糊八股</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E7%B3%8A%E5%85%AB%E8%82%A1/" rel="tag">模糊八股</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E9%A6%96%E9%9D%A2/" rel="tag">百度首面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
