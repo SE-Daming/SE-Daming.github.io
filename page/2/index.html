@@ -609,8 +609,10 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>1</p>
-<h2 id="小表驱动大表"><a href="#小表驱动大表" class="headerlink" title="小表驱动大表"></a>小表驱动大表</h2>
+        <h2 id="小表驱动大表"><a href="#小表驱动大表" class="headerlink" title="小表驱动大表"></a>小表驱动大表</h2><p>MySQL的join的原理是以驱动表的数据为基础，去逐行匹配被驱动表。假如a表10条数据，b表20w数据</p>
+<p>以a表为驱动表，操作次数：10+log20w；</p>
+<p>以b表为驱动表，操作次数：20w+log10</p>
+<h2 id="被驱动表连接字段建立索引"><a href="#被驱动表连接字段建立索引" class="headerlink" title="被驱动表连接字段建立索引"></a>被驱动表连接字段建立索引</h2><h2 id="为被驱动表连接字段和查询字段建立联合索引"><a href="#为被驱动表连接字段和查询字段建立联合索引" class="headerlink" title="为被驱动表连接字段和查询字段建立联合索引"></a>为被驱动表连接字段和查询字段建立联合索引</h2><h2 id="被驱动表中使用where先过滤数据"><a href="#被驱动表中使用where先过滤数据" class="headerlink" title="被驱动表中使用where先过滤数据"></a>被驱动表中使用where先过滤数据</h2><h2 id="explain看extra字段是否是using-join-buffer（被驱动表无索引），是则优化被驱动表索引"><a href="#explain看extra字段是否是using-join-buffer（被驱动表无索引），是则优化被驱动表索引" class="headerlink" title="explain看extra字段是否是using join buffer（被驱动表无索引），是则优化被驱动表索引"></a>explain看extra字段是否是<em>using join buffer</em>（被驱动表无索引），是则优化被驱动表索引</h2><h2 id="引入OLAP数据库ck"><a href="#引入OLAP数据库ck" class="headerlink" title="引入OLAP数据库ck"></a>引入OLAP数据库ck</h2>
         
         
           <blockquote id="copyright">
