@@ -134,7 +134,7 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="设计背景"><a href="#设计背景" class="headerlink" title="设计背景"></a>设计背景</h2><p>替代CMS，解决其内存碎片、不可控停顿时间、<strong>并发模式失败</strong></p>
+        <h2 id="设计背景"><a href="#设计背景" class="headerlink" title="设计背景"></a>设计背景</h2><p>替代CMS，解决其内存碎片、不可控停顿时间、<strong>并发模式失败</strong>【并发清除时，内存碎片过大，退化成单线程垃圾回收器，长时间STW】</p>
 <p>改进目标：适应大内存堆、可控的停顿时间、无内存碎片</p>
 <h2 id="核心特点"><a href="#核心特点" class="headerlink" title="核心特点"></a>核心特点</h2><h3 id="分区模型"><a href="#分区模型" class="headerlink" title="分区模型"></a>分区模型</h3><p>将堆分为多个大小相同的Region（1MB、32MB），每个Region都可以是Eden、Survivor、Old或Humongous</p>
 <h3 id="分代收集"><a href="#分代收集" class="headerlink" title="分代收集"></a>分代收集</h3><p>逻辑上区分年轻代和老年代，支持混合回收，同时回收年轻代和老年代</p>

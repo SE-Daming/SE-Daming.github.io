@@ -490,7 +490,7 @@
         <h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><h2 id="lambda表达式为啥子使用作用域内局部变量时，提示必须为有效final？"><a href="#lambda表达式为啥子使用作用域内局部变量时，提示必须为有效final？" class="headerlink" title="lambda表达式为啥子使用作用域内局部变量时，提示必须为有效final？"></a>lambda表达式为啥子使用作用域内局部变量时，提示必须为有效final？</h2><h2 id="反射原理，Java-在编程中，反射的好处和其他没有反射的语言比较起来，有哪些优势"><a href="#反射原理，Java-在编程中，反射的好处和其他没有反射的语言比较起来，有哪些优势" class="headerlink" title="反射原理，Java 在编程中，反射的好处和其他没有反射的语言比较起来，有哪些优势"></a>反射原理，Java 在编程中，反射的好处和其他没有反射的语言比较起来，有哪些优势</h2><h2 id="ConcurrentHashMap扩容的时候如何保证线程安全？"><a href="#ConcurrentHashMap扩容的时候如何保证线程安全？" class="headerlink" title="ConcurrentHashMap扩容的时候如何保证线程安全？"></a>ConcurrentHashMap扩容的时候如何保证线程安全？</h2><h2 id="假如需要依赖于一个库的不同版本如何解决"><a href="#假如需要依赖于一个库的不同版本如何解决" class="headerlink" title="假如需要依赖于一个库的不同版本如何解决"></a>假如需要依赖于一个库的不同版本如何解决</h2><h1 id="JUC"><a href="#JUC" class="headerlink" title="JUC"></a>JUC</h1><h2 id="线程池的调度流程"><a href="#线程池的调度流程" class="headerlink" title="线程池的调度流程"></a>线程池的调度流程</h2><p>阻塞队列中通过Condition和ReentrantLock（AtomicInteger）协助</p>
 <p>生产者：当阻塞队列满时生产者释放锁阻塞，直至阻塞队列有空闲时通过notFull的condition唤醒；</p>
 <p>消费者：当工作线程执行完任务之后会从阻塞队列拿任务，若阻塞队列有任务则直接拿出执行；若队列为空则释放锁阻塞等待直到notEmpty的condition通知消费线程</p>
-<h2 id="多个空闲线程怎么分配阻塞队列的任务"><a href="#多个空闲线程怎么分配阻塞队列的任务" class="headerlink" title="多个空闲线程怎么分配阻塞队列的任务"></a>多个空闲线程怎么分配阻塞队列的任务</h2><h3 id="ArrayBlockQueue"><a href="#ArrayBlockQueue" class="headerlink" title="ArrayBlockQueue"></a>ArrayBlockQueue</h3><p>通过ReentrantLock和FIFO队列分配，公平模式按顺序分配，非公平模式随机抢占【线程饥饿问题】</p>
+<h2 id="多个空闲线程怎么分配阻塞队列的任务【阻塞队列原理】"><a href="#多个空闲线程怎么分配阻塞队列的任务【阻塞队列原理】" class="headerlink" title="多个空闲线程怎么分配阻塞队列的任务【阻塞队列原理】"></a>多个空闲线程怎么分配阻塞队列的任务【阻塞队列原理】</h2><h3 id="ArrayBlockQueue"><a href="#ArrayBlockQueue" class="headerlink" title="ArrayBlockQueue"></a>ArrayBlockQueue</h3><p>通过ReentrantLock和FIFO队列分配，公平模式按顺序分配，非公平模式随机抢占【线程饥饿问题】</p>
 <h3 id="LinkedBlockQueue"><a href="#LinkedBlockQueue" class="headerlink" title="LinkedBlockQueue"></a>LinkedBlockQueue</h3><p>通过两个ReentrantLock—takeLock（控制出队、链表头节点）和putLock（控制入队、链表尾部节点）实现，生产者和消费者并行操作队列，吞吐更高</p>
 <p>因为两个线程操作的不是一个节点，所以不存在并发安全问题</p>
 <h3 id="PriorityQueue"><a href="#PriorityQueue" class="headerlink" title="PriorityQueue"></a>PriorityQueue</h3><p>按任务优先级分配</p>
@@ -499,7 +499,10 @@
 <p>栈【线程数过多、递归调用过深、栈内存分配过大导致线程数受限】</p>
 <p>直接内存【参数设置不当、堆外内存分配频繁】</p>
 <p>GC开销超限【频繁Full GC，每次回收效率很低、代码漏洞，快速生成对象】</p>
-<h2 id="网站如果出现了OOM问题你如何进行排查，平时有用过哪些工具"><a href="#网站如果出现了OOM问题你如何进行排查，平时有用过哪些工具" class="headerlink" title="网站如果出现了OOM问题你如何进行排查，平时有用过哪些工具"></a>网站如果出现了OOM问题你如何进行排查，平时有用过哪些工具</h2><h2 id="故障监测和告警方案"><a href="#故障监测和告警方案" class="headerlink" title="故障监测和告警方案"></a>故障监测和告警方案</h2><h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>确定<strong>OOM类型</strong>：堆、栈、元空间、直接内存【通过日志文件】</p>
+<h2 id="网站如果出现了OOM问题你如何进行排查，平时有用过哪些工具"><a href="#网站如果出现了OOM问题你如何进行排查，平时有用过哪些工具" class="headerlink" title="网站如果出现了OOM问题你如何进行排查，平时有用过哪些工具"></a>网站如果出现了OOM问题你如何进行排查，平时有用过哪些工具</h2><h2 id="故障监测和告警方案"><a href="#故障监测和告警方案" class="headerlink" title="故障监测和告警方案"></a>故障监测和告警方案</h2><h2 id="什么时候Full-GC"><a href="#什么时候Full-GC" class="headerlink" title="什么时候Full-GC"></a>什么时候Full-GC</h2><p>System.gc()时尝试执行；</p>
+<p>当Minor-GC后的对象无法全部放到老年代，或老年代不足以容纳存活的对象；</p>
+<p>永生代或元空间空间不足时	</p>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3><p>确定<strong>OOM类型</strong>：堆、栈、元空间、直接内存【通过日志文件】</p>
 <p><strong>工具</strong>：Eclipse Map、Jprofiler、Jstack、Visual VM、JMap</p>
 <p>生成堆转储文件：有一个参数HeapDumpOnOOM，设定后在OOM时自动生成Dump文件；</p>
 <p>分析堆转储文件：Eclipse Map分析对象直方图，识别泄漏对象引用链；Jprofiler实时监控内存分配和线程状态；VisualVM查看内存占用和对象示例数</p>
@@ -519,7 +522,22 @@
 <p>分组后</p>
 <p>select 前后</p>
 <p><img src="/../images/image-20250324132132996.png" alt="image-20250324132132996"></p>
-<h2 id="MySQL-跨表事务是如何实现的"><a href="#MySQL-跨表事务是如何实现的" class="headerlink" title="MySQL 跨表事务是如何实现的"></a>MySQL 跨表事务是如何实现的</h2><h1 id="408"><a href="#408" class="headerlink" title="408"></a>408</h1><h2 id="线程共享了什么资源？"><a href="#线程共享了什么资源？" class="headerlink" title="线程共享了什么资源？"></a>线程共享了什么资源？</h2><h2 id="操作系统虚拟内存？是如何存数据的？TLB-访问过程中上下文切换了是怎么做的？"><a href="#操作系统虚拟内存？是如何存数据的？TLB-访问过程中上下文切换了是怎么做的？" class="headerlink" title="操作系统虚拟内存？是如何存数据的？TLB 访问过程中上下文切换了是怎么做的？"></a>操作系统虚拟内存？是如何存数据的？TLB 访问过程中上下文切换了是怎么做的？</h2><h2 id="访问同一个ip，怎么负载均衡到集群进程？"><a href="#访问同一个ip，怎么负载均衡到集群进程？" class="headerlink" title="访问同一个ip，怎么负载均衡到集群进程？"></a>访问同一个ip，怎么负载均衡到集群进程？</h2><h2 id="协程的应用场景"><a href="#协程的应用场景" class="headerlink" title="协程的应用场景"></a>协程的应用场景</h2><h2 id="什么是段页式内存管理"><a href="#什么是段页式内存管理" class="headerlink" title="什么是段页式内存管理"></a>什么是段页式内存管理</h2><h2 id="段页式中，cpu取数据要访问几次内存"><a href="#段页式中，cpu取数据要访问几次内存" class="headerlink" title="段页式中，cpu取数据要访问几次内存"></a>段页式中，cpu取数据要访问几次内存</h2><h2 id="DNS解析可能在哪出现问题，如何定位，可以使用哪些命令"><a href="#DNS解析可能在哪出现问题，如何定位，可以使用哪些命令" class="headerlink" title="DNS解析可能在哪出现问题，如何定位，可以使用哪些命令"></a>DNS解析可能在哪出现问题，如何定位，可以使用哪些命令</h2><h2 id="TCP为什么粘包"><a href="#TCP为什么粘包" class="headerlink" title="TCP为什么粘包"></a>TCP为什么粘包</h2>
+<h2 id="MySQL-跨表事务是如何实现的"><a href="#MySQL-跨表事务是如何实现的" class="headerlink" title="MySQL 跨表事务是如何实现的"></a>MySQL 跨表事务是如何实现的</h2><h2 id="建索引（SQL）"><a href="#建索引（SQL）" class="headerlink" title="建索引（SQL）"></a>建索引（SQL）</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> a <span class="keyword">from</span> <span class="keyword">table</span> <span class="keyword">where</span> b<span class="operator">=</span>x <span class="keyword">and</span> c<span class="operator">=</span>y <span class="keyword">order</span> <span class="keyword">by</span> d <span class="keyword">asc</span> limit <span class="number">0</span>,<span class="number">100</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="Redis分布式锁了解吗？SetNX是针对单个资源的，如果有100个资源，你怎么上锁？"><a href="#Redis分布式锁了解吗？SetNX是针对单个资源的，如果有100个资源，你怎么上锁？" class="headerlink" title="Redis分布式锁了解吗？SetNX是针对单个资源的，如果有100个资源，你怎么上锁？"></a>Redis分布式锁了解吗？SetNX是针对单个资源的，如果有100个资源，你怎么上锁？</h2><p>分段锁、同时获取100个锁，失败回滚</p>
+<p>独立键锁：多个资源无依赖，允许并行操作。获取100个锁，失败回滚；</p>
+<p>Redisson批量锁：将多个锁合并成一个逻辑锁，确保所有锁同时成功或失败</p>
+<p>分段锁：将资源按id分组，每组分配一个锁</p>
+<h1 id="408"><a href="#408" class="headerlink" title="408"></a>408</h1><h2 id="线程共享了什么资源？"><a href="#线程共享了什么资源？" class="headerlink" title="线程共享了什么资源？"></a>线程共享了什么资源？</h2><h2 id="操作系统虚拟内存？是如何存数据的？TLB-访问过程中上下文切换了是怎么做的？"><a href="#操作系统虚拟内存？是如何存数据的？TLB-访问过程中上下文切换了是怎么做的？" class="headerlink" title="操作系统虚拟内存？是如何存数据的？TLB 访问过程中上下文切换了是怎么做的？"></a>操作系统虚拟内存？是如何存数据的？TLB 访问过程中上下文切换了是怎么做的？</h2><h2 id="访问同一个ip，怎么负载均衡到集群进程？"><a href="#访问同一个ip，怎么负载均衡到集群进程？" class="headerlink" title="访问同一个ip，怎么负载均衡到集群进程？"></a>访问同一个ip，怎么负载均衡到集群进程？</h2><h2 id="协程的应用场景"><a href="#协程的应用场景" class="headerlink" title="协程的应用场景"></a>协程的应用场景</h2><h2 id="什么是段页式内存管理"><a href="#什么是段页式内存管理" class="headerlink" title="什么是段页式内存管理"></a>什么是段页式内存管理</h2><h2 id="段页式中，cpu取数据要访问几次内存"><a href="#段页式中，cpu取数据要访问几次内存" class="headerlink" title="段页式中，cpu取数据要访问几次内存"></a>段页式中，cpu取数据要访问几次内存</h2><h2 id="DNS解析可能在哪出现问题，如何定位，可以使用哪些命令"><a href="#DNS解析可能在哪出现问题，如何定位，可以使用哪些命令" class="headerlink" title="DNS解析可能在哪出现问题，如何定位，可以使用哪些命令"></a>DNS解析可能在哪出现问题，如何定位，可以使用哪些命令</h2><h2 id="TCP为什么粘包"><a href="#TCP为什么粘包" class="headerlink" title="TCP为什么粘包"></a>TCP为什么粘包</h2><h2 id="TCP关闭连接后操作系统需要释放哪些资源？"><a href="#TCP关闭连接后操作系统需要释放哪些资源？" class="headerlink" title="TCP关闭连接后操作系统需要释放哪些资源？"></a>TCP关闭连接后操作系统需要释放哪些资源？</h2><h2 id="进程是资源分配的基本单位，资源是什么"><a href="#进程是资源分配的基本单位，资源是什么" class="headerlink" title="进程是资源分配的基本单位，资源是什么"></a>进程是资源分配的基本单位，资源是什么</h2><p>文件句柄【os为进程分配的资源访问标识符，程序通过该句柄操作资源】</p>
+<p>信号量【进程访问共享资源的同步工具】2</p>
+<p>虚拟内存【进程的地址空间】</p>
+<h2 id="进程间通讯"><a href="#进程间通讯" class="headerlink" title="进程间通讯"></a>进程间通讯</h2><p>管道【匿名管道（仅允许有亲缘关系的进程间通讯，仅存在于内存）、命名管道（允许无亲缘关系的进程通讯、存在于文件系统）】</p>
+<p>信号</p>
+<p>信号量</p>
+<p>消息队列</p>
+<p>共享内存</p>
+<p>套接字</p>
+<h2 id="进程的调度机制"><a href="#进程的调度机制" class="headerlink" title="进程的调度机制"></a>进程的调度机制</h2><h2 id="CPU如何判断进程的优先级"><a href="#CPU如何判断进程的优先级" class="headerlink" title="CPU如何判断进程的优先级"></a>CPU如何判断进程的优先级</h2>
         
         
           <blockquote id="copyright">

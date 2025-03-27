@@ -150,6 +150,8 @@
 <p>G1没有浮动垃圾，第四阶段用户线程暂停</p>
 <h2 id="适用场景不同"><a href="#适用场景不同" class="headerlink" title="适用场景不同"></a>适用场景不同</h2><p>CMS：高吞吐量、低延迟需求，对停顿时间敏感；老年代收集；碎片化管理；</p>
 <p>G1：适用于需要管理大堆内存的场景；对内存碎片明暗；比较平衡的性能，提供较低停顿时间的同时保持了较高的吞吐量</p>
+<h2 id="解决漏标和错标"><a href="#解决漏标和错标" class="headerlink" title="解决漏标和错标"></a>解决漏标和错标</h2><p>CMS：增量更新。在并发标记过程中，如果黑色对象新增了对白色对象的引用【将黑色降级为灰色】，就将这种新增的引用记录下来，后续重新扫描黑色对象及其引用链确保白色对象不被漏标</p>
+<p>G1：STAB（原始快照）。在并发标记中记录对象图的快照，标记过程中即使引用被删除，仍按快照的引用关系进行标记</p>
 
         
             <div id="toc-article">
@@ -157,7 +159,7 @@
   <div class="widget-wrap" id="toc-wrap">
     <h3 class="widget-title"><i class="fa fa-toc"></i> 文章目录</h3>
     <div class="widget">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4%E4%B8%8D%E4%B8%80%E6%A0%B7"><span class="toc-text">使用范围不一样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STW%E7%9A%84%E6%97%B6%E9%97%B4%E6%96%B9%E9%9D%A2"><span class="toc-text">STW的时间方面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E4%B8%8D%E5%90%8C"><span class="toc-text">垃圾回收算法不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%8D%E5%90%8C"><span class="toc-text">垃圾回收的过程不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMS%E4%BC%9A%E4%BA%A7%E7%94%9F%E6%B5%AE%E5%8A%A8%E5%9E%83%E5%9C%BE"><span class="toc-text">CMS会产生浮动垃圾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8D%E5%90%8C"><span class="toc-text">适用场景不同</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%8C%83%E5%9B%B4%E4%B8%8D%E4%B8%80%E6%A0%B7"><span class="toc-text">使用范围不一样</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#STW%E7%9A%84%E6%97%B6%E9%97%B4%E6%96%B9%E9%9D%A2"><span class="toc-text">STW的时间方面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%E4%B8%8D%E5%90%8C"><span class="toc-text">垃圾回收算法不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%9A%84%E8%BF%87%E7%A8%8B%E4%B8%8D%E5%90%8C"><span class="toc-text">垃圾回收的过程不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CMS%E4%BC%9A%E4%BA%A7%E7%94%9F%E6%B5%AE%E5%8A%A8%E5%9E%83%E5%9C%BE"><span class="toc-text">CMS会产生浮动垃圾</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8D%E5%90%8C"><span class="toc-text">适用场景不同</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%BC%8F%E6%A0%87%E5%92%8C%E9%94%99%E6%A0%87"><span class="toc-text">解决漏标和错标</span></a></li></ol>
     </div>
   </div>
 

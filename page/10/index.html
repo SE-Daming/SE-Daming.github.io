@@ -413,11 +413,11 @@
     </div>
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>1</p>
-<h1 id="如何实现公平锁"><a href="#如何实现公平锁" class="headerlink" title="如何实现公平锁"></a>如何实现公平锁</h1><p>获取锁时先判断state是否为0，如果为0则看其否有前驱节点CAS去获取，不为0则看当前占用线程是否是自己，如果是则state+1,实现可重入</p>
+        <h1 id="如何实现公平锁"><a href="#如何实现公平锁" class="headerlink" title="如何实现公平锁"></a>如何实现公平锁</h1><p>获取锁时先判断state是否为0，如果为0则看其否有前驱节点CAS去获取，不为0则看当前占用线程是否是自己，如果是则state+1,实现可重入</p>
 <h1 id="如何实现非公平锁"><a href="#如何实现非公平锁" class="headerlink" title="如何实现非公平锁"></a>如何实现非公平锁</h1><p>获取锁时先判断state是否为0，如果为0则去CAS获取，没有看是否有前驱节点，不为0则看是否是自己的</p>
 <p>也就是说、是否公平体现在获取锁时看是否有其他前驱节点</p>
-<h1 id="如何实现可重入"><a href="#如何实现可重入" class="headerlink" title="如何实现可重入"></a>如何实现可重入</h1>
+<h1 id="如何实现可重入"><a href="#如何实现可重入" class="headerlink" title="如何实现可重入"></a>如何实现可重入</h1><p>内部有个状态计数器state，为0说明没有被线程持有，为1被某个线程第一次获取，大于1被某个线程多次的获取。</p>
+<h1 id="加锁流程"><a href="#加锁流程" class="headerlink" title="加锁流程"></a>加锁流程</h1><h2 id="公平锁"><a href="#公平锁" class="headerlink" title="公平锁"></a>公平锁</h2><h2 id="非公平锁"><a href="#非公平锁" class="headerlink" title="非公平锁"></a>非公平锁</h2><h1 id="解锁流程"><a href="#解锁流程" class="headerlink" title="解锁流程"></a>解锁流程</h1>
         
         
           <blockquote id="copyright">
