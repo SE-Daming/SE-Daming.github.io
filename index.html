@@ -85,6 +85,76 @@
 
       <div class="outer">
         <section id="main">
+  <article id="post-AI" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/04/13/AI/">AI</a>
+    </h1>
+  
+
+
+      </header>
+    
+    <div class="article-meta">
+      
+      <span class="article-date">
+  <i class="fa fa-date"></i>
+  <time class="dt-published" datetime="2025-04-13T09:10:27.000Z" itemprop="datePublished">2025年04月13日</time>
+</span>
+      
+      
+      
+<a href="/2025/04/13/AI/#comments" class="article-comment-link">
+  
+  <i class="fa fa-commt"></i>
+  留言
+</a>
+
+
+    </div>
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="名词"><a href="#名词" class="headerlink" title="名词"></a>名词</h1><h2 id="prompt"><a href="#prompt" class="headerlink" title="prompt"></a>prompt</h2><h2 id="Prompt-Engineering"><a href="#Prompt-Engineering" class="headerlink" title="Prompt Engineering"></a>Prompt Engineering</h2><h2 id="System-Prompt"><a href="#System-Prompt" class="headerlink" title="System Prompt"></a>System Prompt</h2><h2 id="temperature"><a href="#temperature" class="headerlink" title="temperature"></a>temperature</h2><h2 id="agent"><a href="#agent" class="headerlink" title="agent"></a>agent</h2><h2 id="RPA"><a href="#RPA" class="headerlink" title="RPA"></a>RPA</h2><h2 id="embeddings"><a href="#embeddings" class="headerlink" title="embeddings"></a>embeddings</h2><h2 id="LLM"><a href="#LLM" class="headerlink" title="LLM"></a>LLM</h2><h2 id="RAG"><a href="#RAG" class="headerlink" title="RAG"></a>RAG</h2><h2 id="MCP"><a href="#MCP" class="headerlink" title="MCP"></a>MCP</h2><h2 id="SOP"><a href="#SOP" class="headerlink" title="SOP"></a>SOP</h2><h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="pip镜像（USTC）"><a href="#pip镜像（USTC）" class="headerlink" title="pip镜像（USTC）"></a>pip镜像（USTC）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install zai  -i https://pypi.mirrors.ustc.edu.cn/simple  </span><br></pre></td></tr></table></figure>
+
+
+        
+        
+          <blockquote id="copyright">
+              <p>原文链接: <a href="https://se-daming.github.io/index.html">https://se-daming.github.io/index.html</a></p>
+              <p>版权声明: 转载请注明出处.</p>
+          </blockquote>
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <div class="article-tag-wrap">
+          
+
+          
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AI/" rel="tag">AI</a></li></ul>
+
+          
+    <div class="social-share">
+      <span>分享到:</span>
+    </div>
+
+
+
+        </div>
+      
+      
+      
+    </footer>
+  </div>
+</article>
+
+
   <article id="post-讲稿" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-inner">
     
@@ -829,7 +899,7 @@
 <h2 id="new一个对象的全过程"><a href="#new一个对象的全过程" class="headerlink" title="new一个对象的全过程"></a>new一个对象的全过程</h2><h2 id="什么情况对象进入老年代"><a href="#什么情况对象进入老年代" class="headerlink" title="什么情况对象进入老年代"></a>什么情况对象进入老年代</h2><h2 id="为什么GC要分成不同的年代"><a href="#为什么GC要分成不同的年代" class="headerlink" title="为什么GC要分成不同的年代"></a>为什么GC要分成不同的年代</h2><h2 id="老年代会不会被GC"><a href="#老年代会不会被GC" class="headerlink" title="老年代会不会被GC"></a>老年代会不会被GC</h2><h2 id="GC的分代内存是连续的还是零碎？各有什么好处？坏处？"><a href="#GC的分代内存是连续的还是零碎？各有什么好处？坏处？" class="headerlink" title="GC的分代内存是连续的还是零碎？各有什么好处？坏处？"></a>GC的分代内存是连续的还是零碎？各有什么好处？坏处？</h2><h2 id="线上CPU飙升"><a href="#线上CPU飙升" class="headerlink" title="线上CPU飙升"></a>线上CPU飙升</h2><h2 id="GC-ROOT包含什么"><a href="#GC-ROOT包含什么" class="headerlink" title="GC-ROOT包含什么"></a>GC-ROOT包含什么</h2><p>虚拟机栈中引用的对象、本地方法栈引用的对象、方法区中类静态属性和常量引用的对象、活跃线程和同步锁持有的对象</p>
 <h2 id="三色标记法"><a href="#三色标记法" class="headerlink" title="三色标记法"></a>三色标记法</h2><p>白灰黑【用于并发标记过程】</p>
 <p>初始对象都是白色。从GC-ROOT出发，将该对象标记为灰色，取出灰色对象，将其直接引用的对象标记为灰色，然后将此灰色对象标记为黑色。迭代此过程。当灰色集合为空时，标记结束，标记结束，白色对象被回收</p>
-<h2 id="对象逃逸"><a href="#对象逃逸" class="headerlink" title="对象逃逸"></a>对象逃逸</h2><h2 id="如果程序在运行中，此时新加入一个类，且保证这个类能被程序扫描到，能在运行中加载吗"><a href="#如果程序在运行中，此时新加入一个类，且保证这个类能被程序扫描到，能在运行中加载吗" class="headerlink" title="如果程序在运行中，此时新加入一个类，且保证这个类能被程序扫描到，能在运行中加载吗"></a>如果程序在运行中，此时新加入一个类，且保证这个类能被程序扫描到，能在运行中加载吗</h2><h2 id="我想要知道哪些对象占用了大内存，怎么做"><a href="#我想要知道哪些对象占用了大内存，怎么做" class="headerlink" title="我想要知道哪些对象占用了大内存，怎么做"></a>我想要知道哪些对象占用了大内存，怎么做</h2><h2 id="GC流程"><a href="#GC流程" class="headerlink" title="GC流程"></a>GC流程</h2><h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><h2 id="分表有哪些缺点"><a href="#分表有哪些缺点" class="headerlink" title="分表有哪些缺点"></a>分表有哪些缺点</h2><p>分布式事务、跨表连接困难、全局id生成、数据迁移与扩容成本</p>
+<h2 id="对象逃逸"><a href="#对象逃逸" class="headerlink" title="对象逃逸"></a>对象逃逸</h2><h2 id="如果程序在运行中，此时新加入一个类，且保证这个类能被程序扫描到，能在运行中加载吗"><a href="#如果程序在运行中，此时新加入一个类，且保证这个类能被程序扫描到，能在运行中加载吗" class="headerlink" title="如果程序在运行中，此时新加入一个类，且保证这个类能被程序扫描到，能在运行中加载吗"></a>如果程序在运行中，此时新加入一个类，且保证这个类能被程序扫描到，能在运行中加载吗</h2><h2 id="我想要知道哪些对象占用了大内存，怎么做"><a href="#我想要知道哪些对象占用了大内存，怎么做" class="headerlink" title="我想要知道哪些对象占用了大内存，怎么做"></a>我想要知道哪些对象占用了大内存，怎么做</h2><h2 id="GC流程"><a href="#GC流程" class="headerlink" title="GC流程"></a>GC流程</h2><h2 id="强引用的对象能被回收吗"><a href="#强引用的对象能被回收吗" class="headerlink" title="强引用的对象能被回收吗"></a>强引用的对象能被回收吗</h2><h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><h2 id="分表有哪些缺点"><a href="#分表有哪些缺点" class="headerlink" title="分表有哪些缺点"></a>分表有哪些缺点</h2><p>分布式事务、跨表连接困难、全局id生成、数据迁移与扩容成本</p>
 <h2 id="一条SQL有多少次I-O"><a href="#一条SQL有多少次I-O" class="headerlink" title="一条SQL有多少次I&#x2F;O"></a>一条SQL有多少次I&#x2F;O</h2><p>命中<em>buffer pool</em> 0次</p>
 <p>未命中：3次查询主键【覆盖索引、树高一般为3层】；6次回表查询【3次主键io和3次回表io】；若干次【全表查询】</p>
 <h2 id="关键字执行顺序"><a href="#关键字执行顺序" class="headerlink" title="关键字执行顺序"></a>关键字执行顺序</h2><p>from where group-by  order-by join select having on distinct limit </p>
@@ -859,7 +929,8 @@
 
 
 <h2 id="怎么查看服务器上有哪些进程和线程"><a href="#怎么查看服务器上有哪些进程和线程" class="headerlink" title="怎么查看服务器上有哪些进程和线程"></a>怎么查看服务器上有哪些进程和线程</h2><h2 id="三次握手过程中，如果客户端或者服务端中间任何一端发生了故障，他们会怎么样"><a href="#三次握手过程中，如果客户端或者服务端中间任何一端发生了故障，他们会怎么样" class="headerlink" title="三次握手过程中，如果客户端或者服务端中间任何一端发生了故障，他们会怎么样"></a>三次握手过程中，如果客户端或者服务端中间任何一端发生了故障，他们会怎么样</h2><h2 id="了解过SYN洪水攻击吗"><a href="#了解过SYN洪水攻击吗" class="headerlink" title="了解过SYN洪水攻击吗?"></a>了解过SYN洪水攻击吗?</h2><h2 id="虚拟内存它如何实现地址隔离的"><a href="#虚拟内存它如何实现地址隔离的" class="headerlink" title="虚拟内存它如何实现地址隔离的"></a>虚拟内存它如何实现地址隔离的</h2><h2 id="页中断如何处理"><a href="#页中断如何处理" class="headerlink" title="页中断如何处理"></a>页中断如何处理</h2><h2 id="ping-www-baidu-com的时候发生了什么？"><a href="#ping-www-baidu-com的时候发生了什么？" class="headerlink" title="ping www.baidu.com的时候发生了什么？"></a>ping <a target="_blank" rel="noopener" href="https://gw-c.nowcoder.com/api/sparta/jump/link?link=http://www.baidu.com">www.baidu.com</a>的时候发生了什么？</h2><h2 id="我们要ping一个域名，通过DNS协议找到了这个域名的ip地址。后来这个域名ip地址变了，我们ping原来的ip地址ping不通，要手动修改DNS记录，请问DNS记录文件存在哪里，怎么手动修改？"><a href="#我们要ping一个域名，通过DNS协议找到了这个域名的ip地址。后来这个域名ip地址变了，我们ping原来的ip地址ping不通，要手动修改DNS记录，请问DNS记录文件存在哪里，怎么手动修改？" class="headerlink" title="我们要ping一个域名，通过DNS协议找到了这个域名的ip地址。后来这个域名ip地址变了，我们ping原来的ip地址ping不通，要手动修改DNS记录，请问DNS记录文件存在哪里，怎么手动修改？"></a>我们要ping一个域名，通过DNS协议找到了这个域名的ip地址。后来这个域名ip地址变了，我们ping原来的ip地址ping不通，要手动修改DNS记录，请问DNS记录文件存在哪里，怎么手动修改？</h2><h2 id="TCP-keep-alive机制"><a href="#TCP-keep-alive机制" class="headerlink" title="TCP keep-alive机制"></a>TCP keep-alive机制</h2><p>在双方没有数据交互时通过探测报文确定对方的TCP连接是否存活</p>
-<h2 id="内核态与用户态怎么进行通信"><a href="#内核态与用户态怎么进行通信" class="headerlink" title="内核态与用户态怎么进行通信"></a>内核态与用户态怎么进行通信</h2><h2 id="父进程加锁了，然后fork一个子进程，子进程还能访问吗"><a href="#父进程加锁了，然后fork一个子进程，子进程还能访问吗" class="headerlink" title="父进程加锁了，然后fork一个子进程，子进程还能访问吗"></a>父进程加锁了，然后fork一个子进程，子进程还能访问吗</h2>
+<h2 id="内核态与用户态怎么进行通信"><a href="#内核态与用户态怎么进行通信" class="headerlink" title="内核态与用户态怎么进行通信"></a>内核态与用户态怎么进行通信</h2><h2 id="父进程加锁了，然后fork一个子进程，子进程还能访问吗"><a href="#父进程加锁了，然后fork一个子进程，子进程还能访问吗" class="headerlink" title="父进程加锁了，然后fork一个子进程，子进程还能访问吗"></a>父进程加锁了，然后fork一个子进程，子进程还能访问吗</h2><h2 id="UDP传输如何解决乱序问题？"><a href="#UDP传输如何解决乱序问题？" class="headerlink" title="UDP传输如何解决乱序问题？"></a>UDP传输如何解决乱序问题？</h2><p>应用层面仿照TCP在每个数据包加一个序列号字段</p>
+
         
         
           <blockquote id="copyright">
@@ -1386,82 +1457,6 @@
 </article>
 
 
-  <article id="post-Kafka选举流程" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/03/17/Kafka%E9%80%89%E4%B8%BE%E6%B5%81%E7%A8%8B/">Kafka选举流程</a>
-    </h1>
-  
-
-
-      </header>
-    
-    <div class="article-meta">
-      
-      <span class="article-date">
-  <i class="fa fa-date"></i>
-  <time class="dt-published" datetime="2025-03-17T06:55:41.000Z" itemprop="datePublished">2025年03月17日</time>
-</span>
-      
-      
-      
-<a href="/2025/03/17/Kafka%E9%80%89%E4%B8%BE%E6%B5%81%E7%A8%8B/#comments" class="article-comment-link">
-  
-  <i class="fa fa-commt"></i>
-  留言
-</a>
-
-
-    </div>
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="leader选举"><a href="#leader选举" class="headerlink" title="leader选举"></a>leader选举</h1><h2 id="触发条件"><a href="#触发条件" class="headerlink" title="触发条件"></a>触发条件</h2><p>leader失效；ISR数量低于副本因子；集群扩容或新建分区需重新分配leader；手动触发</p>
-<h2 id="选举策略"><a href="#选举策略" class="headerlink" title="选举策略"></a>选举策略</h2><p>ISR优先策略：默认的，从ISR中选择leader；</p>
-<p>首选副本策略：优先选择分区副本的第一个副本；</p>
-<p>不干净选举：允许从OSR中选举，可能导致数据丢失</p>
-<h2 id="选举流程"><a href="#选举流程" class="headerlink" title="选举流程"></a>选举流程</h2><p>故障检测：通过心跳监控leader失效后触发选举；</p>
-<p>选择候选副本；</p>
-<p>更新元数据：将leader信息更新到内部元数据主题或zookeeper；</p>
-<p>通知集群：broker通过元数据感知到新leader</p>
-
-        
-        
-          <blockquote id="copyright">
-              <p>原文链接: <a href="https://se-daming.github.io/index.html">https://se-daming.github.io/index.html</a></p>
-              <p>版权声明: 转载请注明出处.</p>
-          </blockquote>
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <div class="article-tag-wrap">
-          
-
-          
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a></li></ul>
-
-          
-    <div class="social-share">
-      <span>分享到:</span>
-    </div>
-
-
-
-        </div>
-      
-      
-      
-    </footer>
-  </div>
-</article>
-
-
 
     <nav id="page-nav">
 
@@ -1480,6 +1475,10 @@
       <ul>
         
           <li>
+            <a href="/2025/04/13/AI/">AI</a>
+          </li>
+        
+          <li>
             <a href="/2025/04/12/%E8%AE%B2%E7%A8%BF/">讲稿</a>
           </li>
         
@@ -1495,10 +1494,6 @@
             <a href="/2025/03/22/MySQL%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3/">MySQL主从延迟如何解决</a>
           </li>
         
-          <li>
-            <a href="/2025/03/19/explain%E5%B7%A5%E5%85%B7/">explain工具</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1509,7 +1504,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AI/" style="font-size: 10px;">AI</a> <a href="/tags/JUC/" style="font-size: 17.78px;">JUC</a> <a href="/tags/JVM/" style="font-size: 15.56px;">JVM</a> <a href="/tags/Java/" style="font-size: 14.44px;">Java</a> <a href="/tags/Kafka/" style="font-size: 16.67px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/OS/" style="font-size: 11.11px;">OS</a> <a href="/tags/Redis/" style="font-size: 18.89px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring/" style="font-size: 13.33px;">Spring</a> <a href="/tags/TEST/" style="font-size: 10px;">TEST</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hr%E9%9D%A2/" style="font-size: 10px;">hr面</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 15.56px;">分布式</a> <a href="/tags/%E5%9C%BA%E6%99%AF/" style="font-size: 10px;">场景</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 12.22px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 14.44px;">小红书</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.11px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">暑期面经</a> <a href="/tags/%E6%A8%A1%E7%B3%8A%E5%85%AB%E8%82%A1/" style="font-size: 10px;">模糊八股</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.11px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">系统架构</a> <a href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" style="font-size: 11.11px;">经纬恒润</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 16.67px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 11.11px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.22px;">集合</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.33px;">项目</a>
+      <a href="/tags/AI/" style="font-size: 11.11px;">AI</a> <a href="/tags/JUC/" style="font-size: 17.78px;">JUC</a> <a href="/tags/JVM/" style="font-size: 15.56px;">JVM</a> <a href="/tags/Java/" style="font-size: 14.44px;">Java</a> <a href="/tags/Kafka/" style="font-size: 16.67px;">Kafka</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MySQL/" style="font-size: 20px;">MySQL</a> <a href="/tags/OS/" style="font-size: 11.11px;">OS</a> <a href="/tags/Redis/" style="font-size: 18.89px;">Redis</a> <a href="/tags/SQL/" style="font-size: 10px;">SQL</a> <a href="/tags/Spring/" style="font-size: 13.33px;">Spring</a> <a href="/tags/TEST/" style="font-size: 10px;">TEST</a> <a href="/tags/TODOS/" style="font-size: 10px;">TODOS</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hr%E9%9D%A2/" style="font-size: 10px;">hr面</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/test/" style="font-size: 10px;">test</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" style="font-size: 15.56px;">分布式</a> <a href="/tags/%E5%9C%BA%E6%99%AF/" style="font-size: 10px;">场景</a> <a href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" style="font-size: 10px;">失败经验</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 10px;">安全</a> <a href="/tags/%E5%AE%9E%E4%B9%A0/" style="font-size: 12.22px;">实习</a> <a href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" style="font-size: 14.44px;">小红书</a> <a href="/tags/%E5%BC%80%E6%BA%90/" style="font-size: 10px;">开源</a> <a href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" style="font-size: 11.11px;">快手日常</a> <a href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" style="font-size: 10px;">时间线</a> <a href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">暑期面经</a> <a href="/tags/%E6%A8%A1%E7%B3%8A%E5%85%AB%E8%82%A1/" style="font-size: 10px;">模糊八股</a> <a href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" style="font-size: 10px;">百度日常</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 11.11px;">算法</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">系统架构</a> <a href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" style="font-size: 11.11px;">经纬恒润</a> <a href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" style="font-size: 10px;">自我介绍</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 16.67px;">计算机网络</a> <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" style="font-size: 11.11px;">设计模式</a> <a href="/tags/%E9%9B%86%E5%90%88/" style="font-size: 12.22px;">集合</a> <a href="/tags/%E9%9D%A2%E7%BB%8F/" style="font-size: 10px;">面经</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 13.33px;">项目</a>
     </div>
   </div>
 
@@ -1521,7 +1516,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-archive"></i> 归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年04月</a><span class="archive-list-count">39</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">112</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/">2025年04月</a><span class="archive-list-count">40</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/">2024年12月</a><span class="archive-list-count">112</span></li></ul>
     </div>
   </div>
 
@@ -1531,7 +1526,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title"><i class="fa fa-tag"></i> 标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TEST/" rel="tag">TEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E7%B3%8A%E5%85%AB%E8%82%A1/" rel="tag">模糊八股</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JUC/" rel="tag">JUC</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JVM/" rel="tag">JVM</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kafka/" rel="tag">Kafka</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Redis/" rel="tag">Redis</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring/" rel="tag">Spring</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TEST/" rel="tag">TEST</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TODOS/" rel="tag">TODOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hr%E9%9D%A2/" rel="tag">hr面</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/" rel="tag">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/test/" rel="tag">test</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag">分布式</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%BA%E6%99%AF/" rel="tag">场景</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%B1%E8%B4%A5%E7%BB%8F%E9%AA%8C/" rel="tag">失败经验</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%89%E5%85%A8/" rel="tag">安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9E%E4%B9%A0/" rel="tag">实习</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B0%8F%E7%BA%A2%E4%B9%A6/" rel="tag">小红书</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%89%8B%E6%97%A5%E5%B8%B8/" rel="tag">快手日常</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%97%B6%E9%97%B4%E7%BA%BF/" rel="tag">时间线</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9A%91%E6%9C%9F%E9%9D%A2%E7%BB%8F/" rel="tag">暑期面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%A8%A1%E7%B3%8A%E5%85%AB%E8%82%A1/" rel="tag">模糊八股</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%99%BE%E5%BA%A6%E6%97%A5%E5%B8%B8/" rel="tag">百度日常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/" rel="tag">系统架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BB%8F%E7%BA%AC%E6%81%92%E6%B6%A6/" rel="tag">经纬恒润</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" rel="tag">自我介绍</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" rel="tag">计算机网络</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9B%86%E5%90%88/" rel="tag">集合</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag">项目</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </div>
 
